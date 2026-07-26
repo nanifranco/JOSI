@@ -75,6 +75,7 @@ export function BookingForm() {
             <h2 className="font-serif text-4xl leading-tight text-coffee sm:text-5xl">{booking.title}</h2>
             <p className="mt-6 max-w-sm font-sans text-[0.9rem] leading-relaxed text-taupe">{booking.text}</p>
             <p className="mt-3 max-w-sm font-sans text-xs italic text-taupe/70">{booking.note}</p>
+            <p className="mt-3 max-w-sm font-sans text-xs italic text-taupe/70">{booking.scheduleNote}</p>
 
             <p className="mt-8 max-w-sm border-l border-champagne pl-5 font-sans text-xs leading-relaxed text-taupe/80">
               {booking.disclaimer}

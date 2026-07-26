@@ -52,12 +52,6 @@ export const contact = {
   /** EDITAR: zona o ciudad donde ofrece el servicio. */
   serviceZone: 'Ciudad de México y área metropolitana',
 
-  /** EDITAR: horarios de atención, uno por línea. */
-  hours: [
-    { day: 'Lunes a viernes', time: '10:00 – 18:00' },
-    { day: 'Fines de semana', time: 'EDITAR: horario de fin de semana' },
-  ],
-
   /**
    * EDITAR (opcional, futuro): enlace a un sistema de reservas externo
    * (Calendly, Cal.com, Google Calendar Appointment Schedules, backend
@@ -81,7 +75,7 @@ export const brand = {
 /* ----------------------------------------------------------------------- */
 export const navLinks = [
   { label: 'Inicio', href: '#inicio' },
-  { label: 'Sobre Josi', href: '#sobre-josi' },
+  { label: 'Sobre mí', href: '#sobre-josi' },
   { label: 'Servicios', href: '#servicios' },
   { label: 'Portafolio', href: '#portafolio' },
   { label: 'Agenda', href: '#agenda' },
@@ -104,12 +98,12 @@ export const hero = {
 /* SOBRE JOSI — EDITAR: datos personales reales                            */
 /* ----------------------------------------------------------------------- */
 export const about = {
-  eyebrow: 'Sobre Josi',
+  eyebrow: 'Sobre mí',
   title: 'Belleza creada desde la confianza',
   paragraphs: [
-    'Hola, soy Josi. Para mí, el maquillaje no se trata de cubrir o transformar quién eres, sino de resaltar aquello que ya te hace especial.',
-    'Cada rostro, estilo y ocasión son distintos, por eso trabajo cada look de manera personalizada. Me gusta escuchar lo que imaginas, conocer cómo quieres sentirte y crear contigo un maquillaje que se vea hermoso tanto en persona como en fotografías.',
-    'Mi intención es que disfrutes el proceso, te sientas cómoda y, cuando te mires al espejo, sigas reconociéndote a ti misma.',
+    'Hola, soy Josi. Me encanta ayudar a que cada persona se sienta segura y cómoda con su maquillaje. Para mí, no se trata de cambiar quién eres, sino de resaltar lo mejor de ti con un look que vaya contigo y con la ocasión.',
+    'Cada rostro es diferente, por eso me gusta trabajar de forma personalizada. Escucho tus ideas, conozco el estilo que buscas y juntos encontramos un maquillaje que se vea bonito, natural y que te haga sentir tú misma.',
+    'Mi objetivo es que disfrutes la experiencia de principio a fin y que, cuando te mires al espejo, te encante el resultado sin dejar de reconocerte.',
   ],
   photoMain: img('Fotografía de Josi', 'Retrato de Josi, maquillista profesional'),
 }
@@ -213,6 +207,9 @@ export const booking = {
   text: 'Comparte los datos de tu evento para consultar disponibilidad. Tu cita quedará confirmada después de recibir respuesta y realizar el anticipo correspondiente.',
   /** Por ahora Josi no cuenta con estudio propio: todo el servicio es a domicilio. */
   note: 'Por el momento, el servicio es únicamente a domicilio.',
+  /** Las citas solo se realizan en fin de semana; para eventos lejanos se puede verificar disponibilidad por WhatsApp. */
+  scheduleNote:
+    'Las citas se realizan únicamente los fines de semana. Si tu evento todavía está lejos, puedes verificar la disponibilidad directamente por WhatsApp.',
   disclaimer: 'Enviar este formulario solicita disponibilidad; no confirma tu cita de forma automática.',
   serviceOptions: [
     { value: 'social', label: 'Social / Eventos' },
@@ -319,7 +316,7 @@ export const finalCta = {
 export const footerLinks = {
   site: [
     { label: 'Inicio', href: '#inicio' },
-    { label: 'Sobre Josi', href: '#sobre-josi' },
+    { label: 'Sobre mí', href: '#sobre-josi' },
     { label: 'Servicios', href: '#servicios' },
     { label: 'Portafolio', href: '#portafolio' },
     { label: 'Agenda', href: '#agenda' },

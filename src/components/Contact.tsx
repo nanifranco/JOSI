@@ -43,17 +43,6 @@ export function Contact() {
                   </dd>
                 </div>
               ))}
-
-              <div className="border-t border-coffee/15 pt-5 sm:col-span-2">
-                <dt className="eyebrow mb-3 text-[0.6rem]">Horarios de atención</dt>
-                <dd className="flex flex-col gap-1.5">
-                  {contact.hours.map((slot) => (
-                    <span key={slot.day} className="font-sans text-sm text-taupe">
-                      <span className="text-coffee">{slot.day}:</span> {slot.time}
-                    </span>
-                  ))}
-                </dd>
-              </div>
             </dl>
           </div>
         </Reveal>
