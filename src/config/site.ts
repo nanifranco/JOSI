@@ -92,7 +92,7 @@ export const navLinks = [
 /* HERO                                                                     */
 /* ----------------------------------------------------------------------- */
 export const hero = {
-  eyebrow: 'Social · Eventos · Infantil',
+  eyebrow: 'Infantil · Social · Caracterización',
   title: 'Maquillaje que se siente como tú',
   text: 'Looks personalizados para resaltar tu esencia y hacerte sentir segura en cada momento especial.',
   primaryCta: 'Agenda tu cita',
