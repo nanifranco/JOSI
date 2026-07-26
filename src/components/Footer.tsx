@@ -48,6 +48,16 @@ export function Footer() {
               </li>
               <li>
                 <a
+                  href={contact.facebookUrl}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="font-sans text-sm text-cream/75 hover:text-cream"
+                >
+                  Facebook
+                </a>
+              </li>
+              <li>
+                <a
                   href={whatsappHref}
                   target="_blank"
                   rel="noopener noreferrer"

@@ -45,8 +45,9 @@ export const contact = {
   instagramHandle: '@josimakeup',
   instagramUrl: 'https://instagram.com/josimakeup',
 
-  /** EDITAR: correo de contacto. */
-  email: 'hola@josimakeup.com',
+  /** EDITAR: nombre de la página de Facebook y URL completa. */
+  facebookHandle: 'Josi Makeup',
+  facebookUrl: 'https://facebook.com/josimakeup',
 
   /** EDITAR: zona o ciudad donde ofrece el servicio. */
   serviceZone: 'Ciudad de México y área metropolitana',

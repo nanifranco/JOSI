@@ -7,7 +7,7 @@ export function Contact() {
   const entries = [
     { label: 'WhatsApp', value: `+${contact.whatsappNumber}`, href: whatsappHref },
     { label: 'Instagram', value: contact.instagramHandle, href: contact.instagramUrl },
-    { label: 'Correo', value: contact.email, href: `mailto:${contact.email}` },
+    { label: 'Facebook', value: contact.facebookHandle, href: contact.facebookUrl },
     { label: 'Zona de servicio', value: contact.serviceZone },
   ]
 
