@@ -31,13 +31,6 @@ export function AboutJosi() {
                 </p>
               ))}
             </div>
-
-            <blockquote className="mt-10 max-w-lg border-l border-champagne pl-7">
-              <p className="font-serif text-2xl italic leading-snug text-coffee sm:text-[1.75rem]">
-                “{about.quote}”
-              </p>
-              <p className="mt-4 font-serif text-lg italic text-champagne-deep">— {about.signature}</p>
-            </blockquote>
           </Reveal>
         </div>
       </div>

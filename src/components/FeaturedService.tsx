@@ -7,7 +7,7 @@ export function FeaturedService() {
   return (
     <section className="bg-coffee text-cream">
       <div className="grid md:grid-cols-12">
-        <Reveal className="h-[52vh] md:col-span-6 md:h-auto">
+        <Reveal className="aspect-[4/3] md:col-span-6 md:aspect-auto md:h-auto">
           <PlaceholderImage slot={featuredService.image} tone="blush" className="h-full w-full" />
         </Reveal>
 

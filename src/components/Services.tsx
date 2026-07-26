@@ -14,8 +14,7 @@ export function Services() {
         </Reveal>
 
         <div className="mt-16 border-t border-coffee/15">
-          {services.map((service, index) => {
-            const withImage = index % 2 === 0
+          {services.map((service) => {
             return (
               <Reveal key={service.id}>
                 <div className="grid items-center gap-x-6 gap-y-6 border-b border-coffee/15 py-10 md:grid-cols-12">
@@ -28,13 +27,9 @@ export function Services() {
                     </p>
                   </div>
 
-                  {withImage ? (
-                    <div className="aspect-[4/3] w-full md:col-span-3">
-                      <PlaceholderImage slot={service.image} tone="blush" className="h-full w-full" />
-                    </div>
-                  ) : (
-                    <div className="hidden md:col-span-3 md:block" aria-hidden />
-                  )}
+                  <div className="aspect-[4/3] w-full md:col-span-3">
+                    <PlaceholderImage slot={service.image} tone="blush" className="h-full w-full" />
+                  </div>
 
                   <div className="flex gap-8 md:col-span-4">
                     <div>
