@@ -145,8 +145,12 @@ export function BookingForm() {
                   value={form.eventDate}
                   onChange={(e) => update('eventDate', e.target.value)}
                   aria-invalid={Boolean(errors.eventDate)}
-                  aria-describedby={errors.eventDate ? 'eventDate-error' : undefined}
+                  aria-describedby={errors.eventDate ? 'eventDate-error' : 'eventDate-hint'}
                 />
+                <p id="eventDate-hint" className="mt-2 font-sans text-xs text-taupe/70">
+                  La disponibilidad para citas es los fines de semana. Si tu evento es entre semana, escríbenos por
+                  WhatsApp — contando con suficiente anticipación, es posible encontrar un espacio disponible.
+                </p>
                 {errors.eventDate && (
                   <p id="eventDate-error" className="mt-2 font-sans text-xs font-medium text-coffee">
                     {errors.eventDate}
