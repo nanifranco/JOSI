@@ -1,0 +1,406 @@
+/**
+ * ============================================================================
+ *  JOSI MAKEUP — CONFIGURACIÓN CENTRAL DEL SITIO
+ * ============================================================================
+ *  Este es el ÚNICO archivo que debería tocarse para actualizar textos,
+ *  precios, contacto, redes, horarios, servicios, preguntas frecuentes,
+ *  testimonios y fotografías. Ningún otro componente debe tener datos de
+ *  contacto ni textos "quemados" — todos los importan desde aquí.
+ *
+ *  Busca las etiquetas "EDITAR:" para ubicar rápidamente lo que debes
+ *  reemplazar antes de publicar el sitio con información real.
+ * ============================================================================
+ */
+
+export type ImageSlot = {
+  /** Ruta a la imagen real, p. ej. "/images/hero.jpg". Vacío = placeholder editorial. */
+  src: string
+  /** Texto alternativo accesible. Descriptivo y en español. */
+  alt: string
+  /** Etiqueta breve mostrada sobre el marcador de posición (guía interna, no es un ícono). */
+  label: string
+}
+
+const img = (label: string, alt: string): ImageSlot => ({ src: '', alt, label })
+
+/* ----------------------------------------------------------------------- */
+/* CONTACTO — EDITAR: reemplaza con los datos reales antes de publicar     */
+/* ----------------------------------------------------------------------- */
+export const contact = {
+  /**
+   * EDITAR: número de WhatsApp en formato internacional, SOLO dígitos
+   * (código de país + número). Ej. México: "521XXXXXXXXXX".
+   * Se usa para el botón flotante y para el formulario de agenda.
+   */
+  whatsappNumber: '521234567890',
+
+  /** EDITAR: usuario de Instagram (sin @) y URL completa. */
+  instagramHandle: '@josimakeup',
+  instagramUrl: 'https://instagram.com/josimakeup',
+
+  /** EDITAR: correo de contacto. */
+  email: 'hola@josimakeup.com',
+
+  /** EDITAR: zona o ciudad donde ofrece el servicio. */
+  serviceZone: 'Ciudad de México y área metropolitana',
+
+  /** EDITAR: horarios de atención, uno por línea. */
+  hours: [
+    { day: 'Lunes a viernes', time: '10:00 – 18:00' },
+    { day: 'Sábados', time: '9:00 – 14:00' },
+    { day: 'Domingos', time: 'Cerrado' },
+  ],
+
+  /**
+   * EDITAR (opcional, futuro): enlace a un sistema de reservas externo
+   * (Calendly, Cal.com, Google Calendar Appointment Schedules, backend
+   * propio). Mientras esté vacío, la sección de Agenda solo usa WhatsApp.
+   * Ver src/lib/whatsapp.ts para la integración actual.
+   */
+  externalBookingUrl: '',
+}
+
+/* ----------------------------------------------------------------------- */
+/* MARCA                                                                    */
+/* ----------------------------------------------------------------------- */
+export const brand = {
+  name: 'JOSI',
+  descriptor: 'MAKEUP',
+  tagline: 'Maquillaje social, novias y eventos.',
+}
+
+/* ----------------------------------------------------------------------- */
+/* NAVEGACIÓN                                                               */
+/* ----------------------------------------------------------------------- */
+export const navLinks = [
+  { label: 'Inicio', href: '#inicio' },
+  { label: 'Sobre Josi', href: '#sobre-josi' },
+  { label: 'Servicios', href: '#servicios' },
+  { label: 'Portafolio', href: '#portafolio' },
+  { label: 'Agenda', href: '#agenda' },
+  { label: 'Contacto', href: '#contacto' },
+]
+
+/* ----------------------------------------------------------------------- */
+/* HERO                                                                     */
+/* ----------------------------------------------------------------------- */
+export const hero = {
+  eyebrow: 'Social · Novias · Eventos',
+  title: 'Maquillaje que se siente como tú',
+  text: 'Looks personalizados para resaltar tu esencia y hacerte sentir segura en cada momento especial.',
+  primaryCta: 'Agenda tu cita',
+  secondaryCta: 'Descubre mi trabajo',
+  image: img('Fotografía editorial — novia o maquillaje profesional', 'Retrato editorial de un maquillaje profesional realizado por Josi'),
+}
+
+/* ----------------------------------------------------------------------- */
+/* SOBRE JOSI — EDITAR: datos personales reales                            */
+/* ----------------------------------------------------------------------- */
+export const about = {
+  eyebrow: 'Sobre Josi',
+  title: 'Belleza creada desde la confianza',
+  paragraphs: [
+    'Hola, soy Josi. Para mí, el maquillaje no se trata de cubrir o transformar quién eres, sino de resaltar aquello que ya te hace especial.',
+    'Cada rostro, estilo y ocasión son distintos, por eso trabajo cada look de manera personalizada. Me gusta escuchar lo que imaginas, conocer cómo quieres sentirte y crear contigo un maquillaje que se vea hermoso tanto en persona como en fotografías.',
+    'Mi intención es que disfrutes el proceso, te sientas cómoda y, cuando te mires al espejo, sigas reconociéndote a ti misma.',
+  ],
+  quote: 'No quiero cambiar tu rostro; quiero ayudarte a verlo con otros ojos.',
+  signature: 'Josi',
+  photoMain: img('Fotografía de Josi', 'Retrato de Josi, maquillista profesional'),
+  photoDetail: img('Detalle de trabajo', 'Detalle de un maquillaje realizado por Josi'),
+  /** EDITAR: cada campo es un dato real pendiente de confirmar. */
+  facts: [
+    { label: 'Zona', value: 'EDITAR: ciudad o zona donde trabaja' },
+    { label: 'Experiencia', value: 'EDITAR: años o trayectoria' },
+    { label: 'Formación', value: 'EDITAR: cursos o certificaciones' },
+    { label: 'Especialidad', value: 'EDITAR: tipo de maquillaje o técnica' },
+  ],
+}
+
+/* ----------------------------------------------------------------------- */
+/* SERVICIOS — EDITAR: duración y precio de cada servicio                  */
+/* ----------------------------------------------------------------------- */
+export type Service = {
+  id: string
+  number: string
+  name: string
+  description: string
+  duration: string
+  price: string
+  image: ImageSlot
+}
+
+export const servicesIntro = {
+  eyebrow: 'Servicios',
+  title: 'Un look para cada momento',
+  text: 'Cada servicio se adapta a tus facciones, estilo, tipo de evento y resultado que deseas.',
+}
+
+export const services: Service[] = [
+  {
+    id: 'social',
+    number: '01',
+    name: 'Maquillaje social',
+    description: 'Para cenas, cumpleaños o cualquier ocasión donde quieras verte impecable y sentirte tú misma.',
+    duration: 'EDITAR: duración',
+    price: 'Cotización personalizada',
+    image: img('Maquillaje social', 'Maquillaje social realizado por Josi'),
+  },
+  {
+    id: 'novias',
+    number: '02',
+    name: 'Maquillaje para novias',
+    description: 'Un servicio completo y personalizado para el día más importante. Ver sección dedicada más abajo.',
+    duration: 'EDITAR: duración',
+    price: 'Cotización personalizada',
+    image: img('Maquillaje de novia', 'Maquillaje de novia realizado por Josi'),
+  },
+  {
+    id: 'xv',
+    number: '03',
+    name: 'Maquillaje para XV años',
+    description: 'Un look fresco y elegante para celebrar esta etapa, cuidando que se sienta natural en las fotografías.',
+    duration: 'EDITAR: duración',
+    price: 'Cotización personalizada',
+    image: img('Maquillaje XV años', 'Maquillaje para quince años realizado por Josi'),
+  },
+  {
+    id: 'graduacion',
+    number: '04',
+    name: 'Maquillaje para graduación',
+    description: 'Un maquillaje pulido y duradero, pensado para acompañarte durante toda la ceremonia y celebración.',
+    duration: 'EDITAR: duración',
+    price: 'Cotización personalizada',
+    image: img('Maquillaje de graduación', 'Maquillaje de graduación realizado por Josi'),
+  },
+  {
+    id: 'sesiones',
+    number: '05',
+    name: 'Maquillaje para sesiones',
+    description: 'Diseñado para cámara: sesiones fotográficas, editoriales o contenido, con acabado natural o editorial.',
+    duration: 'EDITAR: duración',
+    price: 'Cotización personalizada',
+    image: img('Maquillaje para sesión fotográfica', 'Maquillaje para sesión fotográfica realizado por Josi'),
+  },
+  {
+    id: 'domicilio',
+    number: '06',
+    name: 'Servicio a domicilio',
+    description: 'Josi se traslada a la ubicación de tu evento para que te arregles con calma, en un espacio conocido.',
+    duration: 'EDITAR: duración',
+    price: 'Cotización personalizada',
+    image: img('Servicio a domicilio', 'Servicio de maquillaje a domicilio'),
+  },
+]
+
+/* ----------------------------------------------------------------------- */
+/* SERVICIO DESTACADO — NOVIAS                                             */
+/* ----------------------------------------------------------------------- */
+export const bridal = {
+  eyebrow: 'Servicio destacado',
+  title: 'Tu maquillaje para un día inolvidable',
+  text: 'Un servicio pensado para crear contigo un look armónico, duradero y fiel a tu personalidad.',
+  /**
+   * EDITAR: estos son los elementos que PODRÍA incluir un paquete de novia.
+   * No representan un paquete confirmado ni su alcance final — Josi debe
+   * definir qué incluye cada opción antes de publicarlo como definitivo.
+   */
+  items: [
+    'Prueba de maquillaje',
+    'Maquillaje del día del evento',
+    'Preparación de piel',
+    'Pestañas',
+    'Retoque',
+    'Servicio a domicilio',
+    'Maquillaje para acompañantes',
+  ],
+  itemsNote: 'Elementos editables — el contenido final del paquete se confirma directamente con Josi.',
+  cta: 'Cotizar maquillaje de novia',
+  image: img('Novia', 'Maquillaje de novia, servicio destacado'),
+}
+
+/* ----------------------------------------------------------------------- */
+/* EXPERIENCIA DE RESERVA                                                   */
+/* ----------------------------------------------------------------------- */
+export const bookingProcess = {
+  eyebrow: 'Cómo funciona',
+  title: 'Así comienza tu experiencia',
+  steps: [
+    {
+      number: '01',
+      title: 'Elige tu servicio',
+      text: 'Cuéntame qué evento tienes y el look que estás buscando.',
+    },
+    {
+      number: '02',
+      title: 'Consulta disponibilidad',
+      text: 'Selecciona la fecha, horario y zona del servicio.',
+    },
+    {
+      number: '03',
+      title: 'Confirma tu cita',
+      text: 'Recibe los detalles de disponibilidad, cotización y anticipo.',
+    },
+    {
+      number: '04',
+      title: 'Disfruta tu momento',
+      text: 'Juntas crearemos un look pensado especialmente para ti.',
+    },
+  ],
+}
+
+/* ----------------------------------------------------------------------- */
+/* AGENDA / FORMULARIO DE RESERVA                                          */
+/* ----------------------------------------------------------------------- */
+export const booking = {
+  eyebrow: 'Agenda',
+  title: 'Agenda tu cita',
+  text: 'Comparte los datos de tu evento para consultar disponibilidad. Tu cita quedará confirmada después de recibir respuesta y realizar el anticipo correspondiente.',
+  disclaimer: 'Enviar este formulario solicita disponibilidad; no confirma tu cita de forma automática.',
+  serviceOptions: [
+    { value: 'social', label: 'Social' },
+    { value: 'novia', label: 'Novia' },
+    { value: 'xv', label: 'XV años' },
+    { value: 'graduacion', label: 'Graduación' },
+    { value: 'sesion', label: 'Sesión' },
+    { value: 'otro', label: 'Otro' },
+  ],
+  locationOptions: [
+    { value: 'estudio', label: 'En estudio' },
+    { value: 'domicilio', label: 'A domicilio' },
+  ],
+  whatsappGreeting: 'Hola, Josi. Me gustaría consultar disponibilidad para una cita de maquillaje.',
+  privacyNoticeText: 'He leído y acepto el aviso de privacidad.',
+}
+
+/* ----------------------------------------------------------------------- */
+/* PORTAFOLIO — EDITAR: sustituye por fotografías reales                   */
+/* ----------------------------------------------------------------------- */
+export type PortfolioCategory = 'social' | 'novias' | 'eventos' | 'editorial'
+
+export type PortfolioItem = {
+  id: string
+  category: PortfolioCategory
+  orientation: 'vertical' | 'horizontal'
+  image: ImageSlot
+}
+
+export const portfolioIntro = {
+  eyebrow: 'Portafolio',
+  title: 'Cada look cuenta una historia',
+}
+
+export const portfolioFilters: { value: 'todos' | PortfolioCategory; label: string }[] = [
+  { value: 'todos', label: 'Todos' },
+  { value: 'social', label: 'Social' },
+  { value: 'novias', label: 'Novias' },
+  { value: 'eventos', label: 'Eventos' },
+  { value: 'editorial', label: 'Editorial' },
+]
+
+export const portfolio: PortfolioItem[] = [
+  { id: 'p1', category: 'novias', orientation: 'vertical', image: img('Novia 01', 'Maquillaje de novia con acabado natural') },
+  { id: 'p2', category: 'social', orientation: 'horizontal', image: img('Social 01', 'Maquillaje social con acabado luminoso') },
+  { id: 'p3', category: 'editorial', orientation: 'vertical', image: img('Editorial 01', 'Maquillaje editorial de alto contraste') },
+  { id: 'p4', category: 'eventos', orientation: 'horizontal', image: img('Eventos 01', 'Maquillaje para evento de noche') },
+  { id: 'p5', category: 'novias', orientation: 'horizontal', image: img('Novia 02', 'Detalle de maquillaje de novia') },
+  { id: 'p6', category: 'social', orientation: 'vertical', image: img('Social 02', 'Maquillaje social diurno') },
+  { id: 'p7', category: 'eventos', orientation: 'vertical', image: img('Eventos 02', 'Maquillaje para XV años') },
+  { id: 'p8', category: 'editorial', orientation: 'horizontal', image: img('Editorial 02', 'Sesión editorial de belleza') },
+  { id: 'p9', category: 'novias', orientation: 'vertical', image: img('Novia 03', 'Maquillaje de novia, prueba previa') },
+  { id: 'p10', category: 'social', orientation: 'horizontal', image: img('Social 03', 'Maquillaje social para graduación') },
+]
+
+/* ----------------------------------------------------------------------- */
+/* TESTIMONIOS — EJEMPLO: reemplazar con testimonios reales                */
+/* ----------------------------------------------------------------------- */
+export const testimonialsIntro = {
+  eyebrow: 'Testimonios',
+  title: 'Cómo se sintieron',
+  note: 'Textos de ejemplo — sustituir por testimonios reales de clientas.',
+}
+
+export const testimonials = [
+  {
+    quote: 'Me sentí muy cómoda durante toda la sesión, Josi es súper atenta y el ambiente fue muy relajado.',
+    name: 'Andrea M.',
+    focus: 'Trato y comodidad',
+  },
+  {
+    quote: 'El maquillaje se mantuvo intacto toda la noche, hasta en las fotos del final de la fiesta se veía perfecto.',
+    name: 'Renata G.',
+    focus: 'Duración del maquillaje',
+  },
+  {
+    quote: 'Quedé enamorada del resultado, era justo lo que tenía en mente pero mejor. Totalmente recomendada.',
+    name: 'Paola V.',
+    focus: 'Satisfacción con el resultado',
+  },
+]
+
+/* ----------------------------------------------------------------------- */
+/* PREGUNTAS FRECUENTES — EDITAR: respuestas provisionales                 */
+/* ----------------------------------------------------------------------- */
+export const faqIntro = {
+  eyebrow: 'Preguntas frecuentes',
+  title: 'Antes de agendar',
+}
+
+export const faqs = [
+  {
+    question: '¿Con cuánto tiempo debo reservar?',
+    answer: 'EDITAR: se recomienda agendar con anticipación, especialmente para fechas de temporada alta como fines de semana y meses de graduaciones o bodas.',
+  },
+  {
+    question: '¿Trabajas a domicilio?',
+    answer: 'EDITAR: sí, el servicio a domicilio está disponible dentro de la zona de cobertura. Fuera de esa zona puede aplicar un costo adicional de traslado.',
+  },
+  {
+    question: '¿Cómo se confirma una cita?',
+    answer: 'EDITAR: tu cita se confirma una vez que se acuerda la disponibilidad y se realiza el anticipo correspondiente.',
+  },
+  {
+    question: '¿Es necesario realizar un anticipo?',
+    answer: 'EDITAR: sí, se solicita un anticipo para apartar la fecha. El monto y forma de pago se comparten al confirmar disponibilidad.',
+  },
+  {
+    question: '¿Puedo mandarte referencias del maquillaje?',
+    answer: 'Sí, de hecho lo recomiendo. Puedes compartir fotos o un enlace de inspiración en el formulario de agenda o por WhatsApp.',
+  },
+  {
+    question: '¿Cuánto dura el servicio?',
+    answer: 'EDITAR: la duración varía según el tipo de maquillaje y si incluye peinado o preparación de piel adicional.',
+  },
+  {
+    question: '¿Qué debo hacer antes de mi cita?',
+    answer: 'EDITAR: se recomienda llegar con el rostro limpio, sin maquillaje previo, y comunicar con anticipación cualquier sensibilidad de piel.',
+  },
+  {
+    question: '¿Realizas pruebas para novias?',
+    answer: 'EDITAR: sí, se recomienda una prueba previa para definir juntas el look ideal antes del día del evento.',
+  },
+]
+
+/* ----------------------------------------------------------------------- */
+/* CTA FINAL                                                                */
+/* ----------------------------------------------------------------------- */
+export const finalCta = {
+  title: 'Tu momento merece sentirse especial',
+  text: 'Cuéntame qué tienes en mente y creemos juntas el look ideal para ti.',
+  primaryCta: 'Agenda tu cita',
+  secondaryCta: 'Escríbeme por WhatsApp',
+  image: img('Fotografía final', 'Fotografía editorial de cierre'),
+}
+
+/* ----------------------------------------------------------------------- */
+/* FOOTER                                                                   */
+/* ----------------------------------------------------------------------- */
+export const footerLinks = {
+  site: [
+    { label: 'Inicio', href: '#inicio' },
+    { label: 'Sobre Josi', href: '#sobre-josi' },
+    { label: 'Servicios', href: '#servicios' },
+    { label: 'Portafolio', href: '#portafolio' },
+    { label: 'Agenda', href: '#agenda' },
+  ],
+}

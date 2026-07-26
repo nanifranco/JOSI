@@ -1,0 +1,113 @@
+@import 'tailwindcss';
+
+/* ------------------------------------------------------------------
+   JOSI MAKEUP — design tokens
+   Editorial, warm, minimal. White/ivory dominate; blush is an accent,
+   champagne only for hairline details. Two type families only.
+------------------------------------------------------------------- */
+@theme {
+  --color-cream: #faf8f5; /* blanco cálido */
+  --color-ivory: #f5eceb; /* marfil rosado */
+  --color-blush: #e5c9cd; /* rosa blush */
+  --color-rose: #cda8ae; /* rosa viejo */
+  --color-taupe: #82726d; /* taupe cálido */
+  --color-coffee: #342c2a; /* café profundo */
+  --color-champagne: #b69a70; /* champagne — solo líneas, bordes y detalles pequeños */
+  --color-champagne-deep: #7c6951; /* champagne oscurecido — para texto/números legibles sobre fondos claros (≈5:1) */
+
+  --font-serif: 'Cormorant Garamond', 'Times New Roman', serif;
+  --font-sans: 'Jost', 'Helvetica Neue', Arial, sans-serif;
+
+  --animate-fade-up: fade-up 0.9s cubic-bezier(0.22, 1, 0.36, 1) both;
+
+  @keyframes fade-up {
+    from {
+      opacity: 0;
+      transform: translateY(18px);
+    }
+    to {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+}
+
+@layer base {
+  * {
+    border-color: var(--color-taupe);
+  }
+
+  html {
+    scroll-behavior: smooth;
+    scroll-padding-top: 5.5rem;
+  }
+
+  body {
+    background-color: var(--color-cream);
+    color: var(--color-coffee);
+    font-family: var(--font-sans);
+    font-weight: 300;
+    -webkit-font-smoothing: antialiased;
+    text-rendering: optimizeLegibility;
+  }
+
+  h1,
+  h2,
+  h3,
+  h4 {
+    font-family: var(--font-serif);
+    font-weight: 400;
+    letter-spacing: 0.01em;
+  }
+
+  ::selection {
+    background-color: var(--color-blush);
+    color: var(--color-coffee);
+  }
+
+  a,
+  button {
+    -webkit-tap-highlight-color: transparent;
+  }
+
+  :focus-visible {
+    outline: 1px solid var(--color-coffee);
+    outline-offset: 3px;
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    html {
+      scroll-behavior: auto;
+    }
+    *,
+    *::before,
+    *::after {
+      animation-duration: 0.01ms !important;
+      animation-iteration-count: 1 !important;
+      transition-duration: 0.01ms !important;
+      scroll-behavior: auto !important;
+    }
+  }
+}
+
+@layer components {
+  /* Small tracked-out editorial eyebrow label, e.g. "SOBRE JOSI" */
+  .eyebrow {
+    font-family: var(--font-sans);
+    font-size: 0.7rem;
+    font-weight: 500;
+    letter-spacing: 0.32em;
+    text-transform: uppercase;
+    /* Café profundo atenuado en vez de champagne: mantiene el tono editorial
+       discreto sin bajar del contraste de lectura mínimo (~5:1) sobre crema. */
+    color: var(--color-coffee);
+    opacity: 0.72;
+  }
+
+  /* Hairline rule used instead of borders/shadows/cards */
+  .hairline {
+    height: 1px;
+    background-color: currentColor;
+    opacity: 0.25;
+  }
+}
