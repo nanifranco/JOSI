@@ -6,7 +6,6 @@ import { Reveal } from './Reveal'
 
 const emptyForm: BookingFormData = {
   fullName: '',
-  whatsapp: '',
   service: '',
   eventDate: '',
   eventTime: '',
@@ -22,6 +21,12 @@ const fieldClasses =
   'w-full border-0 border-b border-coffee/25 bg-transparent py-2.5 font-sans text-sm text-coffee placeholder:text-taupe/50 focus:border-coffee focus:outline-none'
 
 const labelClasses = 'eyebrow mb-2 block text-[0.6rem]'
+
+const todayIso = () => {
+  const now = new Date()
+  const offset = now.getTimezoneOffset()
+  return new Date(now.getTime() - offset * 60_000).toISOString().slice(0, 10)
+}
 
 export function BookingForm() {
   const [form, setForm] = useState<BookingFormData>(emptyForm)
@@ -39,7 +44,6 @@ export function BookingForm() {
 
     const nextErrors: Errors = {}
     if (!form.fullName.trim()) nextErrors.fullName = 'Comparte tu nombre completo.'
-    if (!form.whatsapp.trim()) nextErrors.whatsapp = 'Comparte un número de WhatsApp.'
     if (!form.service) nextErrors.service = 'Selecciona el tipo de servicio.'
     if (!form.eventDate) nextErrors.eventDate = 'Selecciona la fecha del evento.'
     if (!form.location.trim()) nextErrors.location = 'Indica la dirección completa del servicio.'
@@ -94,28 +98,6 @@ export function BookingForm() {
               </div>
 
               <div>
-                <label htmlFor="whatsapp" className={labelClasses}>
-                  Número de WhatsApp *
-                </label>
-                <input
-                  id="whatsapp"
-                  type="tel"
-                  autoComplete="tel"
-                  placeholder="10 dígitos"
-                  className={fieldClasses}
-                  value={form.whatsapp}
-                  onChange={(e) => update('whatsapp', e.target.value)}
-                  aria-invalid={Boolean(errors.whatsapp)}
-                  aria-describedby={errors.whatsapp ? 'whatsapp-error' : undefined}
-                />
-                {errors.whatsapp && (
-                  <p id="whatsapp-error" className="mt-2 font-sans text-xs font-medium text-coffee">
-                    {errors.whatsapp}
-                  </p>
-                )}
-              </div>
-
-              <div>
                 <label htmlFor="service" className={labelClasses}>
                   Tipo de servicio *
                 </label>
@@ -148,6 +130,7 @@ export function BookingForm() {
                 <input
                   id="eventDate"
                   type="date"
+                  min={todayIso()}
                   className={fieldClasses}
                   value={form.eventDate}
                   onChange={(e) => update('eventDate', e.target.value)}

@@ -179,7 +179,6 @@ export const featuredService = {
    * definitivo.
    */
   items: ['Piel de larga duración', 'Pestañas (opcional)', 'Retoque durante el evento', 'Servicio a domicilio'],
-  itemsNote: 'Elementos editables — el contenido final del servicio se confirma directamente con Josi.',
   cta: 'Cotizar maquillaje social',
   image: img('Maquillaje social o de evento', 'Maquillaje social para un evento nocturno'),
 }

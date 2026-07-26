@@ -27,8 +27,6 @@ export function FeaturedService() {
                 </li>
               ))}
             </ul>
-            <p className="mt-5 max-w-md font-sans text-xs italic text-cream/50">{featuredService.itemsNote}</p>
-
             <div className="mt-10">
               <CtaLink href="#agenda" variant="outline-inverse">
                 {featuredService.cta}

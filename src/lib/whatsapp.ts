@@ -2,7 +2,6 @@ import { booking, contact } from '../config/site'
 
 export type BookingFormData = {
   fullName: string
-  whatsapp: string
   service: string
   eventDate: string
   eventTime: string
@@ -21,7 +20,6 @@ export function buildWhatsappMessage(data: BookingFormData): string {
     booking.whatsappGreeting,
     '',
     `Nombre: ${data.fullName}`,
-    `WhatsApp: ${data.whatsapp}`,
     `Servicio: ${serviceLabel(data.service)}`,
     `Fecha del evento: ${data.eventDate}`,
     data.eventTime && `Hora aproximada: ${data.eventTime}`,
