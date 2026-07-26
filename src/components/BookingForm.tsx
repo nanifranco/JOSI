@@ -10,6 +10,7 @@ const emptyForm: BookingFormData = {
   eventDate: '',
   eventTime: '',
   guestCount: '',
+  serviceMode: '',
   location: '',
   message: '',
   inspirationLink: '',
@@ -53,7 +54,10 @@ export function BookingForm() {
     } else if (form.eventDate < minBookableDateIso()) {
       nextErrors.eventDate = 'Elige una fecha con al menos 24 horas de anticipación.'
     }
-    if (!form.location.trim()) nextErrors.location = 'Indica la dirección completa del servicio.'
+    if (!form.serviceMode) nextErrors.serviceMode = 'Selecciona dónde prefieres el servicio.'
+    if (form.serviceMode === 'domicilio' && !form.location.trim()) {
+      nextErrors.location = 'Indica la dirección completa del servicio.'
+    }
 
     if (Object.keys(nextErrors).length > 0) {
       setErrors(nextErrors)
@@ -77,7 +81,6 @@ export function BookingForm() {
               {booking.scheduleNote}
             </p>
             <p className="mt-4 max-w-sm font-sans text-[0.9rem] leading-relaxed text-taupe">{booking.text}</p>
-            <p className="mt-3 max-w-sm font-sans text-xs italic text-taupe/70">{booking.note}</p>
 
             <p className="mt-8 max-w-sm border-l border-champagne pl-5 font-sans text-xs leading-relaxed text-taupe/80">
               {booking.disclaimer}
@@ -186,30 +189,61 @@ export function BookingForm() {
                 />
               </div>
 
-              <div className="sm:col-span-2">
-                <label htmlFor="location" className={labelClasses}>
-                  Dirección del servicio *
+              <div>
+                <label htmlFor="serviceMode" className={labelClasses}>
+                  ¿Dónde prefieres el servicio? *
                 </label>
-                <input
-                  id="location"
-                  type="text"
-                  placeholder="Calle y número, colonia, ciudad"
-                  className={fieldClasses}
-                  value={form.location}
-                  onChange={(e) => update('location', e.target.value)}
-                  aria-invalid={Boolean(errors.location)}
-                  aria-describedby={errors.location ? 'location-error' : 'location-hint'}
-                />
-                <p id="location-hint" className="mt-2 font-sans text-xs text-taupe/70">
-                  Incluye calle, número, colonia y ciudad completos para evitar confusiones con calles del mismo
-                  nombre en otras colonias.
-                </p>
-                {errors.location && (
-                  <p id="location-error" className="mt-2 font-sans text-xs font-medium text-coffee">
-                    {errors.location}
+                <select
+                  id="serviceMode"
+                  className={`${fieldClasses} appearance-none`}
+                  value={form.serviceMode}
+                  onChange={(e) => update('serviceMode', e.target.value as BookingFormData['serviceMode'])}
+                  aria-invalid={Boolean(errors.serviceMode)}
+                  aria-describedby={errors.serviceMode ? 'serviceMode-error' : undefined}
+                >
+                  <option value="">Selecciona una opción</option>
+                  <option value="domicilio">A domicilio</option>
+                  <option value="estudio">En el lugar de Josi</option>
+                </select>
+                {errors.serviceMode && (
+                  <p id="serviceMode-error" className="mt-2 font-sans text-xs font-medium text-coffee">
+                    {errors.serviceMode}
                   </p>
                 )}
               </div>
+
+              {form.serviceMode === 'domicilio' && (
+                <div className="sm:col-span-2">
+                  <label htmlFor="location" className={labelClasses}>
+                    Dirección del servicio *
+                  </label>
+                  <input
+                    id="location"
+                    type="text"
+                    placeholder="Calle y número, colonia, ciudad"
+                    className={fieldClasses}
+                    value={form.location}
+                    onChange={(e) => update('location', e.target.value)}
+                    aria-invalid={Boolean(errors.location)}
+                    aria-describedby={errors.location ? 'location-error' : 'location-hint'}
+                  />
+                  <p id="location-hint" className="mt-2 font-sans text-xs text-taupe/70">
+                    Incluye calle, número, colonia y ciudad completos para evitar confusiones con calles del mismo
+                    nombre en otras colonias.
+                  </p>
+                  {errors.location && (
+                    <p id="location-error" className="mt-2 font-sans text-xs font-medium text-coffee">
+                      {errors.location}
+                    </p>
+                  )}
+                </div>
+              )}
+
+              {form.serviceMode === 'estudio' && (
+                <p className="sm:col-span-2 font-sans text-xs text-taupe/70">
+                  Te compartimos la ubicación exacta directamente por WhatsApp al confirmar tu cita.
+                </p>
+              )}
 
               <div className="sm:col-span-2">
                 <label htmlFor="message" className={labelClasses}>

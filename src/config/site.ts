@@ -67,7 +67,7 @@ export const contact = {
 export const brand = {
   name: 'JOSI',
   descriptor: 'MAKEUP',
-  tagline: 'Maquillaje social, eventos y fiestas infantiles — a domicilio.',
+  tagline: 'Maquillaje social, eventos y fiestas infantiles.',
 }
 
 /* ----------------------------------------------------------------------- */
@@ -91,7 +91,7 @@ export const hero = {
   text: 'Looks personalizados para resaltar tu esencia y hacerte sentir segura en cada momento especial.',
   primaryCta: 'Agenda tu cita',
   secondaryCta: 'Descubre mi trabajo',
-  image: img('Fotografía editorial — maquillaje profesional a domicilio', 'Retrato editorial de un maquillaje profesional realizado por Josi'),
+  image: img('Fotografía editorial — maquillaje profesional', 'Retrato editorial de un maquillaje profesional realizado por Josi'),
 }
 
 /* ----------------------------------------------------------------------- */
@@ -124,8 +124,7 @@ export const servicesIntro = {
   eyebrow: 'Servicios',
   title: 'Un look para cada momento',
   text: 'Cada servicio se adapta a tus facciones, estilo, tipo de evento y resultado que deseas.',
-  /** Por ahora Josi no cuenta con estudio propio: todo el servicio es a domicilio. */
-  note: 'Por el momento, todos los servicios se ofrecen a domicilio.',
+  note: 'Los servicios se ofrecen a domicilio o en el lugar de Josi, según tu preferencia.',
   /** Los precios de abajo son un estimado de partida, no un monto fijo. */
   priceNote: 'Precio estimado. Puede variar si el trabajo es muy elaborado — el precio final se confirma directamente por WhatsApp.',
 }
@@ -136,7 +135,7 @@ export const services: Service[] = [
     number: '01',
     name: 'Maquillaje social y de eventos',
     description: 'Para cenas, cumpleaños, XV años, graduaciones y cualquier evento donde quieras verte impecable y sentirte tú misma.',
-    price: 'Desde EDITAR: $000 MXN',
+    price: '$500 MXN en el lugar de Josi. A domicilio, según el trayecto.',
     image: eventoXvImage,
   },
   {
@@ -205,8 +204,6 @@ export const booking = {
   eyebrow: 'Agenda',
   title: 'Agenda tu cita',
   text: 'Comparte los datos de tu evento para consultar disponibilidad. Tu cita quedará confirmada después de recibir respuesta y realizar el anticipo correspondiente.',
-  /** Por ahora Josi no cuenta con estudio propio: todo el servicio es a domicilio. */
-  note: 'Por el momento, el servicio es únicamente a domicilio.',
   /** Las citas solo se realizan en fin de semana; para eventos lejanos se puede verificar disponibilidad por WhatsApp. */
   scheduleNote:
     'Las citas se realizan únicamente los fines de semana. Si tu evento todavía está lejos, puedes verificar la disponibilidad directamente por WhatsApp.',
@@ -272,7 +269,7 @@ export const faqs = [
   },
   {
     question: '¿Trabajas a domicilio?',
-    answer: 'Sí — por ahora el servicio es únicamente a domicilio, dentro de la zona de cobertura. EDITAR: confirmar si fuera de esa zona aplica un costo adicional de traslado.',
+    answer: 'Sí, ofrezco servicio a domicilio (el costo varía según el trayecto) y también puedes agendar en el lugar de Josi. EDITAR: confirmar zona de cobertura y costo de traslado según distancia.',
   },
   {
     question: '¿Cómo se confirma una cita?',

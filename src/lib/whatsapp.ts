@@ -1,11 +1,14 @@
 import { booking, contact } from '../config/site'
 
+export type ServiceMode = 'domicilio' | 'estudio'
+
 export type BookingFormData = {
   fullName: string
   service: string
   eventDate: string
   eventTime: string
   guestCount: string
+  serviceMode: ServiceMode | ''
   location: string
   message: string
   inspirationLink: string
@@ -13,6 +16,9 @@ export type BookingFormData = {
 
 const serviceLabel = (value: string) =>
   booking.serviceOptions.find((option) => option.value === value)?.label ?? value
+
+const serviceModeLabel = (value: BookingFormData['serviceMode']) =>
+  value === 'estudio' ? 'En el lugar de Josi' : value === 'domicilio' ? 'A domicilio' : ''
 
 /** Construye el mensaje de WhatsApp a partir de los datos del formulario de agenda. */
 export function buildWhatsappMessage(data: BookingFormData): string {
@@ -24,8 +30,8 @@ export function buildWhatsappMessage(data: BookingFormData): string {
     `Fecha del evento: ${data.eventDate}`,
     data.eventTime && `Hora aproximada: ${data.eventTime}`,
     data.guestCount && `Número de personas: ${data.guestCount}`,
-    'Modalidad: A domicilio',
-    data.location && `Dirección: ${data.location}`,
+    `Modalidad: ${serviceModeLabel(data.serviceMode)}`,
+    data.serviceMode === 'domicilio' && data.location && `Dirección: ${data.location}`,
     data.message && `Mensaje / referencias: ${data.message}`,
     data.inspirationLink && `Inspiración: ${data.inspirationLink}`,
   ].filter(Boolean)
