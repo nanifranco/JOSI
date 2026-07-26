@@ -33,7 +33,11 @@ export function Services() {
 
                   <div className="md:col-span-4">
                     <p className="eyebrow mb-1.5 text-[0.58rem]">Inversión</p>
-                    <p className="font-serif text-base text-coffee">{service.price}</p>
+                    {service.price.map((line) => (
+                      <p key={line} className="font-serif text-base text-coffee">
+                        {line}
+                      </p>
+                    ))}
                   </div>
                 </div>
               </Reveal>

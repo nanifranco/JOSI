@@ -5,6 +5,7 @@ import { AboutJosi } from './components/AboutJosi'
 import { Services } from './components/Services'
 import { FeaturedService } from './components/FeaturedService'
 import { BookingProcess } from './components/BookingProcess'
+import { OnSite } from './components/OnSite'
 import { BookingForm } from './components/BookingForm'
 import { Portfolio } from './components/Portfolio'
 import { FAQ } from './components/FAQ'
@@ -25,6 +26,7 @@ function App() {
         <Services />
         <FeaturedService />
         <BookingProcess />
+        <OnSite />
         <BookingForm />
         <Portfolio />
         <FAQ />

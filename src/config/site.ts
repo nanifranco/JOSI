@@ -116,7 +116,8 @@ export type Service = {
   number: string
   name: string
   description: string
-  price: string
+  /** Cada elemento se muestra en su propia línea (una por modalidad). */
+  price: string[]
   image: ImageSlot
 }
 
@@ -135,7 +136,7 @@ export const services: Service[] = [
     number: '01',
     name: 'Maquillaje social y de eventos',
     description: 'Para cenas, cumpleaños, XV años, graduaciones y cualquier evento donde quieras verte impecable y sentirte tú misma.',
-    price: 'En sitio: $500 MXN · A domicilio: según el trayecto.',
+    price: ['En sitio: $500 MXN', 'A domicilio: según el trayecto.'],
     image: eventoXvImage,
   },
   {
@@ -143,7 +144,7 @@ export const services: Service[] = [
     number: '02',
     name: 'Fiestas infantiles y pinta caritas',
     description: 'Diseños divertidos y coloridos para celebrar en grande, a domicilio en la fiesta.',
-    price: '$600 MXN/hora básico · $1,000 MXN/hora elaborado',
+    price: ['$600 MXN/hora básico', '$1,000 MXN/hora elaborado'],
     image: eventoCelebracionImage,
   },
   {
@@ -151,20 +152,20 @@ export const services: Service[] = [
     number: '03',
     name: 'Maquillaje de caracterización',
     description: 'EDITAR: describe el tipo de caracterización que ofreces (teatral, fantasía, efectos especiales, disfraces, etc.).',
-    price: 'Depende del diseño',
+    price: ['Depende del diseño'],
     image: img('Maquillaje de caracterización', 'Maquillaje de caracterización realizado por Josi'),
   },
 ]
 
 /* ----------------------------------------------------------------------- */
-/* SERVICIO DESTACADO — SOCIAL Y EVENTOS                                   */
+/* SERVICIO DESTACADO — CARACTERIZACIÓN                                    */
 /* ----------------------------------------------------------------------- */
 export const featuredService = {
   eyebrow: 'Servicio destacado',
-  title: 'Maquillaje para brillar en cada evento',
-  text: 'Un servicio pensado para verte impecable en cenas, cumpleaños y celebraciones, con un maquillaje duradero y a tu medida.',
-  cta: 'Cotizar maquillaje social',
-  image: img('Maquillaje social o de evento', 'Maquillaje social para un evento nocturno'),
+  title: 'Caracterización que transforma por completo',
+  text: 'Maquillaje pensado para cortometrajes, teatro, disfraces o cualquier personaje que tengas en mente — desde efectos especiales hasta transformaciones completas.',
+  cta: 'Cotizar maquillaje de caracterización',
+  image: img('Maquillaje de caracterización', 'Maquillaje de caracterización para cortometraje o teatro'),
 }
 
 /* ----------------------------------------------------------------------- */
@@ -195,6 +196,17 @@ export const bookingProcess = {
       text: 'Juntas crearemos un look pensado especialmente para ti.',
     },
   ],
+}
+
+/* ----------------------------------------------------------------------- */
+/* EN SITIO — EDITAR: descripción real del espacio y zona                  */
+/* ----------------------------------------------------------------------- */
+export const onSite = {
+  eyebrow: 'En sitio',
+  title: 'Maquíllate en mi espacio',
+  text: 'Si prefieres no moverte el día de tu evento, también puedes agendar tu cita en mi espacio de trabajo — cómodo, privado y pensado para que te relajes mientras te maquillo. EDITAR: agregar zona o colonia general de referencia.',
+  note: 'La dirección exacta se comparte directamente por WhatsApp al confirmar tu cita.',
+  photo: img('Espacio de trabajo de Josi', 'Espacio de trabajo de Josi para citas en sitio'),
 }
 
 /* ----------------------------------------------------------------------- */

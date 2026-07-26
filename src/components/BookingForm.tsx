@@ -163,7 +163,7 @@ export function BookingForm() {
 
               <div>
                 <label htmlFor="eventTime" className={labelClasses}>
-                  Hora aproximada
+                  Hora
                 </label>
                 <input
                   id="eventTime"
@@ -237,12 +237,6 @@ export function BookingForm() {
                     </p>
                   )}
                 </div>
-              )}
-
-              {form.serviceMode === 'estudio' && (
-                <p className="sm:col-span-2 font-sans text-xs text-taupe/70">
-                  Te compartimos la ubicación exacta directamente por WhatsApp al confirmar tu cita.
-                </p>
               )}
 
               <div className="sm:col-span-2">
