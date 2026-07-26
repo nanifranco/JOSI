@@ -67,7 +67,7 @@ export function BookingForm() {
   }
 
   return (
-    <section id="agenda" className="bg-cream py-20 md:py-28 lg:py-36">
+    <section id="agenda" className="bg-cream pb-20 pt-14 md:pb-28 md:pt-16 lg:pb-36 lg:pt-20">
       <div className="mx-auto max-w-[1400px] px-6 md:px-12">
         <div className="grid gap-14 md:grid-cols-12 md:gap-10">
           <Reveal className="md:col-span-4">
