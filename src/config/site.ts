@@ -135,7 +135,7 @@ export const services: Service[] = [
     number: '01',
     name: 'Maquillaje social y de eventos',
     description: 'Para cenas, cumpleaños, XV años, graduaciones y cualquier evento donde quieras verte impecable y sentirte tú misma.',
-    price: '$500 MXN en sitio. A domicilio, según el trayecto.',
+    price: 'En sitio: $500 MXN · A domicilio: según el trayecto.',
     image: eventoXvImage,
   },
   {
@@ -143,7 +143,7 @@ export const services: Service[] = [
     number: '02',
     name: 'Fiestas infantiles y pinta caritas',
     description: 'Diseños divertidos y coloridos para celebrar en grande, a domicilio en la fiesta.',
-    price: 'Desde EDITAR: $000 MXN',
+    price: '$600 MXN/hora básico · $1,000 MXN/hora elaborado',
     image: eventoCelebracionImage,
   },
   {
@@ -151,7 +151,7 @@ export const services: Service[] = [
     number: '03',
     name: 'Maquillaje de caracterización',
     description: 'EDITAR: describe el tipo de caracterización que ofreces (teatral, fantasía, efectos especiales, disfraces, etc.).',
-    price: 'Desde EDITAR: $000 MXN',
+    price: 'Depende del diseño',
     image: img('Maquillaje de caracterización', 'Maquillaje de caracterización realizado por Josi'),
   },
 ]
