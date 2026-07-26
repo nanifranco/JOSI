@@ -108,16 +108,6 @@ export const about = {
   signature: 'Josi',
   photoMain: img('Fotografía de Josi', 'Retrato de Josi, maquillista profesional'),
   photoDetail: img('Detalle de trabajo', 'Detalle de un maquillaje realizado por Josi'),
-  /**
-   * EDITAR: cada campo es un dato real pendiente de confirmar.
-   * Nota: no se incluye "Formación" — Josi aún no cuenta con formación
-   * profesional formal. No agregar cursos o certificaciones inventadas.
-   */
-  facts: [
-    { label: 'Zona', value: 'EDITAR: ciudad o zona donde trabaja' },
-    { label: 'Experiencia', value: 'EDITAR: años o trayectoria' },
-    { label: 'Especialidad', value: 'EDITAR: tipo de maquillaje o técnica' },
-  ],
 }
 
 /* ----------------------------------------------------------------------- */
@@ -170,17 +160,8 @@ export const services: Service[] = [
     image: img('Maquillaje de graduación', 'Maquillaje de graduación realizado por Josi'),
   },
   {
-    id: 'sesiones',
-    number: '04',
-    name: 'Maquillaje para sesiones',
-    description: 'Diseñado para cámara: sesiones fotográficas, editoriales o contenido, con acabado natural o editorial.',
-    duration: 'EDITAR: duración',
-    price: 'Cotización personalizada',
-    image: img('Maquillaje para sesión fotográfica', 'Maquillaje para sesión fotográfica realizado por Josi'),
-  },
-  {
     id: 'infantil',
-    number: '05',
+    number: '04',
     name: 'Fiestas infantiles y pinta caritas',
     description: 'Diseños divertidos y coloridos para celebrar en grande, a domicilio en la fiesta. Ver sección dedicada más abajo.',
     duration: 'EDITAR: duración',
@@ -259,7 +240,6 @@ export const booking = {
     { value: 'social', label: 'Social' },
     { value: 'xv', label: 'XV años' },
     { value: 'graduacion', label: 'Graduación' },
-    { value: 'sesion', label: 'Sesión' },
     { value: 'infantil', label: 'Fiesta infantil / pinta caritas' },
     { value: 'otro', label: 'Otro' },
   ],

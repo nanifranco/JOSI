@@ -44,7 +44,7 @@ export function BookingForm() {
     if (!form.whatsapp.trim()) nextErrors.whatsapp = 'Comparte un número de WhatsApp.'
     if (!form.service) nextErrors.service = 'Selecciona el tipo de servicio.'
     if (!form.eventDate) nextErrors.eventDate = 'Selecciona la fecha del evento.'
-    if (!form.location.trim()) nextErrors.location = 'Indica el lugar o zona del servicio.'
+    if (!form.location.trim()) nextErrors.location = 'Indica la dirección del servicio.'
     if (!privacyAccepted) nextErrors.privacy = 'Debes aceptar el aviso de privacidad.'
 
     if (Object.keys(nextErrors).length > 0) {
@@ -216,12 +216,12 @@ export function BookingForm() {
 
               <div>
                 <label htmlFor="location" className={labelClasses}>
-                  Lugar o zona del servicio *
+                  Dirección del servicio *
                 </label>
                 <input
                   id="location"
                   type="text"
-                  placeholder="Colonia, ciudad o recinto"
+                  placeholder="Calle, colonia y ciudad"
                   className={fieldClasses}
                   value={form.location}
                   onChange={(e) => update('location', e.target.value)}

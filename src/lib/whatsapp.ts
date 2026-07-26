@@ -29,7 +29,7 @@ export function buildWhatsappMessage(data: BookingFormData): string {
     data.eventTime && `Hora aproximada: ${data.eventTime}`,
     data.guestCount && `Número de personas: ${data.guestCount}`,
     'Modalidad: A domicilio',
-    data.location && `Lugar / zona: ${data.location}`,
+    data.location && `Dirección: ${data.location}`,
     data.message && `Mensaje / referencias: ${data.message}`,
     data.inspirationLink && `Inspiración: ${data.inspirationLink}`,
   ].filter(Boolean)

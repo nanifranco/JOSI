@@ -1,6 +1,5 @@
 import { services, servicesIntro } from '../config/site'
 import { PlaceholderImage } from './PlaceholderImage'
-import { CtaLink } from './Cta'
 import { Reveal } from './Reveal'
 
 export function Services() {
@@ -37,7 +36,7 @@ export function Services() {
                     <div className="hidden md:col-span-3 md:block" aria-hidden />
                   )}
 
-                  <div className="flex gap-8 md:col-span-2">
+                  <div className="flex gap-8 md:col-span-4">
                     <div>
                       <p className="eyebrow mb-1.5 text-[0.58rem]">Duración</p>
                       <p className="font-serif text-base text-coffee">{service.duration}</p>
@@ -46,12 +45,6 @@ export function Services() {
                       <p className="eyebrow mb-1.5 text-[0.58rem]">Inversión</p>
                       <p className="font-serif text-base text-coffee">{service.price}</p>
                     </div>
-                  </div>
-
-                  <div className="md:col-span-2 md:text-right">
-                    <CtaLink href="#agenda" variant="text" className="text-[0.65rem]">
-                      Consultar disponibilidad
-                    </CtaLink>
                   </div>
                 </div>
               </Reveal>

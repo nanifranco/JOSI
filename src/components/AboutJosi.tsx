@@ -38,15 +38,6 @@ export function AboutJosi() {
               </p>
               <p className="mt-4 font-serif text-lg italic text-champagne-deep">— {about.signature}</p>
             </blockquote>
-
-            <dl className="mt-14 grid max-w-xl grid-cols-2 gap-x-8 gap-y-8 border-t border-coffee/15 pt-10 sm:grid-cols-3">
-              {about.facts.map((fact) => (
-                <div key={fact.label}>
-                  <dt className="eyebrow mb-2 text-[0.6rem]">{fact.label}</dt>
-                  <dd className="font-serif text-base leading-snug text-taupe">{fact.value}</dd>
-                </div>
-              ))}
-            </dl>
           </Reveal>
         </div>
       </div>
