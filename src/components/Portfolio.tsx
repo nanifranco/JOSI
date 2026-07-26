@@ -71,7 +71,7 @@ export function Portfolio() {
               }`}
             >
               <PlaceholderImage
-                slot={item.image}
+                slot={{ ...item.image, label: portfolioFilters.find((f) => f.value === item.category)?.label ?? item.image.label }}
                 tone={index % 2 === 0 ? 'blush' : 'champagne'}
                 className="h-full w-full"
                 showLabel

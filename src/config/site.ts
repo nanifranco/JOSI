@@ -55,8 +55,7 @@ export const contact = {
   /** EDITAR: horarios de atención, uno por línea. */
   hours: [
     { day: 'Lunes a viernes', time: '10:00 – 18:00' },
-    { day: 'Sábados', time: '9:00 – 14:00' },
-    { day: 'Domingos', time: 'Cerrado' },
+    { day: 'Fines de semana', time: 'EDITAR: horario de fin de semana' },
   ],
 
   /**

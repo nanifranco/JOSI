@@ -210,7 +210,7 @@ export function BookingForm() {
                 </label>
                 <textarea
                   id="message"
-                  rows={3}
+                  rows={1}
                   className={`${fieldClasses} resize-none`}
                   value={form.message}
                   onChange={(e) => update('message', e.target.value)}
