@@ -280,7 +280,7 @@ export const faqIntro = {
 export const faqs = [
   {
     question: '¿Con cuánto tiempo debo reservar?',
-    answer: 'EDITAR: se recomienda agendar con anticipación, especialmente para fechas de temporada alta como fines de semana y meses de graduaciones.',
+    answer: 'Como mínimo, con 24 horas de anticipación — el formulario de Agenda no permite seleccionar una fecha más próxima que esa. EDITAR: se recomienda reservar con más tiempo, especialmente para fechas de temporada alta como fines de semana y meses de graduaciones.',
   },
   {
     question: '¿Trabajas a domicilio?',

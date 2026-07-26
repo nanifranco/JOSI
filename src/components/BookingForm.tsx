@@ -22,10 +22,13 @@ const fieldClasses =
 
 const labelClasses = 'eyebrow mb-2 block text-[0.6rem]'
 
-const todayIso = () => {
+/** Fecha más próxima que se puede agendar, respetando el mínimo de 24 horas de anticipación. */
+const minBookableDateIso = () => {
   const now = new Date()
   const offset = now.getTimezoneOffset()
-  return new Date(now.getTime() - offset * 60_000).toISOString().slice(0, 10)
+  const localNow = new Date(now.getTime() - offset * 60_000)
+  localNow.setDate(localNow.getDate() + 1)
+  return localNow.toISOString().slice(0, 10)
 }
 
 export function BookingForm() {
@@ -45,7 +48,11 @@ export function BookingForm() {
     const nextErrors: Errors = {}
     if (!form.fullName.trim()) nextErrors.fullName = 'Comparte tu nombre completo.'
     if (!form.service) nextErrors.service = 'Selecciona el tipo de servicio.'
-    if (!form.eventDate) nextErrors.eventDate = 'Selecciona la fecha del evento.'
+    if (!form.eventDate) {
+      nextErrors.eventDate = 'Selecciona la fecha del evento.'
+    } else if (form.eventDate < minBookableDateIso()) {
+      nextErrors.eventDate = 'Elige una fecha con al menos 24 horas de anticipación.'
+    }
     if (!form.location.trim()) nextErrors.location = 'Indica la dirección completa del servicio.'
 
     if (Object.keys(nextErrors).length > 0) {
@@ -130,7 +137,7 @@ export function BookingForm() {
                 <input
                   id="eventDate"
                   type="date"
-                  min={todayIso()}
+                  min={minBookableDateIso()}
                   className={fieldClasses}
                   value={form.eventDate}
                   onChange={(e) => update('eventDate', e.target.value)}

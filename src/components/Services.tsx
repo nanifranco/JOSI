@@ -4,7 +4,7 @@ import { Reveal } from './Reveal'
 
 export function Services() {
   return (
-    <section id="servicios" className="bg-ivory py-20 md:py-28 lg:py-36">
+    <section id="servicios" className="bg-ivory pb-20 pt-14 md:pb-28 md:pt-16 lg:pb-36 lg:pt-20">
       <div className="mx-auto max-w-[1400px] px-6 md:px-12">
         <Reveal className="max-w-xl">
           <p className="eyebrow mb-6">{servicesIntro.eyebrow}</p>

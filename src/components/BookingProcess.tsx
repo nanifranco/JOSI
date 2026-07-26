@@ -3,7 +3,7 @@ import { Reveal } from './Reveal'
 
 export function BookingProcess() {
   return (
-    <section className="bg-white py-20 md:py-28 lg:py-36">
+    <section className="bg-white pb-20 pt-14 md:pb-28 md:pt-16 lg:pb-36 lg:pt-20">
       <div className="mx-auto max-w-[1400px] px-6 md:px-12">
         <Reveal className="max-w-lg">
           <p className="eyebrow mb-6">{bookingProcess.eyebrow}</p>
