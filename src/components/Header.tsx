@@ -35,7 +35,8 @@ export function Header() {
       >
         <a href="#inicio" className="leading-none" onClick={() => setOpen(false)}>
           <span className="block font-serif text-[1.7rem] tracking-[0.12em] text-coffee">{brand.name}</span>
-          <span className="mt-0.5 block font-sans text-[0.55rem] font-medium tracking-[0.5em] text-taupe">
+          <span className="my-1.5 block h-px w-5 bg-champagne" aria-hidden="true" />
+          <span className="block font-sans text-[0.55rem] font-medium tracking-[0.5em] text-taupe">
             {brand.descriptor}
           </span>
         </a>

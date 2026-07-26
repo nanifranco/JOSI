@@ -10,7 +10,8 @@ export function Footer() {
         <div className="grid gap-12 md:grid-cols-12">
           <div className="md:col-span-5">
             <span className="block font-serif text-2xl tracking-[0.1em]">{brand.name}</span>
-            <span className="mt-1 block font-sans text-[0.55rem] font-medium tracking-[0.5em] text-cream/60">
+            <span className="my-1.5 block h-px w-5 bg-cream/25" aria-hidden="true" />
+            <span className="block font-sans text-[0.55rem] font-medium tracking-[0.5em] text-cream/60">
               {brand.descriptor}
             </span>
             <p className="mt-6 max-w-xs font-sans text-sm leading-relaxed text-cream/60">{brand.tagline}</p>
