@@ -281,33 +281,6 @@ export const portfolio: PortfolioItem[] = [
 ]
 
 /* ----------------------------------------------------------------------- */
-/* TESTIMONIOS — EJEMPLO: reemplazar con testimonios reales                */
-/* ----------------------------------------------------------------------- */
-export const testimonialsIntro = {
-  eyebrow: 'Testimonios',
-  title: 'Cómo se sintieron',
-  note: 'Textos de ejemplo — sustituir por testimonios reales de clientas.',
-}
-
-export const testimonials = [
-  {
-    quote: 'Me sentí muy cómoda durante toda la sesión, Josi es súper atenta y el ambiente fue muy relajado.',
-    name: 'Andrea M.',
-    focus: 'Trato y comodidad',
-  },
-  {
-    quote: 'El maquillaje se mantuvo intacto toda la noche, hasta en las fotos del final de la fiesta se veía perfecto.',
-    name: 'Renata G.',
-    focus: 'Duración del maquillaje',
-  },
-  {
-    quote: 'Quedé enamorada del resultado, era justo lo que tenía en mente pero mejor. Totalmente recomendada.',
-    name: 'Paola V.',
-    focus: 'Satisfacción con el resultado',
-  },
-]
-
-/* ----------------------------------------------------------------------- */
 /* PREGUNTAS FRECUENTES — EDITAR: respuestas provisionales                 */
 /* ----------------------------------------------------------------------- */
 export const faqIntro = {

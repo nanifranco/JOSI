@@ -12,7 +12,7 @@ export function Contact() {
   ]
 
   return (
-    <section id="contacto" className="bg-ivory py-28 md:py-36">
+    <section id="contacto" className="bg-cream py-28 md:py-36">
       <div className="mx-auto max-w-[1400px] px-6 md:px-12">
         <Reveal className="grid gap-14 md:grid-cols-12 md:gap-6">
           <div className="md:col-span-4">

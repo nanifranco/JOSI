@@ -6,7 +6,6 @@ import { FeaturedService } from './components/FeaturedService'
 import { BookingProcess } from './components/BookingProcess'
 import { BookingForm } from './components/BookingForm'
 import { Portfolio } from './components/Portfolio'
-import { Testimonials } from './components/Testimonials'
 import { FAQ } from './components/FAQ'
 import { FinalCta } from './components/FinalCta'
 import { Contact } from './components/Contact'
@@ -26,7 +25,6 @@ function App() {
         <BookingProcess />
         <BookingForm />
         <Portfolio />
-        <Testimonials />
         <FAQ />
         <FinalCta />
         <Contact />
