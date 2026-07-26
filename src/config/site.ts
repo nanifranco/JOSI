@@ -303,7 +303,7 @@ export const faqs = [
   },
   {
     question: '¿Es necesario realizar un anticipo?',
-    answer: 'EDITAR: sí, se solicita un anticipo para apartar la fecha. El monto y forma de pago se comparten al confirmar disponibilidad.',
+    answer: 'Sí, se solicita un anticipo para apartar la fecha. Por el momento se recibe por transferencia bancaria — EDITAR: confirmar monto y datos bancarios que se comparten al confirmar disponibilidad.',
   },
   {
     question: '¿Puedo mandarte referencias del maquillaje?',

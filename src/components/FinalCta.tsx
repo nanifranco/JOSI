@@ -8,7 +8,7 @@ export function FinalCta() {
   const whatsappHref = `https://wa.me/${contact.whatsappNumber}`
 
   return (
-    <section className="bg-cream">
+    <section className="bg-ivory">
       <div className="grid md:grid-cols-12">
         <div className="order-2 h-[46vh] md:order-1 md:col-span-6 md:h-auto">
           <PlaceholderImage slot={finalCta.image} tone="champagne" className="h-full w-full" />

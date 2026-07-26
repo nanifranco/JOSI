@@ -1,3 +1,4 @@
+import { SplashIntro } from './components/SplashIntro'
 import { Header } from './components/Header'
 import { Hero } from './components/Hero'
 import { AboutJosi } from './components/AboutJosi'
@@ -16,6 +17,7 @@ import { BackToTop } from './components/BackToTop'
 function App() {
   return (
     <>
+      <SplashIntro />
       <Header />
       <main>
         <Hero />
