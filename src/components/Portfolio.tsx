@@ -35,7 +35,7 @@ export function Portfolio() {
   const activeItem = activeIndex !== null ? items[activeIndex] : null
 
   return (
-    <section id="portafolio" className="bg-ivory py-28 md:py-36">
+    <section id="portafolio" className="bg-white py-20 md:py-28 lg:py-36">
       <div className="mx-auto max-w-[1400px] px-6 md:px-12">
         <Reveal className="flex flex-col gap-8 sm:flex-row sm:items-end sm:justify-between">
           <div>

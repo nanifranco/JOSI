@@ -7,7 +7,7 @@ export function Hero() {
   return (
     <section id="inicio" className="relative grid overflow-hidden bg-cream md:grid-cols-12 md:items-stretch">
       {/* Columna de texto — asimétrica, con generoso espacio negativo */}
-      <div className="relative order-2 flex flex-col justify-center px-6 pb-16 pt-14 md:order-1 md:col-span-5 md:px-14 md:py-0 lg:px-20">
+      <div className="relative order-2 flex flex-col justify-center px-6 pb-12 pt-10 md:order-1 md:col-span-5 md:px-14 md:py-0 lg:px-20">
         <span
           aria-hidden
           className="pointer-events-none absolute -left-4 top-1/2 hidden -translate-y-1/2 select-none font-serif text-[13rem] leading-none text-coffee/[0.04] lg:block"
@@ -34,7 +34,7 @@ export function Hero() {
       </div>
 
       {/* Fotografía — protagonista, con sangrado completo */}
-      <div className="order-1 h-[62vh] min-h-[420px] md:order-2 md:col-span-7 md:h-screen">
+      <div className="order-1 aspect-[4/5] min-h-[340px] md:order-2 md:col-span-7 md:aspect-auto md:h-screen">
         <PlaceholderImage slot={hero.image} tone="blush" className="h-full w-full" />
       </div>
     </section>
