@@ -19,14 +19,6 @@ export function FeaturedService() {
               {featuredService.text}
             </p>
 
-            <ul className="mt-10 grid max-w-lg grid-cols-1 gap-x-8 gap-y-4 border-t border-cream/15 pt-8 sm:grid-cols-2">
-              {featuredService.items.map((item, index) => (
-                <li key={item} className="flex items-baseline gap-3 border-b border-cream/10 pb-3">
-                  <span className="font-serif text-sm text-champagne">{String(index + 1).padStart(2, '0')}</span>
-                  <span className="font-sans text-sm text-cream/90">{item}</span>
-                </li>
-              ))}
-            </ul>
             <div className="mt-10">
               <CtaLink href="#agenda" variant="outline-inverse">
                 {featuredService.cta}

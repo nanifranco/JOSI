@@ -1,12 +1,9 @@
 import { finalCta } from '../config/site'
-import { contact } from '../config/site'
 import { PlaceholderImage } from './PlaceholderImage'
 import { CtaLink } from './Cta'
 import { Reveal } from './Reveal'
 
 export function FinalCta() {
-  const whatsappHref = `https://wa.me/${contact.whatsappNumber}`
-
   return (
     <section className="bg-cream">
       <div className="grid md:grid-cols-12">
@@ -21,9 +18,6 @@ export function FinalCta() {
             <div className="mt-10 flex flex-wrap items-center gap-5">
               <CtaLink href="#agenda" variant="solid">
                 {finalCta.primaryCta}
-              </CtaLink>
-              <CtaLink href={whatsappHref} target="_blank" rel="noopener noreferrer" variant="text">
-                {finalCta.secondaryCta}
               </CtaLink>
             </div>
           </Reveal>

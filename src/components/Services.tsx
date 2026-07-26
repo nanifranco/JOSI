@@ -31,21 +31,17 @@ export function Services() {
                     <PlaceholderImage slot={service.image} tone="blush" className="h-full w-full" />
                   </div>
 
-                  <div className="flex gap-8 md:col-span-4">
-                    <div>
-                      <p className="eyebrow mb-1.5 text-[0.58rem]">Duración</p>
-                      <p className="font-serif text-base text-coffee">{service.duration}</p>
-                    </div>
-                    <div>
-                      <p className="eyebrow mb-1.5 text-[0.58rem]">Inversión</p>
-                      <p className="font-serif text-base text-coffee">{service.price}</p>
-                    </div>
+                  <div className="md:col-span-4">
+                    <p className="eyebrow mb-1.5 text-[0.58rem]">Inversión</p>
+                    <p className="font-serif text-base text-coffee">{service.price}</p>
                   </div>
                 </div>
               </Reveal>
             )
           })}
         </div>
+
+        <p className="mt-6 max-w-xl font-sans text-xs italic text-taupe/70">{servicesIntro.priceNote}</p>
       </div>
     </section>
   )

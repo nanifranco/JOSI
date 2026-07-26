@@ -116,14 +116,13 @@ export const about = {
 }
 
 /* ----------------------------------------------------------------------- */
-/* SERVICIOS — EDITAR: duración y precio de cada servicio                  */
+/* SERVICIOS — EDITAR: precio estimado de cada servicio                    */
 /* ----------------------------------------------------------------------- */
 export type Service = {
   id: string
   number: string
   name: string
   description: string
-  duration: string
   price: string
   image: ImageSlot
 }
@@ -134,6 +133,8 @@ export const servicesIntro = {
   text: 'Cada servicio se adapta a tus facciones, estilo, tipo de evento y resultado que deseas.',
   /** Por ahora Josi no cuenta con estudio propio: todo el servicio es a domicilio. */
   note: 'Por el momento, todos los servicios se ofrecen a domicilio.',
+  /** Los precios de abajo son un estimado de partida, no un monto fijo. */
+  priceNote: 'Precio estimado. Puede variar si el trabajo es muy elaborado — el precio final se confirma directamente por WhatsApp.',
 }
 
 export const services: Service[] = [
@@ -142,8 +143,7 @@ export const services: Service[] = [
     number: '01',
     name: 'Maquillaje social y de eventos',
     description: 'Para cenas, cumpleaños, XV años, graduaciones y cualquier evento donde quieras verte impecable y sentirte tú misma.',
-    duration: 'EDITAR: duración',
-    price: 'Cotización personalizada',
+    price: 'Desde EDITAR: $000 MXN',
     image: eventoXvImage,
   },
   {
@@ -151,8 +151,7 @@ export const services: Service[] = [
     number: '02',
     name: 'Fiestas infantiles y pinta caritas',
     description: 'Diseños divertidos y coloridos para celebrar en grande, a domicilio en la fiesta.',
-    duration: 'EDITAR: duración',
-    price: 'Cotización personalizada',
+    price: 'Desde EDITAR: $000 MXN',
     image: eventoCelebracionImage,
   },
   {
@@ -160,8 +159,7 @@ export const services: Service[] = [
     number: '03',
     name: 'Maquillaje de caracterización',
     description: 'EDITAR: describe el tipo de caracterización que ofreces (teatral, fantasía, efectos especiales, disfraces, etc.).',
-    duration: 'EDITAR: duración',
-    price: 'Cotización personalizada',
+    price: 'Desde EDITAR: $000 MXN',
     image: img('Maquillaje de caracterización', 'Maquillaje de caracterización realizado por Josi'),
   },
 ]
@@ -173,13 +171,6 @@ export const featuredService = {
   eyebrow: 'Servicio destacado',
   title: 'Maquillaje para brillar en cada evento',
   text: 'Un servicio pensado para verte impecable en cenas, cumpleaños y celebraciones, con un maquillaje duradero y a tu medida.',
-  /**
-   * EDITAR: estos son los elementos que PODRÍA incluir el servicio social o
-   * de eventos. No representan un paquete confirmado ni su alcance final —
-   * Josi debe definir qué incluye cada opción antes de publicarlo como
-   * definitivo.
-   */
-  items: ['Piel de larga duración', 'Pestañas (opcional)', 'Retoque durante el evento', 'Servicio a domicilio'],
   cta: 'Cotizar maquillaje social',
   image: img('Maquillaje social o de evento', 'Maquillaje social para un evento nocturno'),
 }
@@ -222,7 +213,7 @@ export const booking = {
   title: 'Agenda tu cita',
   text: 'Comparte los datos de tu evento para consultar disponibilidad. Tu cita quedará confirmada después de recibir respuesta y realizar el anticipo correspondiente.',
   /** Por ahora Josi no cuenta con estudio propio: todo el servicio es a domicilio. */
-  note: 'Por el momento, el servicio es únicamente a domicilio — todavía no hay estudio propio.',
+  note: 'Por el momento, el servicio es únicamente a domicilio.',
   disclaimer: 'Enviar este formulario solicita disponibilidad; no confirma tu cita de forma automática.',
   serviceOptions: [
     { value: 'social', label: 'Social / Eventos' },
@@ -320,7 +311,6 @@ export const finalCta = {
   title: 'Tu momento merece sentirse especial',
   text: 'Cuéntame qué tienes en mente y creemos juntas el look ideal para ti.',
   primaryCta: 'Agenda tu cita',
-  secondaryCta: 'Escríbeme por WhatsApp',
   image: img('Fotografía final', 'Fotografía editorial de cierre'),
 }
 

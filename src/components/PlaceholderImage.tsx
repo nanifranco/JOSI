@@ -39,16 +39,10 @@ export function PlaceholderImage({ slot, tone = 'ivory', className = '' }: Props
     <div
       role="img"
       aria-label={slot.alt}
-      className={`relative flex h-full w-full items-end overflow-hidden bg-gradient-to-br ${tones[tone]} ${className}`}
+      title={slot.label}
+      className={`relative h-full w-full overflow-hidden bg-gradient-to-br ${tones[tone]} ${className}`}
     >
       <div className={`pointer-events-none absolute inset-5 border ${isDark ? 'border-cream/20' : 'border-coffee/10'}`} />
-      <span
-        className={`relative m-5 font-sans text-[0.62rem] font-medium uppercase tracking-[0.28em] ${
-          isDark ? 'text-cream/60' : 'text-taupe/65'
-        }`}
-      >
-        {slot.label}
-      </span>
     </div>
   )
 }
