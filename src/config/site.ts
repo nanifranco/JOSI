@@ -124,7 +124,7 @@ export const servicesIntro = {
   eyebrow: 'Servicios',
   title: 'Un look para cada momento',
   text: 'Cada servicio se adapta a tus facciones, estilo, tipo de evento y resultado que deseas.',
-  note: 'Los servicios se ofrecen a domicilio o en el lugar de Josi, según tu preferencia.',
+  note: 'Los servicios se ofrecen a domicilio o en sitio, según tu preferencia.',
   /** Los precios de abajo son un estimado de partida, no un monto fijo. */
   priceNote: 'Precio estimado. Puede variar si el trabajo es muy elaborado — el precio final se confirma directamente por WhatsApp.',
 }
@@ -135,7 +135,7 @@ export const services: Service[] = [
     number: '01',
     name: 'Maquillaje social y de eventos',
     description: 'Para cenas, cumpleaños, XV años, graduaciones y cualquier evento donde quieras verte impecable y sentirte tú misma.',
-    price: '$500 MXN en el lugar de Josi. A domicilio, según el trayecto.',
+    price: '$500 MXN en sitio. A domicilio, según el trayecto.',
     image: eventoXvImage,
   },
   {
@@ -269,7 +269,7 @@ export const faqs = [
   },
   {
     question: '¿Trabajas a domicilio?',
-    answer: 'Sí, ofrezco servicio a domicilio (el costo varía según el trayecto) y también puedes agendar en el lugar de Josi. EDITAR: confirmar zona de cobertura y costo de traslado según distancia.',
+    answer: 'Sí, ofrezco servicio a domicilio (el costo varía según el trayecto) y también puedes agendar en sitio. EDITAR: confirmar zona de cobertura y costo de traslado según distancia.',
   },
   {
     question: '¿Cómo se confirma una cita?',

@@ -203,7 +203,7 @@ export function BookingForm() {
                 >
                   <option value="">Selecciona una opción</option>
                   <option value="domicilio">A domicilio</option>
-                  <option value="estudio">En el lugar de Josi</option>
+                  <option value="estudio">En sitio</option>
                 </select>
                 {errors.serviceMode && (
                   <p id="serviceMode-error" className="mt-2 font-sans text-xs font-medium text-coffee">

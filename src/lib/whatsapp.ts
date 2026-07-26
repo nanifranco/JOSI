@@ -18,7 +18,7 @@ const serviceLabel = (value: string) =>
   booking.serviceOptions.find((option) => option.value === value)?.label ?? value
 
 const serviceModeLabel = (value: BookingFormData['serviceMode']) =>
-  value === 'estudio' ? 'En el lugar de Josi' : value === 'domicilio' ? 'A domicilio' : ''
+  value === 'estudio' ? 'En sitio' : value === 'domicilio' ? 'A domicilio' : ''
 
 /** Construye el mensaje de WhatsApp a partir de los datos del formulario de agenda. */
 export function buildWhatsappMessage(data: BookingFormData): string {
