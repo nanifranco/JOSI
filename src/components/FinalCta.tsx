@@ -14,7 +14,7 @@ export function FinalCta() {
           <PlaceholderImage slot={finalCta.image} tone="champagne" className="h-full w-full" />
         </div>
 
-        <div className="order-1 flex flex-col justify-center px-6 py-16 md:order-2 md:col-span-6 md:px-16 md:py-20 lg:px-24 lg:py-24">
+        <div className="order-1 flex flex-col justify-start px-6 py-16 md:order-2 md:col-span-6 md:px-16 md:py-20 lg:px-24 lg:py-24">
           <Reveal>
             <h2 className="max-w-md font-serif text-4xl leading-tight text-coffee sm:text-5xl">{finalCta.title}</h2>
             <p className="mt-6 max-w-sm font-sans text-[0.95rem] leading-relaxed text-taupe">{finalCta.text}</p>

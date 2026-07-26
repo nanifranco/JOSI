@@ -11,7 +11,7 @@ export function FeaturedService() {
           <PlaceholderImage slot={featuredService.image} tone="blush" className="h-full w-full" />
         </Reveal>
 
-        <div className="flex flex-col justify-center px-6 py-20 md:col-span-6 md:px-16 md:py-20 lg:px-24 lg:py-24">
+        <div className="flex flex-col justify-start px-6 py-20 md:col-span-6 md:px-16 md:py-20 lg:px-24 lg:py-24">
           <Reveal delay={0.1}>
             <p className="eyebrow mb-6 text-champagne">{featuredService.eyebrow}</p>
             <h2 className="max-w-md font-serif text-4xl leading-tight sm:text-5xl">{featuredService.title}</h2>

@@ -14,7 +14,7 @@ export function AboutJosi() {
         </Reveal>
 
         {/* Texto personal */}
-        <div className="flex flex-col justify-center md:col-span-7 md:pl-16 lg:pl-24">
+        <div className="flex flex-col justify-start md:col-span-7 md:pl-16 lg:pl-24">
           <Reveal delay={0.1}>
             <p className="eyebrow mb-6">{about.eyebrow}</p>
             <h2 className="max-w-lg font-serif text-4xl leading-[1.15] text-coffee sm:text-5xl">{about.title}</h2>

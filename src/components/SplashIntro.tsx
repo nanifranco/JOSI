@@ -4,13 +4,16 @@ import { brand } from '../config/site'
 
 /**
  * Breve animación de bienvenida con el logotipo antes de mostrar el
- * sitio. Se omite por completo si la persona prefiere menos movimiento.
+ * sitio. Si la persona prefiere menos movimiento, se muestra igual pero
+ * solo con un fundido (sin desplazamiento), en vez de omitirse por completo.
  */
 export function SplashIntro() {
-  const [visible, setVisible] = useState(() => {
-    if (typeof window === 'undefined') return false
-    return !window.matchMedia('(prefers-reduced-motion: reduce)').matches
-  })
+  const [visible, setVisible] = useState(true)
+  const [reducedMotion, setReducedMotion] = useState(false)
+
+  useEffect(() => {
+    setReducedMotion(window.matchMedia('(prefers-reduced-motion: reduce)').matches)
+  }, [])
 
   useEffect(() => {
     if (!visible) return
@@ -36,14 +39,14 @@ export function SplashIntro() {
         >
           <motion.div
             className="inline-flex flex-col items-center"
-            initial={{ opacity: 0, y: 12 }}
+            initial={{ opacity: 0, y: reducedMotion ? 0 : 12 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.8, ease: [0.22, 1, 0.36, 1] }}
           >
             <span className="font-serif text-5xl tracking-[0.15em] text-coffee sm:text-6xl">{brand.name}</span>
             <motion.span
               className="mt-3 h-px bg-champagne"
-              initial={{ width: 0 }}
+              initial={{ width: reducedMotion ? '100%' : 0 }}
               animate={{ width: '100%' }}
               transition={{ duration: 0.9, delay: 0.35, ease: [0.22, 1, 0.36, 1] }}
             />
