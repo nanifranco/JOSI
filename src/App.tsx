@@ -2,7 +2,7 @@ import { Header } from './components/Header'
 import { Hero } from './components/Hero'
 import { AboutJosi } from './components/AboutJosi'
 import { Services } from './components/Services'
-import { KidsPartyFeature } from './components/KidsPartyFeature'
+import { FeaturedService } from './components/FeaturedService'
 import { BookingProcess } from './components/BookingProcess'
 import { BookingForm } from './components/BookingForm'
 import { Portfolio } from './components/Portfolio'
@@ -22,7 +22,7 @@ function App() {
         <Hero />
         <AboutJosi />
         <Services />
-        <KidsPartyFeature />
+        <FeaturedService />
         <BookingProcess />
         <BookingForm />
         <Portfolio />

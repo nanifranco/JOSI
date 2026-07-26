@@ -171,29 +171,29 @@ export const services: Service[] = [
 ]
 
 /* ----------------------------------------------------------------------- */
-/* SERVICIO DESTACADO — FIESTAS INFANTILES / PINTA CARITAS                 */
+/* SERVICIO DESTACADO — SOCIAL Y EVENTOS                                   */
 /* ----------------------------------------------------------------------- */
-export const kidsParty = {
+export const featuredService = {
   eyebrow: 'Servicio destacado',
-  title: 'Color y diversión en cada fiesta',
-  text: 'Un servicio pensado para llenar de color las fiestas infantiles, con diseños divertidos a domicilio.',
+  title: 'Maquillaje para brillar en cada evento',
+  text: 'Un servicio pensado para verte impecable en cenas, cumpleaños y celebraciones, con un maquillaje duradero y a tu medida.',
   /**
-   * EDITAR: estos son los elementos que PODRÍA incluir el servicio de pinta
-   * caritas. No representan un paquete confirmado ni su alcance final —
+   * EDITAR: estos son los elementos que PODRÍA incluir el servicio social o
+   * de eventos. No representan un paquete confirmado ni su alcance final —
    * Josi debe definir qué incluye cada opción antes de publicarlo como
    * definitivo.
    */
   items: [
-    'Pinta caritas',
-    'Diseños temáticos a elegir',
-    'Glitter y stickers',
-    'Duración del servicio',
-    'Número de niños incluidos',
+    'Maquillaje social',
+    'Maquillaje para eventos',
+    'Piel de larga duración',
+    'Pestañas (opcional)',
+    'Retoque durante el evento',
     'Servicio a domicilio',
   ],
   itemsNote: 'Elementos editables — el contenido final del servicio se confirma directamente con Josi.',
-  cta: 'Cotizar fiesta infantil',
-  image: img('Fiesta infantil', 'Pinta caritas en una fiesta infantil'),
+  cta: 'Cotizar maquillaje social',
+  image: img('Maquillaje social o de evento', 'Maquillaje social para un evento nocturno'),
 }
 
 /* ----------------------------------------------------------------------- */
