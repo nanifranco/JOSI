@@ -12,7 +12,7 @@ export function Contact() {
   ]
 
   return (
-    <section id="contacto" className="bg-cream py-28 md:py-36">
+    <section id="contacto" className="bg-ivory py-28 md:py-36">
       <div className="mx-auto max-w-[1400px] px-6 md:px-12">
         <Reveal className="grid gap-14 md:grid-cols-12 md:gap-6">
           <div className="md:col-span-4">
@@ -55,15 +55,6 @@ export function Contact() {
                 </dd>
               </div>
             </dl>
-
-            <div className="sm:col-span-2">
-              <a
-                href="#agenda"
-                className="inline-flex border-b border-coffee/40 pb-1 font-sans text-[0.72rem] font-medium uppercase tracking-[0.2em] text-coffee transition-colors duration-300 hover:border-coffee"
-              >
-                Ir a la sección de agenda
-              </a>
-            </div>
           </div>
         </Reveal>
       </div>

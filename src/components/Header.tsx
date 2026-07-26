@@ -33,10 +33,11 @@ export function Header() {
           scrolled ? 'py-4' : 'py-6'
         }`}
       >
-        <a href="#inicio" className="leading-none" onClick={() => setOpen(false)}>
-          <span className="block font-serif text-[1.7rem] tracking-[0.12em] text-coffee">{brand.name}</span>
-          <span className="my-1.5 block h-px w-5 bg-champagne" aria-hidden="true" />
-          <span className="block font-sans text-[0.55rem] font-medium tracking-[0.5em] text-taupe">
+        <a href="#inicio" className="inline-flex flex-col items-stretch leading-none" onClick={() => setOpen(false)}>
+          <span className="border-b border-champagne pb-1.5 font-serif text-[1.7rem] tracking-[0.12em] text-coffee">
+            {brand.name}
+          </span>
+          <span className="mt-1.5 font-sans text-[0.55rem] font-medium tracking-[0.5em] text-taupe">
             {brand.descriptor}
           </span>
         </a>

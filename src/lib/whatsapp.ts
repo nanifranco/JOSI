@@ -3,7 +3,6 @@ import { booking, contact } from '../config/site'
 export type BookingFormData = {
   fullName: string
   whatsapp: string
-  email: string
   service: string
   eventDate: string
   eventTime: string
@@ -23,7 +22,6 @@ export function buildWhatsappMessage(data: BookingFormData): string {
     '',
     `Nombre: ${data.fullName}`,
     `WhatsApp: ${data.whatsapp}`,
-    data.email && `Correo: ${data.email}`,
     `Servicio: ${serviceLabel(data.service)}`,
     `Fecha del evento: ${data.eventDate}`,
     data.eventTime && `Hora aproximada: ${data.eventTime}`,
@@ -37,8 +35,12 @@ export function buildWhatsappMessage(data: BookingFormData): string {
   return lines.join('\n')
 }
 
-/** Abre WhatsApp (web o app) con el mensaje precargado. */
+/**
+ * Abre WhatsApp con el mensaje precargado. Se navega en la misma pestaña
+ * (en vez de abrir una ventana nueva) porque es el patrón más confiable
+ * para que los navegadores móviles completen el salto a la app de WhatsApp.
+ */
 export function openWhatsapp(message: string) {
   const url = `https://wa.me/${contact.whatsappNumber}?text=${encodeURIComponent(message)}`
-  window.open(url, '_blank', 'noopener,noreferrer')
+  window.location.href = url
 }

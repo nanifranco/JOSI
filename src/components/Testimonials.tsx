@@ -3,7 +3,7 @@ import { Reveal } from './Reveal'
 
 export function Testimonials() {
   return (
-    <section className="bg-ivory py-28 md:py-36">
+    <section className="bg-cream py-28 md:py-36">
       <div className="mx-auto max-w-[1400px] px-6 md:px-12">
         <Reveal className="max-w-lg">
           <p className="eyebrow mb-6">{testimonialsIntro.eyebrow}</p>

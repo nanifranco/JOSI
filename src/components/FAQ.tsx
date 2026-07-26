@@ -7,7 +7,7 @@ export function FAQ() {
   const [openIndex, setOpenIndex] = useState<number | null>(0)
 
   return (
-    <section className="bg-cream py-28 md:py-36">
+    <section className="bg-ivory py-28 md:py-36">
       <div className="mx-auto max-w-[900px] px-6 md:px-12">
         <Reveal className="text-center">
           <p className="eyebrow mb-6">{faqIntro.eyebrow}</p>

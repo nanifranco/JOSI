@@ -35,7 +35,7 @@ export function Portfolio() {
   const activeItem = activeIndex !== null ? items[activeIndex] : null
 
   return (
-    <section id="portafolio" className="bg-cream py-28 md:py-36">
+    <section id="portafolio" className="bg-ivory py-28 md:py-36">
       <div className="mx-auto max-w-[1400px] px-6 md:px-12">
         <Reveal className="flex flex-col gap-8 sm:flex-row sm:items-end sm:justify-between">
           <div>
@@ -70,7 +70,7 @@ export function Portfolio() {
                 item.orientation === 'vertical' ? 'aspect-[3/4]' : 'aspect-[4/3]'
               }`}
             >
-              <PlaceholderImage slot={item.image} tone={index % 2 === 0 ? 'blush' : 'ivory'} className="h-full w-full" />
+              <PlaceholderImage slot={item.image} tone={index % 2 === 0 ? 'blush' : 'champagne'} className="h-full w-full" />
             </button>
           ))}
         </div>

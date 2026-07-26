@@ -9,11 +9,14 @@ export function Footer() {
       <div className="mx-auto max-w-[1400px] px-6 md:px-12">
         <div className="grid gap-12 md:grid-cols-12">
           <div className="md:col-span-5">
-            <span className="block font-serif text-2xl tracking-[0.1em]">{brand.name}</span>
-            <span className="my-1.5 block h-px w-5 bg-cream/25" aria-hidden="true" />
-            <span className="block font-sans text-[0.55rem] font-medium tracking-[0.5em] text-cream/60">
-              {brand.descriptor}
-            </span>
+            <div className="inline-flex flex-col items-stretch leading-none">
+              <span className="border-b border-cream/25 pb-1.5 font-serif text-2xl tracking-[0.1em]">
+                {brand.name}
+              </span>
+              <span className="mt-1.5 font-sans text-[0.55rem] font-medium tracking-[0.5em] text-cream/60">
+                {brand.descriptor}
+              </span>
+            </div>
             <p className="mt-6 max-w-xs font-sans text-sm leading-relaxed text-cream/60">{brand.tagline}</p>
           </div>
 
@@ -30,7 +33,7 @@ export function Footer() {
             </ul>
           </nav>
 
-          <nav className="md:col-span-4" aria-label="Contacto y legal">
+          <nav className="md:col-span-4" aria-label="Contacto">
             <p className="eyebrow mb-5 text-cream/50">Más</p>
             <ul className="flex flex-col gap-3">
               <li>
@@ -52,10 +55,6 @@ export function Footer() {
                 >
                   WhatsApp
                 </a>
-              </li>
-              <li>
-                {/* EDITAR: enlazar a la página de aviso de privacidad cuando exista */}
-                <span className="font-sans text-sm text-cream/40">Aviso de privacidad</span>
               </li>
             </ul>
           </nav>

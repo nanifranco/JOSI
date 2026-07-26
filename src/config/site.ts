@@ -92,7 +92,7 @@ export const navLinks = [
 /* HERO                                                                     */
 /* ----------------------------------------------------------------------- */
 export const hero = {
-  eyebrow: 'Social · Fiestas infantiles · Eventos',
+  eyebrow: 'Social · Eventos',
   title: 'Maquillaje que se siente como tú',
   text: 'Looks personalizados para resaltar tu esencia y hacerte sentir segura en cada momento especial.',
   primaryCta: 'Agenda tu cita',
@@ -249,7 +249,6 @@ export const booking = {
     { value: 'otro', label: 'Otro' },
   ],
   whatsappGreeting: 'Hola, Josi. Me gustaría consultar disponibilidad para una cita de maquillaje.',
-  privacyNoticeText: 'He leído y acepto el aviso de privacidad.',
 }
 
 /* ----------------------------------------------------------------------- */

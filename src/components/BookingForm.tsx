@@ -7,7 +7,6 @@ import { Reveal } from './Reveal'
 const emptyForm: BookingFormData = {
   fullName: '',
   whatsapp: '',
-  email: '',
   service: '',
   eventDate: '',
   eventTime: '',
@@ -17,7 +16,7 @@ const emptyForm: BookingFormData = {
   inspirationLink: '',
 }
 
-type Errors = Partial<Record<keyof BookingFormData | 'privacy', string>>
+type Errors = Partial<Record<keyof BookingFormData, string>>
 
 const fieldClasses =
   'w-full border-0 border-b border-coffee/25 bg-transparent py-2.5 font-sans text-sm text-coffee placeholder:text-taupe/50 focus:border-coffee focus:outline-none'
@@ -26,7 +25,6 @@ const labelClasses = 'eyebrow mb-2 block text-[0.6rem]'
 
 export function BookingForm() {
   const [form, setForm] = useState<BookingFormData>(emptyForm)
-  const [privacyAccepted, setPrivacyAccepted] = useState(false)
   const [errors, setErrors] = useState<Errors>({})
   const [confirmation, setConfirmation] = useState(false)
 
@@ -44,8 +42,7 @@ export function BookingForm() {
     if (!form.whatsapp.trim()) nextErrors.whatsapp = 'Comparte un número de WhatsApp.'
     if (!form.service) nextErrors.service = 'Selecciona el tipo de servicio.'
     if (!form.eventDate) nextErrors.eventDate = 'Selecciona la fecha del evento.'
-    if (!form.location.trim()) nextErrors.location = 'Indica la dirección del servicio.'
-    if (!privacyAccepted) nextErrors.privacy = 'Debes aceptar el aviso de privacidad.'
+    if (!form.location.trim()) nextErrors.location = 'Indica la dirección completa del servicio.'
 
     if (Object.keys(nextErrors).length > 0) {
       setErrors(nextErrors)
@@ -56,7 +53,6 @@ export function BookingForm() {
     openWhatsapp(message)
     setConfirmation(true)
     setForm(emptyForm)
-    setPrivacyAccepted(false)
   }
 
   return (
@@ -124,20 +120,6 @@ export function BookingForm() {
                     {errors.whatsapp}
                   </p>
                 )}
-              </div>
-
-              <div>
-                <label htmlFor="email" className={labelClasses}>
-                  Correo electrónico (opcional)
-                </label>
-                <input
-                  id="email"
-                  type="email"
-                  autoComplete="email"
-                  className={fieldClasses}
-                  value={form.email}
-                  onChange={(e) => update('email', e.target.value)}
-                />
               </div>
 
               <div>
@@ -214,20 +196,24 @@ export function BookingForm() {
                 />
               </div>
 
-              <div>
+              <div className="sm:col-span-2">
                 <label htmlFor="location" className={labelClasses}>
                   Dirección del servicio *
                 </label>
                 <input
                   id="location"
                   type="text"
-                  placeholder="Calle, colonia y ciudad"
+                  placeholder="Calle y número, colonia, ciudad"
                   className={fieldClasses}
                   value={form.location}
                   onChange={(e) => update('location', e.target.value)}
                   aria-invalid={Boolean(errors.location)}
-                  aria-describedby={errors.location ? 'location-error' : undefined}
+                  aria-describedby={errors.location ? 'location-error' : 'location-hint'}
                 />
+                <p id="location-hint" className="mt-2 font-sans text-xs text-taupe/70">
+                  Incluye calle, número, colonia y ciudad completos para evitar confusiones con calles del mismo
+                  nombre en otras colonias.
+                </p>
                 {errors.location && (
                   <p id="location-error" className="mt-2 font-sans text-xs font-medium text-coffee">
                     {errors.location}
@@ -260,25 +246,10 @@ export function BookingForm() {
                   value={form.inspirationLink}
                   onChange={(e) => update('inspirationLink', e.target.value)}
                 />
-              </div>
-
-              <div className="sm:col-span-2">
-                <label className="flex cursor-pointer items-start gap-3">
-                  <input
-                    type="checkbox"
-                    checked={privacyAccepted}
-                    onChange={(e) => {
-                      setPrivacyAccepted(e.target.checked)
-                      setErrors((prev) => ({ ...prev, privacy: undefined }))
-                    }}
-                    className="mt-1 h-4 w-4 shrink-0 border-coffee/40 text-coffee accent-coffee"
-                    aria-invalid={Boolean(errors.privacy)}
-                  />
-                  <span className="font-sans text-xs leading-relaxed text-taupe">
-                    {booking.privacyNoticeText}
-                  </span>
-                </label>
-                {errors.privacy && <p className="mt-2 font-sans text-xs font-medium text-coffee">{errors.privacy}</p>}
+                <p className="mt-2 font-sans text-xs text-taupe/70">
+                  ¿Prefieres mandar fotos en vez de un enlace? Puedes adjuntarlas directamente en el chat de
+                  WhatsApp una vez que se abra con tu solicitud.
+                </p>
               </div>
 
               <div className="sm:col-span-2">
