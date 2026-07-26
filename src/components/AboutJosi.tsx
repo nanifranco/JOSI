@@ -6,15 +6,10 @@ export function AboutJosi() {
   return (
     <section id="sobre-josi" className="bg-ivory py-28 md:py-36">
       <div className="mx-auto grid max-w-[1400px] gap-16 px-6 md:grid-cols-12 md:gap-6 md:px-12">
-        {/* Composición fotográfica asimétrica */}
-        <Reveal className="relative pb-16 md:col-span-5 md:pb-0">
-          <div className="aspect-[4/5] w-[86%]">
+        {/* Fotografía principal */}
+        <Reveal className="md:col-span-5">
+          <div className="aspect-[4/5] w-full">
             <PlaceholderImage slot={about.photoMain} tone="ivory" className="h-full w-full" />
-          </div>
-          <div className="absolute bottom-0 right-0 w-[46%] border-[10px] border-ivory md:right-4">
-            <div className="aspect-[3/4]">
-              <PlaceholderImage slot={about.photoDetail} tone="champagne" className="h-full w-full" />
-            </div>
           </div>
         </Reveal>
 

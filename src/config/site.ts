@@ -92,7 +92,7 @@ export const navLinks = [
 /* HERO                                                                     */
 /* ----------------------------------------------------------------------- */
 export const hero = {
-  eyebrow: 'Social · Eventos',
+  eyebrow: 'Social · Eventos · Infantil',
   title: 'Maquillaje que se siente como tú',
   text: 'Looks personalizados para resaltar tu esencia y hacerte sentir segura en cada momento especial.',
   primaryCta: 'Agenda tu cita',
@@ -112,7 +112,6 @@ export const about = {
     'Mi intención es que disfrutes el proceso, te sientas cómoda y, cuando te mires al espejo, sigas reconociéndote a ti misma.',
   ],
   photoMain: img('Fotografía de Josi', 'Retrato de Josi, maquillista profesional'),
-  photoDetail: img('Detalle de trabajo', 'Detalle de un maquillaje realizado por Josi'),
 }
 
 /* ----------------------------------------------------------------------- */
@@ -188,14 +187,7 @@ export const featuredService = {
    * Josi debe definir qué incluye cada opción antes de publicarlo como
    * definitivo.
    */
-  items: [
-    'Maquillaje social',
-    'Maquillaje para eventos',
-    'Piel de larga duración',
-    'Pestañas (opcional)',
-    'Retoque durante el evento',
-    'Servicio a domicilio',
-  ],
+  items: ['Piel de larga duración', 'Pestañas (opcional)', 'Retoque durante el evento', 'Servicio a domicilio'],
   itemsNote: 'Elementos editables — el contenido final del servicio se confirma directamente con Josi.',
   cta: 'Cotizar maquillaje social',
   image: img('Maquillaje social o de evento', 'Maquillaje social para un evento nocturno'),
@@ -254,7 +246,7 @@ export const booking = {
 /* ----------------------------------------------------------------------- */
 /* PORTAFOLIO — EDITAR: sustituye por fotografías reales                   */
 /* ----------------------------------------------------------------------- */
-export type PortfolioCategory = 'social' | 'infantil' | 'eventos' | 'editorial'
+export type PortfolioCategory = 'social' | 'infantil' | 'eventos'
 
 export type PortfolioItem = {
   id: string
@@ -273,18 +265,17 @@ export const portfolioFilters: { value: 'todos' | PortfolioCategory; label: stri
   { value: 'social', label: 'Social' },
   { value: 'infantil', label: 'Infantil' },
   { value: 'eventos', label: 'Eventos' },
-  { value: 'editorial', label: 'Editorial' },
 ]
 
 export const portfolio: PortfolioItem[] = [
   { id: 'p1', category: 'infantil', orientation: 'vertical', image: img('Fiesta infantil 01', 'Pinta caritas en fiesta infantil') },
   { id: 'p2', category: 'social', orientation: 'horizontal', image: img('Social 01', 'Maquillaje social con acabado luminoso') },
-  { id: 'p3', category: 'editorial', orientation: 'vertical', image: img('Editorial 01', 'Maquillaje editorial de alto contraste') },
+  { id: 'p3', category: 'social', orientation: 'vertical', image: img('Social 04', 'Maquillaje social de alto contraste') },
   { id: 'p4', category: 'eventos', orientation: 'horizontal', image: eventoCelebracionImage },
   { id: 'p5', category: 'infantil', orientation: 'horizontal', image: img('Fiesta infantil 02', 'Diseño de pinta caritas temático') },
   { id: 'p6', category: 'social', orientation: 'vertical', image: img('Social 02', 'Maquillaje social diurno') },
   { id: 'p7', category: 'eventos', orientation: 'vertical', image: eventoXvImage },
-  { id: 'p8', category: 'editorial', orientation: 'horizontal', image: img('Editorial 02', 'Sesión editorial de belleza') },
+  { id: 'p8', category: 'eventos', orientation: 'horizontal', image: img('Eventos 03', 'Maquillaje para evento de noche') },
   { id: 'p9', category: 'infantil', orientation: 'vertical', image: img('Fiesta infantil 03', 'Detalle de pinta caritas en fiesta infantil') },
   { id: 'p10', category: 'social', orientation: 'horizontal', image: img('Social 03', 'Maquillaje social para graduación') },
 ]

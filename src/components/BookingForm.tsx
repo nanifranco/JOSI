@@ -1,5 +1,5 @@
 import { useState, type FormEvent } from 'react'
-import { booking, contact } from '../config/site'
+import { booking } from '../config/site'
 import { buildWhatsappMessage, openWhatsapp, type BookingFormData } from '../lib/whatsapp'
 import { CtaButton } from './Cta'
 import { Reveal } from './Reveal'
@@ -68,13 +68,6 @@ export function BookingForm() {
             <p className="mt-8 max-w-sm border-l border-champagne pl-5 font-sans text-xs leading-relaxed text-taupe/80">
               {booking.disclaimer}
             </p>
-
-            <div className="mt-12 hidden max-w-sm border-t border-coffee/15 pt-8 font-sans text-xs leading-relaxed text-taupe/70 md:block">
-              <p>
-                También puedes escribir directamente por WhatsApp al{' '}
-                <span className="text-coffee">+{contact.whatsappNumber}</span>.
-              </p>
-            </div>
           </Reveal>
 
           <Reveal delay={0.1} className="md:col-span-8">
@@ -254,7 +247,7 @@ export function BookingForm() {
 
               <div className="sm:col-span-2">
                 <CtaButton type="submit" variant="solid" className="w-full sm:w-auto">
-                  Solicitar disponibilidad por WhatsApp
+                  Solicitar disponibilidad
                 </CtaButton>
 
                 {confirmation && (

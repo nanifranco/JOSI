@@ -9,7 +9,7 @@ export function Footer() {
       <div className="mx-auto max-w-[1400px] px-6 md:px-12">
         <div className="grid gap-12 md:grid-cols-12">
           <div className="md:col-span-5">
-            <div className="inline-flex flex-col items-stretch leading-none">
+            <div className="inline-flex flex-col items-center leading-none">
               <span className="border-b border-cream/25 pb-1.5 font-serif text-2xl tracking-[0.1em]">
                 {brand.name}
               </span>

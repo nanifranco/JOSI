@@ -2,17 +2,17 @@
 
 /* ------------------------------------------------------------------
    JOSI MAKEUP — design tokens
-   Editorial, warm, minimal. White/ivory dominate; blush y vino dan el
-   contraste. Champagne solo para líneas y detalles pequeños. Dos
-   familias tipográficas.
+   Editorial, warm, minimal. White/ivory dominate; blush es acento,
+   champagne solo para líneas y detalles pequeños. Dos familias
+   tipográficas.
 ------------------------------------------------------------------- */
 @theme {
   --color-cream: #faf8f5; /* blanco cálido */
   --color-ivory: #f5eceb; /* marfil rosado */
   --color-blush: #e5c9cd; /* rosa blush */
   --color-rose: #cda8ae; /* rosa viejo */
-  --color-taupe: #6b3540; /* vino mauve — texto secundario, mismo rol que antes tenía el taupe */
-  --color-coffee: #4a1e2b; /* vino profundo — mismo rol que antes tenía el café profundo */
+  --color-taupe: #82726d; /* taupe cálido */
+  --color-coffee: #342c2a; /* café profundo */
   --color-champagne: #b69a70; /* champagne — solo líneas, bordes y detalles pequeños */
   --color-champagne-deep: #7c6951; /* champagne oscurecido — para texto/números legibles sobre fondos claros (≈5:1) */
 
@@ -99,7 +99,7 @@
     font-weight: 500;
     letter-spacing: 0.32em;
     text-transform: uppercase;
-    /* Vino profundo atenuado en vez de champagne: mantiene el tono editorial
+    /* Café profundo atenuado en vez de champagne: mantiene el tono editorial
        discreto sin bajar del contraste de lectura mínimo (~5:1) sobre crema. */
     color: var(--color-coffee);
     opacity: 0.72;

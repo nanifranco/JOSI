@@ -33,7 +33,7 @@ export function Header() {
           scrolled ? 'py-4' : 'py-6'
         }`}
       >
-        <a href="#inicio" className="inline-flex flex-col items-stretch leading-none" onClick={() => setOpen(false)}>
+        <a href="#inicio" className="inline-flex flex-col items-center leading-none" onClick={() => setOpen(false)}>
           <span className="border-b border-champagne pb-1.5 font-serif text-[1.7rem] tracking-[0.12em] text-coffee">
             {brand.name}
           </span>

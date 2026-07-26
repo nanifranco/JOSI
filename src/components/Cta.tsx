@@ -9,7 +9,7 @@ const variants: Record<CtaVariant, string> = {
   solid: 'border border-coffee bg-coffee px-8 py-3.5 text-cream hover:bg-transparent hover:text-coffee',
   outline: 'border border-coffee/70 px-8 py-3.5 text-coffee hover:border-coffee hover:bg-coffee hover:text-cream',
   text: 'border-b border-coffee/40 pb-1 text-coffee hover:border-coffee',
-  /** Para usarse sobre fondos oscuros (p. ej. la sección destacada o el vino profundo). */
+  /** Para usarse sobre fondos oscuros (p. ej. la sección destacada o el café profundo). */
   'outline-inverse': 'border border-cream/60 px-8 py-3.5 text-cream hover:border-cream hover:bg-cream hover:text-coffee',
   'text-inverse': 'border-b border-cream/40 pb-1 text-cream hover:border-cream',
 }
