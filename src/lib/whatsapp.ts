@@ -9,16 +9,12 @@ export type BookingFormData = {
   eventTime: string
   guestCount: string
   location: string
-  serviceMode: string
   message: string
   inspirationLink: string
 }
 
 const serviceLabel = (value: string) =>
   booking.serviceOptions.find((option) => option.value === value)?.label ?? value
-
-const locationModeLabel = (value: string) =>
-  booking.locationOptions.find((option) => option.value === value)?.label ?? value
 
 /** Construye el mensaje de WhatsApp a partir de los datos del formulario de agenda. */
 export function buildWhatsappMessage(data: BookingFormData): string {
@@ -32,7 +28,7 @@ export function buildWhatsappMessage(data: BookingFormData): string {
     `Fecha del evento: ${data.eventDate}`,
     data.eventTime && `Hora aproximada: ${data.eventTime}`,
     data.guestCount && `Número de personas: ${data.guestCount}`,
-    `Modalidad: ${locationModeLabel(data.serviceMode)}`,
+    'Modalidad: A domicilio',
     data.location && `Lugar / zona: ${data.location}`,
     data.message && `Mensaje / referencias: ${data.message}`,
     data.inspirationLink && `Inspiración: ${data.inspirationLink}`,

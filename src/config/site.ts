@@ -32,7 +32,7 @@ export const contact = {
    * (código de país + número). Ej. México: "521XXXXXXXXXX".
    * Se usa para el botón flotante y para el formulario de agenda.
    */
-  whatsappNumber: '521234567890',
+  whatsappNumber: '525511902816',
 
   /** EDITAR: usuario de Instagram (sin @) y URL completa. */
   instagramHandle: '@josimakeup',
@@ -66,7 +66,7 @@ export const contact = {
 export const brand = {
   name: 'JOSI',
   descriptor: 'MAKEUP',
-  tagline: 'Maquillaje social, novias y eventos.',
+  tagline: 'Maquillaje social, eventos y fiestas infantiles — a domicilio.',
 }
 
 /* ----------------------------------------------------------------------- */
@@ -85,12 +85,12 @@ export const navLinks = [
 /* HERO                                                                     */
 /* ----------------------------------------------------------------------- */
 export const hero = {
-  eyebrow: 'Social · Novias · Eventos',
+  eyebrow: 'Social · Fiestas infantiles · Eventos',
   title: 'Maquillaje que se siente como tú',
   text: 'Looks personalizados para resaltar tu esencia y hacerte sentir segura en cada momento especial.',
   primaryCta: 'Agenda tu cita',
   secondaryCta: 'Descubre mi trabajo',
-  image: img('Fotografía editorial — novia o maquillaje profesional', 'Retrato editorial de un maquillaje profesional realizado por Josi'),
+  image: img('Fotografía editorial — maquillaje profesional a domicilio', 'Retrato editorial de un maquillaje profesional realizado por Josi'),
 }
 
 /* ----------------------------------------------------------------------- */
@@ -108,11 +108,14 @@ export const about = {
   signature: 'Josi',
   photoMain: img('Fotografía de Josi', 'Retrato de Josi, maquillista profesional'),
   photoDetail: img('Detalle de trabajo', 'Detalle de un maquillaje realizado por Josi'),
-  /** EDITAR: cada campo es un dato real pendiente de confirmar. */
+  /**
+   * EDITAR: cada campo es un dato real pendiente de confirmar.
+   * Nota: no se incluye "Formación" — Josi aún no cuenta con formación
+   * profesional formal. No agregar cursos o certificaciones inventadas.
+   */
   facts: [
     { label: 'Zona', value: 'EDITAR: ciudad o zona donde trabaja' },
     { label: 'Experiencia', value: 'EDITAR: años o trayectoria' },
-    { label: 'Formación', value: 'EDITAR: cursos o certificaciones' },
     { label: 'Especialidad', value: 'EDITAR: tipo de maquillaje o técnica' },
   ],
 }
@@ -134,6 +137,8 @@ export const servicesIntro = {
   eyebrow: 'Servicios',
   title: 'Un look para cada momento',
   text: 'Cada servicio se adapta a tus facciones, estilo, tipo de evento y resultado que deseas.',
+  /** Por ahora Josi no cuenta con estudio propio: todo el servicio es a domicilio. */
+  note: 'Por el momento, todos los servicios se ofrecen a domicilio.',
 }
 
 export const services: Service[] = [
@@ -147,17 +152,8 @@ export const services: Service[] = [
     image: img('Maquillaje social', 'Maquillaje social realizado por Josi'),
   },
   {
-    id: 'novias',
-    number: '02',
-    name: 'Maquillaje para novias',
-    description: 'Un servicio completo y personalizado para el día más importante. Ver sección dedicada más abajo.',
-    duration: 'EDITAR: duración',
-    price: 'Cotización personalizada',
-    image: img('Maquillaje de novia', 'Maquillaje de novia realizado por Josi'),
-  },
-  {
     id: 'xv',
-    number: '03',
+    number: '02',
     name: 'Maquillaje para XV años',
     description: 'Un look fresco y elegante para celebrar esta etapa, cuidando que se sienta natural en las fotografías.',
     duration: 'EDITAR: duración',
@@ -166,7 +162,7 @@ export const services: Service[] = [
   },
   {
     id: 'graduacion',
-    number: '04',
+    number: '03',
     name: 'Maquillaje para graduación',
     description: 'Un maquillaje pulido y duradero, pensado para acompañarte durante toda la ceremonia y celebración.',
     duration: 'EDITAR: duración',
@@ -175,7 +171,7 @@ export const services: Service[] = [
   },
   {
     id: 'sesiones',
-    number: '05',
+    number: '04',
     name: 'Maquillaje para sesiones',
     description: 'Diseñado para cámara: sesiones fotográficas, editoriales o contenido, con acabado natural o editorial.',
     duration: 'EDITAR: duración',
@@ -183,40 +179,40 @@ export const services: Service[] = [
     image: img('Maquillaje para sesión fotográfica', 'Maquillaje para sesión fotográfica realizado por Josi'),
   },
   {
-    id: 'domicilio',
-    number: '06',
-    name: 'Servicio a domicilio',
-    description: 'Josi se traslada a la ubicación de tu evento para que te arregles con calma, en un espacio conocido.',
+    id: 'infantil',
+    number: '05',
+    name: 'Fiestas infantiles y pinta caritas',
+    description: 'Diseños divertidos y coloridos para celebrar en grande, a domicilio en la fiesta. Ver sección dedicada más abajo.',
     duration: 'EDITAR: duración',
     price: 'Cotización personalizada',
-    image: img('Servicio a domicilio', 'Servicio de maquillaje a domicilio'),
+    image: img('Fiesta infantil', 'Pinta caritas en fiesta infantil realizado por Josi'),
   },
 ]
 
 /* ----------------------------------------------------------------------- */
-/* SERVICIO DESTACADO — NOVIAS                                             */
+/* SERVICIO DESTACADO — FIESTAS INFANTILES / PINTA CARITAS                 */
 /* ----------------------------------------------------------------------- */
-export const bridal = {
+export const kidsParty = {
   eyebrow: 'Servicio destacado',
-  title: 'Tu maquillaje para un día inolvidable',
-  text: 'Un servicio pensado para crear contigo un look armónico, duradero y fiel a tu personalidad.',
+  title: 'Color y diversión en cada fiesta',
+  text: 'Un servicio pensado para llenar de color las fiestas infantiles, con diseños divertidos a domicilio.',
   /**
-   * EDITAR: estos son los elementos que PODRÍA incluir un paquete de novia.
-   * No representan un paquete confirmado ni su alcance final — Josi debe
-   * definir qué incluye cada opción antes de publicarlo como definitivo.
+   * EDITAR: estos son los elementos que PODRÍA incluir el servicio de pinta
+   * caritas. No representan un paquete confirmado ni su alcance final —
+   * Josi debe definir qué incluye cada opción antes de publicarlo como
+   * definitivo.
    */
   items: [
-    'Prueba de maquillaje',
-    'Maquillaje del día del evento',
-    'Preparación de piel',
-    'Pestañas',
-    'Retoque',
+    'Pinta caritas',
+    'Diseños temáticos a elegir',
+    'Glitter y stickers',
+    'Duración del servicio',
+    'Número de niños incluidos',
     'Servicio a domicilio',
-    'Maquillaje para acompañantes',
   ],
-  itemsNote: 'Elementos editables — el contenido final del paquete se confirma directamente con Josi.',
-  cta: 'Cotizar maquillaje de novia',
-  image: img('Novia', 'Maquillaje de novia, servicio destacado'),
+  itemsNote: 'Elementos editables — el contenido final del servicio se confirma directamente con Josi.',
+  cta: 'Cotizar fiesta infantil',
+  image: img('Fiesta infantil', 'Pinta caritas en una fiesta infantil'),
 }
 
 /* ----------------------------------------------------------------------- */
@@ -256,18 +252,16 @@ export const booking = {
   eyebrow: 'Agenda',
   title: 'Agenda tu cita',
   text: 'Comparte los datos de tu evento para consultar disponibilidad. Tu cita quedará confirmada después de recibir respuesta y realizar el anticipo correspondiente.',
+  /** Por ahora Josi no cuenta con estudio propio: todo el servicio es a domicilio. */
+  note: 'Por el momento, el servicio es únicamente a domicilio — todavía no hay estudio propio.',
   disclaimer: 'Enviar este formulario solicita disponibilidad; no confirma tu cita de forma automática.',
   serviceOptions: [
     { value: 'social', label: 'Social' },
-    { value: 'novia', label: 'Novia' },
     { value: 'xv', label: 'XV años' },
     { value: 'graduacion', label: 'Graduación' },
     { value: 'sesion', label: 'Sesión' },
+    { value: 'infantil', label: 'Fiesta infantil / pinta caritas' },
     { value: 'otro', label: 'Otro' },
-  ],
-  locationOptions: [
-    { value: 'estudio', label: 'En estudio' },
-    { value: 'domicilio', label: 'A domicilio' },
   ],
   whatsappGreeting: 'Hola, Josi. Me gustaría consultar disponibilidad para una cita de maquillaje.',
   privacyNoticeText: 'He leído y acepto el aviso de privacidad.',
@@ -276,7 +270,7 @@ export const booking = {
 /* ----------------------------------------------------------------------- */
 /* PORTAFOLIO — EDITAR: sustituye por fotografías reales                   */
 /* ----------------------------------------------------------------------- */
-export type PortfolioCategory = 'social' | 'novias' | 'eventos' | 'editorial'
+export type PortfolioCategory = 'social' | 'infantil' | 'eventos' | 'editorial'
 
 export type PortfolioItem = {
   id: string
@@ -293,21 +287,21 @@ export const portfolioIntro = {
 export const portfolioFilters: { value: 'todos' | PortfolioCategory; label: string }[] = [
   { value: 'todos', label: 'Todos' },
   { value: 'social', label: 'Social' },
-  { value: 'novias', label: 'Novias' },
+  { value: 'infantil', label: 'Infantil' },
   { value: 'eventos', label: 'Eventos' },
   { value: 'editorial', label: 'Editorial' },
 ]
 
 export const portfolio: PortfolioItem[] = [
-  { id: 'p1', category: 'novias', orientation: 'vertical', image: img('Novia 01', 'Maquillaje de novia con acabado natural') },
+  { id: 'p1', category: 'infantil', orientation: 'vertical', image: img('Fiesta infantil 01', 'Pinta caritas en fiesta infantil') },
   { id: 'p2', category: 'social', orientation: 'horizontal', image: img('Social 01', 'Maquillaje social con acabado luminoso') },
   { id: 'p3', category: 'editorial', orientation: 'vertical', image: img('Editorial 01', 'Maquillaje editorial de alto contraste') },
   { id: 'p4', category: 'eventos', orientation: 'horizontal', image: img('Eventos 01', 'Maquillaje para evento de noche') },
-  { id: 'p5', category: 'novias', orientation: 'horizontal', image: img('Novia 02', 'Detalle de maquillaje de novia') },
+  { id: 'p5', category: 'infantil', orientation: 'horizontal', image: img('Fiesta infantil 02', 'Diseño de pinta caritas temático') },
   { id: 'p6', category: 'social', orientation: 'vertical', image: img('Social 02', 'Maquillaje social diurno') },
   { id: 'p7', category: 'eventos', orientation: 'vertical', image: img('Eventos 02', 'Maquillaje para XV años') },
   { id: 'p8', category: 'editorial', orientation: 'horizontal', image: img('Editorial 02', 'Sesión editorial de belleza') },
-  { id: 'p9', category: 'novias', orientation: 'vertical', image: img('Novia 03', 'Maquillaje de novia, prueba previa') },
+  { id: 'p9', category: 'infantil', orientation: 'vertical', image: img('Fiesta infantil 03', 'Detalle de pinta caritas en fiesta infantil') },
   { id: 'p10', category: 'social', orientation: 'horizontal', image: img('Social 03', 'Maquillaje social para graduación') },
 ]
 
@@ -349,11 +343,11 @@ export const faqIntro = {
 export const faqs = [
   {
     question: '¿Con cuánto tiempo debo reservar?',
-    answer: 'EDITAR: se recomienda agendar con anticipación, especialmente para fechas de temporada alta como fines de semana y meses de graduaciones o bodas.',
+    answer: 'EDITAR: se recomienda agendar con anticipación, especialmente para fechas de temporada alta como fines de semana y meses de graduaciones.',
   },
   {
     question: '¿Trabajas a domicilio?',
-    answer: 'EDITAR: sí, el servicio a domicilio está disponible dentro de la zona de cobertura. Fuera de esa zona puede aplicar un costo adicional de traslado.',
+    answer: 'Sí — por ahora el servicio es únicamente a domicilio, dentro de la zona de cobertura. EDITAR: confirmar si fuera de esa zona aplica un costo adicional de traslado.',
   },
   {
     question: '¿Cómo se confirma una cita?',
@@ -376,8 +370,8 @@ export const faqs = [
     answer: 'EDITAR: se recomienda llegar con el rostro limpio, sin maquillaje previo, y comunicar con anticipación cualquier sensibilidad de piel.',
   },
   {
-    question: '¿Realizas pruebas para novias?',
-    answer: 'EDITAR: sí, se recomienda una prueba previa para definir juntas el look ideal antes del día del evento.',
+    question: '¿Qué incluye el servicio de pinta caritas?',
+    answer: 'EDITAR: cuéntanos qué diseños, materiales y tiempo incluye el servicio de pinta caritas para fiestas infantiles.',
   },
 ]
 

@@ -11,6 +11,7 @@ export function Services() {
           <p className="eyebrow mb-6">{servicesIntro.eyebrow}</p>
           <h2 className="font-serif text-4xl leading-tight text-coffee sm:text-5xl">{servicesIntro.title}</h2>
           <p className="mt-6 font-sans text-[0.95rem] leading-relaxed text-taupe">{servicesIntro.text}</p>
+          <p className="mt-4 font-sans text-xs italic text-taupe/70">{servicesIntro.note}</p>
         </Reveal>
 
         <div className="mt-16 border-t border-coffee/15">

@@ -13,7 +13,6 @@ const emptyForm: BookingFormData = {
   eventTime: '',
   guestCount: '',
   location: '',
-  serviceMode: '',
   message: '',
   inspirationLink: '',
 }
@@ -46,7 +45,6 @@ export function BookingForm() {
     if (!form.service) nextErrors.service = 'Selecciona el tipo de servicio.'
     if (!form.eventDate) nextErrors.eventDate = 'Selecciona la fecha del evento.'
     if (!form.location.trim()) nextErrors.location = 'Indica el lugar o zona del servicio.'
-    if (!form.serviceMode) nextErrors.serviceMode = 'Indica si es en estudio o a domicilio.'
     if (!privacyAccepted) nextErrors.privacy = 'Debes aceptar el aviso de privacidad.'
 
     if (Object.keys(nextErrors).length > 0) {
@@ -69,6 +67,7 @@ export function BookingForm() {
             <p className="eyebrow mb-6">{booking.eyebrow}</p>
             <h2 className="font-serif text-4xl leading-tight text-coffee sm:text-5xl">{booking.title}</h2>
             <p className="mt-6 max-w-sm font-sans text-[0.9rem] leading-relaxed text-taupe">{booking.text}</p>
+            <p className="mt-3 max-w-sm font-sans text-xs italic text-taupe/70">{booking.note}</p>
 
             <p className="mt-8 max-w-sm border-l border-champagne pl-5 font-sans text-xs leading-relaxed text-taupe/80">
               {booking.disclaimer}
@@ -235,35 +234,6 @@ export function BookingForm() {
                   </p>
                 )}
               </div>
-
-              <fieldset className="sm:col-span-2">
-                <legend className={labelClasses}>Modalidad *</legend>
-                <div className="flex flex-wrap gap-3">
-                  {booking.locationOptions.map((option) => (
-                    <label
-                      key={option.value}
-                      className={`cursor-pointer border px-6 py-2.5 font-sans text-xs uppercase tracking-[0.15em] transition-colors duration-300 ${
-                        form.serviceMode === option.value
-                          ? 'border-coffee bg-coffee text-cream'
-                          : 'border-coffee/25 text-taupe hover:border-coffee/60'
-                      }`}
-                    >
-                      <input
-                        type="radio"
-                        name="serviceMode"
-                        value={option.value}
-                        checked={form.serviceMode === option.value}
-                        onChange={(e) => update('serviceMode', e.target.value)}
-                        className="sr-only"
-                      />
-                      {option.label}
-                    </label>
-                  ))}
-                </div>
-                {errors.serviceMode && (
-                  <p className="mt-2 font-sans text-xs font-medium text-coffee">{errors.serviceMode}</p>
-                )}
-              </fieldset>
 
               <div className="sm:col-span-2">
                 <label htmlFor="message" className={labelClasses}>
