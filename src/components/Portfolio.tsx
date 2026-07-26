@@ -70,7 +70,12 @@ export function Portfolio() {
                 item.orientation === 'vertical' ? 'aspect-[3/4]' : 'aspect-[4/3]'
               }`}
             >
-              <PlaceholderImage slot={item.image} tone={index % 2 === 0 ? 'blush' : 'champagne'} className="h-full w-full" />
+              <PlaceholderImage
+                slot={item.image}
+                tone={index % 2 === 0 ? 'blush' : 'champagne'}
+                className="h-full w-full"
+                showLabel
+              />
             </button>
           ))}
         </div>

@@ -13,15 +13,17 @@ type Props = {
   slot: ImageSlot
   tone?: Tone
   className?: string
+  /** Muestra la etiqueta como subtítulo visible (solo se usa en el Portafolio). */
+  showLabel?: boolean
 }
 
 /**
  * Marcador de posición editorial para fotografías pendientes de reemplazar.
  * Si `slot.src` tiene una ruta real, se renderiza la imagen; de lo contrario
- * se muestra una superficie tonal con una etiqueta discreta que indica qué
- * fotografía colocar ahí. Sin íconos, sin sombras, sin bordes redondeados.
+ * se muestra una superficie tonal. Sin íconos, sin sombras, sin bordes
+ * redondeados.
  */
-export function PlaceholderImage({ slot, tone = 'ivory', className = '' }: Props) {
+export function PlaceholderImage({ slot, tone = 'ivory', className = '', showLabel = false }: Props) {
   if (slot.src) {
     return (
       <img
@@ -39,10 +41,19 @@ export function PlaceholderImage({ slot, tone = 'ivory', className = '' }: Props
     <div
       role="img"
       aria-label={slot.alt}
-      title={slot.label}
-      className={`relative h-full w-full overflow-hidden bg-gradient-to-br ${tones[tone]} ${className}`}
+      title={showLabel ? undefined : slot.label}
+      className={`relative flex h-full w-full items-end overflow-hidden bg-gradient-to-br ${tones[tone]} ${className}`}
     >
       <div className={`pointer-events-none absolute inset-5 border ${isDark ? 'border-cream/20' : 'border-coffee/10'}`} />
+      {showLabel && (
+        <span
+          className={`relative m-5 font-sans text-[0.62rem] font-medium uppercase tracking-[0.28em] ${
+            isDark ? 'text-cream/60' : 'text-taupe/65'
+          }`}
+        >
+          {slot.label}
+        </span>
+      )}
     </div>
   )
 }
