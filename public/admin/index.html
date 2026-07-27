@@ -91,6 +91,7 @@
       input[type='password'],
       input[type='text'] {
         flex: 1;
+        min-width: 0;
         border: 0;
         border-bottom: 1px solid var(--border);
         background: transparent;
@@ -203,28 +204,29 @@
       .position-panel.open {
         display: flex;
       }
-      .position-preview {
+      .crop-stage {
         position: relative;
         width: 100%;
-        max-width: 280px;
+        max-width: 300px;
+        overflow: hidden;
         border: 1px solid var(--border);
-        cursor: crosshair;
+        cursor: grab;
+        touch-action: none;
         user-select: none;
       }
-      .position-preview img {
+      .crop-stage.dragging {
+        cursor: grabbing;
+      }
+      .crop-stage img {
         display: block;
         width: 100%;
         height: auto;
+        pointer-events: none;
       }
-      .position-dot {
+      .crop-window {
         position: absolute;
-        width: 14px;
-        height: 14px;
-        margin-left: -7px;
-        margin-top: -7px;
-        border-radius: 50%;
-        background: var(--champagne);
-        border: 2px solid var(--coffee);
+        border: 2px solid var(--champagne);
+        box-shadow: 0 0 0 9999px rgba(58, 46, 44, 0.55);
         pointer-events: none;
       }
       .position-actions {
@@ -283,22 +285,25 @@
       const SITE_ORIGIN = 'https://nanifranco.github.io'
       const TOKEN_KEY = 'josi_admin_github_token'
 
+      // "aspect" es el ancho entre alto real del espacio donde se ve cada foto en el sitio
+      // (el mismo que usan las clases aspect-[...] de cada sección) — con eso el recuadro
+      // de "Centrar" muestra el tamaño real, no uno inventado.
       const SLOTS = [
-        { id: 'hero', label: 'Hero (portada)', file: 'src/content/hero.json', path: ['image'] },
-        { id: 'about', label: 'Sobre mí', file: 'src/content/about.json', path: ['photoMain'] },
-        { id: 'service-social', label: 'Servicios — Maquillaje social', file: 'src/content/services.json', path: ['items', 0, 'image'] },
-        { id: 'service-infantil', label: 'Servicios — Fiestas infantiles', file: 'src/content/services.json', path: ['items', 1, 'image'] },
-        { id: 'service-caracterizacion', label: 'Servicios — Caracterización', file: 'src/content/services.json', path: ['items', 2, 'image'] },
-        { id: 'portfolio-1', label: 'Portafolio — Foto 1', file: 'src/content/portfolio.json', path: ['items', 0, 'image'] },
-        { id: 'portfolio-2', label: 'Portafolio — Foto 2', file: 'src/content/portfolio.json', path: ['items', 1, 'image'] },
-        { id: 'portfolio-3', label: 'Portafolio — Foto 3', file: 'src/content/portfolio.json', path: ['items', 2, 'image'] },
-        { id: 'portfolio-4', label: 'Portafolio — Foto 4', file: 'src/content/portfolio.json', path: ['items', 3, 'image'] },
-        { id: 'portfolio-5', label: 'Portafolio — Foto 5', file: 'src/content/portfolio.json', path: ['items', 4, 'image'] },
-        { id: 'portfolio-6', label: 'Portafolio — Foto 6', file: 'src/content/portfolio.json', path: ['items', 5, 'image'] },
-        { id: 'portfolio-7', label: 'Portafolio — Foto 7', file: 'src/content/portfolio.json', path: ['items', 6, 'image'] },
-        { id: 'portfolio-8', label: 'Portafolio — Foto 8', file: 'src/content/portfolio.json', path: ['items', 7, 'image'] },
-        { id: 'portfolio-9', label: 'Portafolio — Foto 9', file: 'src/content/portfolio.json', path: ['items', 8, 'image'] },
-        { id: 'portfolio-10', label: 'Portafolio — Foto 10', file: 'src/content/portfolio.json', path: ['items', 9, 'image'] },
+        { id: 'hero', label: 'Hero (portada)', file: 'src/content/hero.json', path: ['image'], aspect: 4 / 5 },
+        { id: 'about', label: 'Sobre mí', file: 'src/content/about.json', path: ['photoMain'], aspect: 1 },
+        { id: 'service-social', label: 'Servicios — Maquillaje social', file: 'src/content/services.json', path: ['items', 0, 'image'], aspect: 4 / 3 },
+        { id: 'service-infantil', label: 'Servicios — Fiestas infantiles', file: 'src/content/services.json', path: ['items', 1, 'image'], aspect: 4 / 3 },
+        { id: 'service-caracterizacion', label: 'Servicios — Caracterización', file: 'src/content/services.json', path: ['items', 2, 'image'], aspect: 4 / 3 },
+        { id: 'portfolio-1', label: 'Portafolio — Foto 1', file: 'src/content/portfolio.json', path: ['items', 0, 'image'], aspect: 3 / 4 },
+        { id: 'portfolio-2', label: 'Portafolio — Foto 2', file: 'src/content/portfolio.json', path: ['items', 1, 'image'], aspect: 4 / 3 },
+        { id: 'portfolio-3', label: 'Portafolio — Foto 3', file: 'src/content/portfolio.json', path: ['items', 2, 'image'], aspect: 3 / 4 },
+        { id: 'portfolio-4', label: 'Portafolio — Foto 4', file: 'src/content/portfolio.json', path: ['items', 3, 'image'], aspect: 4 / 3 },
+        { id: 'portfolio-5', label: 'Portafolio — Foto 5', file: 'src/content/portfolio.json', path: ['items', 4, 'image'], aspect: 4 / 3 },
+        { id: 'portfolio-6', label: 'Portafolio — Foto 6', file: 'src/content/portfolio.json', path: ['items', 5, 'image'], aspect: 3 / 4 },
+        { id: 'portfolio-7', label: 'Portafolio — Foto 7', file: 'src/content/portfolio.json', path: ['items', 6, 'image'], aspect: 3 / 4 },
+        { id: 'portfolio-8', label: 'Portafolio — Foto 8', file: 'src/content/portfolio.json', path: ['items', 7, 'image'], aspect: 4 / 3 },
+        { id: 'portfolio-9', label: 'Portafolio — Foto 9', file: 'src/content/portfolio.json', path: ['items', 8, 'image'], aspect: 3 / 4 },
+        { id: 'portfolio-10', label: 'Portafolio — Foto 10', file: 'src/content/portfolio.json', path: ['items', 9, 'image'], aspect: 4 / 3 },
       ]
 
       const walk = (obj, path) => path.reduce((node, key) => (node == null ? node : node[key]), obj)
@@ -428,24 +433,29 @@
         return { x: Number(match[1]), y: Number(match[2]) }
       }
 
-      /** Panel para elegir el punto focal del recorte de una foto ya subida. */
+      /**
+       * Panel para elegir qué parte de la foto entra en su espacio real. Muestra la foto
+       * completa con un recuadro superpuesto del mismo tamaño/forma que tendrá en el sitio
+       * (según slot.aspect) — igual que aplicaría object-fit: cover — y se arrastra ese
+       * recuadro para elegir qué parte queda visible.
+       */
       function createPositionPanel(slot) {
         const panel = document.createElement('div')
         panel.className = 'position-panel'
 
-        const preview = document.createElement('div')
-        preview.className = 'position-preview'
+        const stage = document.createElement('div')
+        stage.className = 'crop-stage'
         const img = document.createElement('img')
-        const dot = document.createElement('div')
-        dot.className = 'position-dot'
-        preview.appendChild(img)
-        preview.appendChild(dot)
+        const windowEl = document.createElement('div')
+        windowEl.className = 'crop-window'
+        stage.appendChild(img)
+        stage.appendChild(windowEl)
 
         const actions = document.createElement('div')
         actions.className = 'position-actions'
         const hint = document.createElement('p')
         hint.className = 'position-hint'
-        hint.textContent = 'Da clic en la parte de la foto que siempre quieres que se vea, aunque se recorte.'
+        hint.textContent = 'Arrastra el recuadro — es el tamaño real donde se verá la foto — para elegir qué parte queda dentro.'
         const saveBtn = document.createElement('button')
         saveBtn.className = 'secondary'
         saveBtn.textContent = 'Guardar posición'
@@ -460,23 +470,85 @@
         actions.appendChild(resetBtn)
         actions.appendChild(posStatus)
 
-        panel.appendChild(preview)
+        panel.appendChild(stage)
         panel.appendChild(actions)
 
         let pending = { x: 50, y: 50 }
+        const aspect = slot.aspect || 1
 
-        function setPosition(x, y) {
-          pending = { x, y }
-          dot.style.left = x + '%'
-          dot.style.top = y + '%'
+        function cropWindowSize() {
+          const stageRect = stage.getBoundingClientRect()
+          const W = stageRect.width
+          const H = stageRect.height
+          const naturalW = img.naturalWidth
+          const naturalH = img.naturalHeight
+          if (!W || !H || !naturalW || !naturalH) return null
+          const naturalAspect = naturalW / naturalH
+          let winW
+          let winH
+          if (naturalAspect > aspect) {
+            winH = H
+            winW = H * aspect
+          } else {
+            winW = W
+            winH = W / aspect
+          }
+          return { W, H, winW, winH }
         }
 
-        preview.addEventListener('click', (event) => {
-          const rect = preview.getBoundingClientRect()
-          const x = Math.round(Math.max(0, Math.min(100, ((event.clientX - rect.left) / rect.width) * 100)))
-          const y = Math.round(Math.max(0, Math.min(100, ((event.clientY - rect.top) / rect.height) * 100)))
-          setPosition(x, y)
+        function layout() {
+          const size = cropWindowSize()
+          if (!size) return
+          const { W, H, winW, winH } = size
+          const maxLeft = W - winW
+          const maxTop = H - winH
+          const left = maxLeft * (pending.x / 100)
+          const top = maxTop * (pending.y / 100)
+          windowEl.style.width = winW + 'px'
+          windowEl.style.height = winH + 'px'
+          windowEl.style.left = left + 'px'
+          windowEl.style.top = top + 'px'
+        }
+
+        function setPosition(x, y) {
+          pending = { x: Math.max(0, Math.min(100, x)), y: Math.max(0, Math.min(100, y)) }
+          layout()
+        }
+
+        img.addEventListener('load', layout)
+
+        let dragging = false
+        let dragStart = null
+
+        stage.addEventListener('pointerdown', (event) => {
+          const size = cropWindowSize()
+          if (!size) return
+          dragging = true
+          stage.classList.add('dragging')
+          stage.setPointerCapture(event.pointerId)
+          dragStart = { x: event.clientX, y: event.clientY, pending: { ...pending } }
         })
+
+        stage.addEventListener('pointermove', (event) => {
+          if (!dragging) return
+          const size = cropWindowSize()
+          if (!size) return
+          const maxLeft = size.W - size.winW
+          const maxTop = size.H - size.winH
+          const dx = event.clientX - dragStart.x
+          const dy = event.clientY - dragStart.y
+          const dxPercent = maxLeft > 0 ? (dx / maxLeft) * 100 : 0
+          const dyPercent = maxTop > 0 ? (dy / maxTop) * 100 : 0
+          setPosition(dragStart.pending.x + dxPercent, dragStart.pending.y + dyPercent)
+        })
+
+        function stopDragging() {
+          dragging = false
+          stage.classList.remove('dragging')
+        }
+
+        stage.addEventListener('pointerup', stopDragging)
+        stage.addEventListener('pointercancel', stopDragging)
 
         resetBtn.addEventListener('click', () => setPosition(50, 50))
 
@@ -489,7 +561,7 @@
           setStatus(posStatus, 'Guardando…', '')
           try {
             await updateJsonField(slot, token, (target) => {
-              target.objectPosition = `${pending.x}% ${pending.y}%`
+              target.objectPosition = `${Math.round(pending.x)}% ${Math.round(pending.y)}%`
             })
             setStatus(posStatus, 'Posición guardada — se publicará en unos minutos.', 'ok')
           } catch (error) {
@@ -497,7 +569,7 @@
           }
         })
 
-        return { panel, img, setPosition }
+        return { panel, img, setPosition, layout }
       }
 
       function renderSlot(slot) {
@@ -551,7 +623,7 @@
           uploadPhoto(slot, file, statusEl, previewImg)
         })
 
-        const { panel: positionPanel, img: positionImg, setPosition } = createPositionPanel(slot)
+        const { panel: positionPanel, img: positionImg, setPosition, layout: positionLayout } = createPositionPanel(slot)
         let currentPosition = { x: 50, y: 50 }
 
         centerBtn.addEventListener('click', () => {
@@ -559,9 +631,13 @@
             setStatus(statusEl, 'Sube una foto primero para poder centrarla.', 'error')
             return
           }
-          positionImg.src = previewImg.src
-          setPosition(currentPosition.x, currentPosition.y)
+          const willOpen = !positionPanel.classList.contains('open')
           positionPanel.classList.toggle('open')
+          if (willOpen) {
+            positionImg.src = previewImg.src
+            setPosition(currentPosition.x, currentPosition.y)
+            requestAnimationFrame(() => requestAnimationFrame(positionLayout))
+          }
         })
 
         row.appendChild(previewWrap)
