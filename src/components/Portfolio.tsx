@@ -139,7 +139,7 @@ export function Portfolio() {
         <div
           role="dialog"
           aria-modal="true"
-          aria-label={activeItem.image.alt}
+          aria-label={activeItem.image.label}
           className="fixed inset-0 z-[100] flex items-center justify-center bg-coffee/97 px-4 py-10"
         >
           <button

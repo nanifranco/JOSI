@@ -6,7 +6,7 @@
       "orientation": "vertical",
       "image": {
         "src": "/JOSI/images/uploads/portfolio-3-1785161820626.jpeg",
-        "alt": "Maquillaje de caracterización de alto contraste",
+        "alt": "",
         "label": "Hola"
       }
     },
@@ -16,7 +16,7 @@
       "orientation": "horizontal",
       "image": {
         "src": "/JOSI/images/uploads/portfolio-2-1785160691470.jpeg",
-        "alt": "Maquillaje social con acabado luminoso",
+        "alt": "",
         "label": "Social"
       }
     },
@@ -26,7 +26,7 @@
       "orientation": "vertical",
       "image": {
         "src": "/JOSI/images/uploads/portfolio-1-1785160557703.png",
-        "alt": "Pinta caritas en fiesta infantil",
+        "alt": "",
         "label": "Infantil"
       }
     },
@@ -36,7 +36,7 @@
       "orientation": "horizontal",
       "image": {
         "src": "/JOSI/images/uploads/portfolio-4-1785161405010.jpeg",
-        "alt": "Maquillaje de caracterización para una celebración especial",
+        "alt": "",
         "label": "Caracterización"
       }
     },
@@ -46,7 +46,7 @@
       "orientation": "horizontal",
       "image": {
         "src": "",
-        "alt": "Diseño de pinta caritas temático",
+        "alt": "",
         "label": "Infantil"
       }
     },
@@ -56,7 +56,7 @@
       "orientation": "vertical",
       "image": {
         "src": "/JOSI/images/uploads/portfolio-6-1785160976790.png",
-        "alt": "Maquillaje social diurno",
+        "alt": "",
         "label": "Social"
       }
     },
@@ -66,7 +66,7 @@
       "orientation": "vertical",
       "image": {
         "src": "/JOSI/images/uploads/portfolio-7-1785161233818.jpg",
-        "alt": "Maquillaje de caracterización estilo fantasía",
+        "alt": "",
         "label": "Caracterización"
       }
     },
@@ -76,7 +76,7 @@
       "orientation": "horizontal",
       "image": {
         "src": "/JOSI/images/uploads/portfolio-8-1785161490183.jpeg",
-        "alt": "Maquillaje de caracterización",
+        "alt": "",
         "label": "Caracterización"
       }
     },
@@ -86,7 +86,7 @@
       "orientation": "vertical",
       "image": {
         "src": "/JOSI/images/uploads/portfolio-9-1785161038251.png",
-        "alt": "Detalle de pinta caritas en fiesta infantil",
+        "alt": "",
         "label": "Infantil n"
       }
     },
@@ -96,7 +96,7 @@
       "orientation": "horizontal",
       "image": {
         "src": "",
-        "alt": "Maquillaje social para graduación",
+        "alt": "",
         "label": "Social"
       }
     },
@@ -106,7 +106,7 @@
       "orientation": "horizontal",
       "image": {
         "src": "",
-        "alt": "Maquillaje social",
+        "alt": "",
         "label": "Social"
       }
     },
@@ -116,7 +116,7 @@
       "orientation": "vertical",
       "image": {
         "src": "",
-        "alt": "Pinta caritas en fiesta infantil",
+        "alt": "",
         "label": "Infantil"
       }
     },
@@ -126,7 +126,7 @@
       "orientation": "horizontal",
       "image": {
         "src": "",
-        "alt": "Maquillaje de caracterización",
+        "alt": "",
         "label": "Caracterización"
       }
     },
@@ -136,7 +136,7 @@
       "orientation": "vertical",
       "image": {
         "src": "",
-        "alt": "Maquillaje social",
+        "alt": "",
         "label": "Social"
       }
     },
@@ -146,7 +146,7 @@
       "orientation": "horizontal",
       "image": {
         "src": "",
-        "alt": "Pinta caritas en fiesta infantil",
+        "alt": "",
         "label": "Infantil"
       }
     },
@@ -156,7 +156,7 @@
       "orientation": "vertical",
       "image": {
         "src": "",
-        "alt": "Maquillaje de caracterización",
+        "alt": "",
         "label": "Caracterización"
       }
     },
@@ -166,7 +166,7 @@
       "orientation": "horizontal",
       "image": {
         "src": "",
-        "alt": "Maquillaje social",
+        "alt": "",
         "label": "Social"
       }
     },
@@ -176,7 +176,7 @@
       "orientation": "vertical",
       "image": {
         "src": "",
-        "alt": "Pinta caritas en fiesta infantil",
+        "alt": "",
         "label": "Infantil"
       }
     },
@@ -186,7 +186,7 @@
       "orientation": "horizontal",
       "image": {
         "src": "",
-        "alt": "Maquillaje de caracterización",
+        "alt": "",
         "label": "Caracterización"
       }
     },
@@ -196,7 +196,7 @@
       "orientation": "vertical",
       "image": {
         "src": "",
-        "alt": "Maquillaje social",
+        "alt": "",
         "label": "Social"
       }
     }
