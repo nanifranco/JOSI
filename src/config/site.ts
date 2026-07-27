@@ -36,6 +36,8 @@ export type ImageSlot = {
   alt: string
   /** Etiqueta breve mostrada sobre el marcador de posición (guía interna, no es un ícono). */
   label: string
+  /** Punto focal del recorte (CSS object-position, p. ej. "50% 30%"). Ajustable desde /admin. */
+  objectPosition?: string
 }
 
 /* ----------------------------------------------------------------------- */

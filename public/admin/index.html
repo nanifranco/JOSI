@@ -38,26 +38,51 @@
         font-family: 'Cormorant Garamond', serif;
         font-weight: 500;
         font-size: 2.25rem;
-        margin: 0 0 8px;
-      }
-      .intro {
-        color: var(--taupe);
-        font-size: 0.92rem;
         margin: 0 0 32px;
-        max-width: 56ch;
       }
-      .token-box {
+      .password-gate {
+        position: fixed;
+        inset: 0;
+        background: var(--cream);
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        z-index: 1000;
+      }
+      .password-box {
         border: 1px solid var(--border);
-        padding: 20px;
-        margin-bottom: 40px;
+        padding: 32px;
+        max-width: 320px;
+        width: 100%;
       }
-      .token-box label {
-        display: block;
+      .password-label {
         font-size: 0.65rem;
         text-transform: uppercase;
         letter-spacing: 0.15em;
-        margin-bottom: 8px;
         color: var(--taupe);
+        margin: 0 0 12px;
+      }
+      .password-error {
+        margin-top: 10px;
+        font-size: 0.78rem;
+        color: #a33;
+        min-height: 1em;
+      }
+      .hidden {
+        display: none !important;
+      }
+      #token-toggle {
+        margin-bottom: 12px;
+      }
+      .token-box {
+        display: none;
+        border: 1px solid var(--border);
+        padding: 14px 16px;
+        margin-bottom: 28px;
+        max-width: 360px;
+      }
+      .token-box.open {
+        display: block;
       }
       .token-row {
         display: flex;
@@ -166,6 +191,54 @@
         font-size: 0.72rem;
         max-width: 160px;
       }
+      .position-panel {
+        display: none;
+        grid-column: 1 / -1;
+        margin-top: 12px;
+        padding-top: 16px;
+        border-top: 1px dashed var(--border);
+        gap: 20px;
+        flex-wrap: wrap;
+      }
+      .position-panel.open {
+        display: flex;
+      }
+      .position-preview {
+        position: relative;
+        width: 100%;
+        max-width: 280px;
+        border: 1px solid var(--border);
+        cursor: crosshair;
+        user-select: none;
+      }
+      .position-preview img {
+        display: block;
+        width: 100%;
+        height: auto;
+      }
+      .position-dot {
+        position: absolute;
+        width: 14px;
+        height: 14px;
+        margin-left: -7px;
+        margin-top: -7px;
+        border-radius: 50%;
+        background: var(--champagne);
+        border: 2px solid var(--coffee);
+        pointer-events: none;
+      }
+      .position-actions {
+        display: flex;
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 8px;
+      }
+      .position-hint {
+        font-size: 0.72rem;
+        color: var(--taupe);
+        max-width: 240px;
+        margin: 0;
+      }
       #slots {
         display: none;
       }
@@ -175,20 +248,26 @@
     </style>
   </head>
   <body>
-    <div class="wrap">
-      <h1>Subir fotos</h1>
-      <p class="intro">
-        Sube o reemplaza las fotos del sitio directamente desde aquí. Los cambios se publican en unos minutos
-        automáticamente. Este panel solo sube fotos — los textos y precios se editan directamente en el código.
-      </p>
+    <div class="password-gate" id="password-gate">
+      <div class="password-box">
+        <p class="password-label">Contraseña</p>
+        <div class="token-row">
+          <input id="password-input" type="password" autocomplete="off" />
+          <button id="password-submit">Entrar</button>
+        </div>
+        <p class="password-error" id="password-error"></p>
+      </div>
+    </div>
 
-      <div class="token-box">
-        <label for="token-input">Token de GitHub</label>
+    <div class="wrap hidden" id="app-content">
+      <h1>Subir fotos</h1>
+
+      <button id="token-toggle" class="secondary" type="button">Token de GitHub</button>
+      <div class="token-box" id="token-box">
         <div class="token-row" id="token-row">
           <input id="token-input" type="password" placeholder="github_pat_..." autocomplete="off" />
           <button id="save-token">Guardar</button>
         </div>
-        <button id="change-token" class="secondary" style="display: none; margin-top: 4px">Cambiar token</button>
         <p class="token-status" id="token-status"></p>
       </div>
 
@@ -297,13 +376,13 @@
       // Otra subida al mismo archivo (p. ej. dos fotos de Servicios) puede adelantarse y
       // dejar desactualizado el sha que leímos. Si GitHub responde 409, releemos el
       // archivo con su sha más reciente y reintentamos, en vez de fallar de una vez.
-      async function updateJsonField(slot, token, imagePath) {
+      async function updateJsonField(slot, token, mutate) {
         const MAX_ATTEMPTS = 5
         for (let attempt = 1; attempt <= MAX_ATTEMPTS; attempt++) {
           const { sha, content } = await getFileSha(slot.file, token)
           const target = walk(content, slot.path)
           if (!target) throw new Error('No se encontró el campo esperado en ' + slot.file)
-          target.src = '/JOSI/' + imagePath.replace(/^public\//, '')
+          mutate(target)
 
           const newJsonBase64 = utf8ToBase64(JSON.stringify(content, null, 2) + '\n')
           try {
@@ -332,13 +411,93 @@
           const imageBase64 = await fileToBase64(file)
 
           await putFile(imagePath, token, imageBase64, null, `Subir foto: ${slot.label}`)
-          await updateJsonField(slot, token, imagePath)
+          await updateJsonField(slot, token, (target) => {
+            target.src = '/JOSI/' + imagePath.replace(/^public\//, '')
+          })
 
           previewImg.src = URL.createObjectURL(file)
           setStatus(statusEl, 'Listo — se publicará en unos minutos.', 'ok')
         } catch (error) {
           setStatus(statusEl, error.message || 'Ocurrió un error al subir la foto.', 'error')
         }
+      }
+
+      function parsePosition(value) {
+        const match = /^\s*(\d+(?:\.\d+)?)%\s+(\d+(?:\.\d+)?)%\s*$/.exec(value || '')
+        if (!match) return { x: 50, y: 50 }
+        return { x: Number(match[1]), y: Number(match[2]) }
+      }
+
+      /** Panel para elegir el punto focal del recorte de una foto ya subida. */
+      function createPositionPanel(slot) {
+        const panel = document.createElement('div')
+        panel.className = 'position-panel'
+
+        const preview = document.createElement('div')
+        preview.className = 'position-preview'
+        const img = document.createElement('img')
+        const dot = document.createElement('div')
+        dot.className = 'position-dot'
+        preview.appendChild(img)
+        preview.appendChild(dot)
+
+        const actions = document.createElement('div')
+        actions.className = 'position-actions'
+        const hint = document.createElement('p')
+        hint.className = 'position-hint'
+        hint.textContent = 'Da clic en la parte de la foto que siempre quieres que se vea, aunque se recorte.'
+        const saveBtn = document.createElement('button')
+        saveBtn.className = 'secondary'
+        saveBtn.textContent = 'Guardar posición'
+        const resetBtn = document.createElement('button')
+        resetBtn.className = 'secondary'
+        resetBtn.textContent = 'Restablecer centro'
+        const posStatus = document.createElement('p')
+        posStatus.className = 'slot-status'
+
+        actions.appendChild(hint)
+        actions.appendChild(saveBtn)
+        actions.appendChild(resetBtn)
+        actions.appendChild(posStatus)
+
+        panel.appendChild(preview)
+        panel.appendChild(actions)
+
+        let pending = { x: 50, y: 50 }
+
+        function setPosition(x, y) {
+          pending = { x, y }
+          dot.style.left = x + '%'
+          dot.style.top = y + '%'
+        }
+
+        preview.addEventListener('click', (event) => {
+          const rect = preview.getBoundingClientRect()
+          const x = Math.round(Math.max(0, Math.min(100, ((event.clientX - rect.left) / rect.width) * 100)))
+          const y = Math.round(Math.max(0, Math.min(100, ((event.clientY - rect.top) / rect.height) * 100)))
+          setPosition(x, y)
+        })
+
+        resetBtn.addEventListener('click', () => setPosition(50, 50))
+
+        saveBtn.addEventListener('click', async () => {
+          const token = getToken()
+          if (!token) {
+            setStatus(posStatus, 'Primero guarda tu token de GitHub arriba.', 'error')
+            return
+          }
+          setStatus(posStatus, 'Guardando…', '')
+          try {
+            await updateJsonField(slot, token, (target) => {
+              target.objectPosition = `${pending.x}% ${pending.y}%`
+            })
+            setStatus(posStatus, 'Posición guardada — se publicará en unos minutos.', 'ok')
+          } catch (error) {
+            setStatus(posStatus, error.message || 'Ocurrió un error al guardar.', 'error')
+          }
+        })
+
+        return { panel, img, setPosition }
       }
 
       function renderSlot(slot) {
@@ -373,10 +532,14 @@
         const uploadBtn = document.createElement('button')
         uploadBtn.className = 'secondary'
         uploadBtn.textContent = 'Subir'
+        const centerBtn = document.createElement('button')
+        centerBtn.className = 'secondary'
+        centerBtn.textContent = 'Centrar'
         const statusEl = document.createElement('p')
         statusEl.className = 'slot-status'
         actions.appendChild(fileInput)
         actions.appendChild(uploadBtn)
+        actions.appendChild(centerBtn)
         actions.appendChild(statusEl)
 
         uploadBtn.addEventListener('click', () => {
@@ -388,9 +551,23 @@
           uploadPhoto(slot, file, statusEl, previewImg)
         })
 
+        const { panel: positionPanel, img: positionImg, setPosition } = createPositionPanel(slot)
+        let currentPosition = { x: 50, y: 50 }
+
+        centerBtn.addEventListener('click', () => {
+          if (previewImg.style.display === 'none') {
+            setStatus(statusEl, 'Sube una foto primero para poder centrarla.', 'error')
+            return
+          }
+          positionImg.src = previewImg.src
+          setPosition(currentPosition.x, currentPosition.y)
+          positionPanel.classList.toggle('open')
+        })
+
         row.appendChild(previewWrap)
         row.appendChild(info)
         row.appendChild(actions)
+        row.appendChild(positionPanel)
 
         fetchJson(slot.file)
           .then((data) => {
@@ -399,6 +576,9 @@
               previewImg.src = SITE_ORIGIN + target.src
               previewImg.style.display = 'block'
               emptyThumb.style.display = 'none'
+            }
+            if (target && target.objectPosition) {
+              currentPosition = parsePosition(target.objectPosition)
             }
             altEl.textContent = target && target.alt ? target.alt : ''
           })
@@ -418,12 +598,7 @@
 
       function updateTokenStatus() {
         const status = document.getElementById('token-status')
-        const tokenRow = document.getElementById('token-row')
-        const changeBtn = document.getElementById('change-token')
-        const hasToken = Boolean(getToken())
-        status.textContent = hasToken ? 'Token guardado en este navegador.' : 'Todavía no hay un token guardado.'
-        tokenRow.style.display = hasToken ? 'none' : 'flex'
-        changeBtn.style.display = hasToken ? 'inline-block' : 'none'
+        status.textContent = getToken() ? 'Token guardado en este navegador.' : 'Todavía no hay un token guardado.'
       }
 
       document.getElementById('save-token').addEventListener('click', () => {
@@ -434,13 +609,39 @@
         updateTokenStatus()
       })
 
-      document.getElementById('change-token').addEventListener('click', () => {
-        document.getElementById('token-row').style.display = 'flex'
-        document.getElementById('change-token').style.display = 'none'
+      document.getElementById('token-toggle').addEventListener('click', () => {
+        document.getElementById('token-box').classList.toggle('open')
       })
 
       updateTokenStatus()
       renderSlots()
+
+      // Freno simple para que no cualquiera se tope con el panel — no es seguridad real,
+      // la subida en sí solo funciona con un token de GitHub válido.
+      const ADMIN_PASSWORD = 'JOSIADMIN'
+      const AUTH_KEY = 'josi_admin_authed'
+
+      function unlock() {
+        document.getElementById('password-gate').classList.add('hidden')
+        document.getElementById('app-content').classList.remove('hidden')
+      }
+
+      if (localStorage.getItem(AUTH_KEY) === 'true') {
+        unlock()
+      } else {
+        document.getElementById('password-submit').addEventListener('click', () => {
+          const value = document.getElementById('password-input').value
+          if (value === ADMIN_PASSWORD) {
+            localStorage.setItem(AUTH_KEY, 'true')
+            unlock()
+          } else {
+            document.getElementById('password-error').textContent = 'Contraseña incorrecta.'
+          }
+        })
+        document.getElementById('password-input').addEventListener('keydown', (event) => {
+          if (event.key === 'Enter') document.getElementById('password-submit').click()
+        })
+      }
     </script>
   </body>
 </html>
