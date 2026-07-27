@@ -15,6 +15,8 @@ type Props = {
   className?: string
   /** Muestra la etiqueta como subtítulo visible (solo se usa en el Portafolio). */
   showLabel?: boolean
+  /** Separación del marco interno respecto al borde (Tailwind inset-*). */
+  insetClass?: string
 }
 
 /**
@@ -23,7 +25,7 @@ type Props = {
  * se muestra una superficie tonal. Sin íconos, sin sombras, sin bordes
  * redondeados.
  */
-export function PlaceholderImage({ slot, tone = 'ivory', className = '', showLabel = false }: Props) {
+export function PlaceholderImage({ slot, tone = 'ivory', className = '', showLabel = false, insetClass = 'inset-5' }: Props) {
   if (slot.src) {
     return (
       <img
@@ -44,7 +46,7 @@ export function PlaceholderImage({ slot, tone = 'ivory', className = '', showLab
       title={showLabel ? undefined : slot.label}
       className={`relative flex h-full w-full items-end overflow-hidden bg-gradient-to-br ${tones[tone]} ${className}`}
     >
-      <div className={`pointer-events-none absolute inset-5 border ${isDark ? 'border-cream/20' : 'border-coffee/10'}`} />
+      <div className={`pointer-events-none absolute ${insetClass} border ${isDark ? 'border-cream/20' : 'border-coffee/10'}`} />
       {showLabel && (
         <span
           className={`relative m-5 font-sans text-[0.62rem] font-medium uppercase tracking-[0.28em] ${
