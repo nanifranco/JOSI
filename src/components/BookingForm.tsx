@@ -33,6 +33,29 @@ const minBookableDateIso = () => {
   return localNow.toISOString().slice(0, 10)
 }
 
+/** true si la fecha ISO (YYYY-MM-DD) cae en sábado o domingo, interpretada en hora local. */
+const isWeekendDate = (isoDate: string) => {
+  const [year, month, day] = isoDate.split('-').map(Number)
+  const dayOfWeek = new Date(year, month - 1, day).getDay()
+  return dayOfWeek === 0 || dayOfWeek === 6
+}
+
+const weekendRequiredMessage = 'Solo se pueden agendar citas los fines de semana. Si tu evento es entre semana, escríbenos por WhatsApp.'
+
+const timeOptions = (() => {
+  const options: { value: string; label: string }[] = []
+  for (let totalMinutes = 7 * 60; totalMinutes <= 21 * 60; totalMinutes += 30) {
+    const hours24 = Math.floor(totalMinutes / 60)
+    const minutes = totalMinutes % 60
+    const value = `${String(hours24).padStart(2, '0')}:${String(minutes).padStart(2, '0')}`
+    const period = hours24 < 12 ? 'a.m.' : 'p.m.'
+    const hours12 = hours24 % 12 === 0 ? 12 : hours24 % 12
+    const label = `${hours12}:${String(minutes).padStart(2, '0')} ${period}`
+    options.push({ value, label })
+  }
+  return options
+})()
+
 type ZoneCheck = 'idle' | 'checking' | 'in-zone' | 'out-of-zone' | 'unknown'
 
 export function BookingForm() {
@@ -46,6 +69,15 @@ export function BookingForm() {
     setForm((prev) => ({ ...prev, [key]: value }))
     setErrors((prev) => ({ ...prev, [key]: undefined }))
     if (key === 'location') setZoneCheck('idle')
+  }
+
+  const handleEventDateChange = (value: string) => {
+    if (value && !isWeekendDate(value)) {
+      setForm((prev) => ({ ...prev, eventDate: '' }))
+      setErrors((prev) => ({ ...prev, eventDate: weekendRequiredMessage }))
+      return
+    }
+    update('eventDate', value)
   }
 
   const checkLocationZone = async () => {
@@ -75,6 +107,8 @@ export function BookingForm() {
       nextErrors.eventDate = 'Selecciona la fecha del evento.'
     } else if (form.eventDate < minBookableDateIso()) {
       nextErrors.eventDate = 'Elige una fecha con al menos 24 horas de anticipación.'
+    } else if (!isWeekendDate(form.eventDate)) {
+      nextErrors.eventDate = weekendRequiredMessage
     }
     if (!form.eventTime) {
       nextErrors.eventTime = 'Selecciona la hora del evento.'
@@ -175,7 +209,7 @@ export function BookingForm() {
                   min={minBookableDateIso()}
                   className={fieldClasses}
                   value={form.eventDate}
-                  onChange={(e) => update('eventDate', e.target.value)}
+                  onChange={(e) => handleEventDateChange(e.target.value)}
                   aria-invalid={Boolean(errors.eventDate)}
                   aria-describedby={errors.eventDate ? 'eventDate-error' : 'eventDate-hint'}
                 />
@@ -195,15 +229,21 @@ export function BookingForm() {
                 <label htmlFor="eventTime" className={labelClasses}>
                   Hora *
                 </label>
-                <input
+                <select
                   id="eventTime"
-                  type="time"
-                  className={fieldClasses}
+                  className={`${fieldClasses} appearance-none`}
                   value={form.eventTime}
                   onChange={(e) => update('eventTime', e.target.value)}
                   aria-invalid={Boolean(errors.eventTime)}
                   aria-describedby={errors.eventTime ? 'eventTime-error' : 'eventTime-hint'}
-                />
+                >
+                  <option value="">Selecciona una hora</option>
+                  {timeOptions.map((option) => (
+                    <option key={option.value} value={option.value}>
+                      {option.label}
+                    </option>
+                  ))}
+                </select>
                 <p id="eventTime-hint" className="mt-2 font-sans text-xs text-taupe/70">
                   Si tu evento es mañana, la hora debe tener al menos 24 horas de anticipación desde este momento.
                 </p>
