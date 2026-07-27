@@ -91,16 +91,6 @@
       }
     },
     {
-      "id": "p11",
-      "category": "social",
-      "orientation": "horizontal",
-      "image": {
-        "src": "",
-        "alt": "",
-        "label": "Social"
-      }
-    },
-    {
       "id": "p12",
       "category": "infantil",
       "orientation": "vertical",
