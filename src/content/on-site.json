@@ -8,5 +8,10 @@
     "src": "",
     "alt": "Espacio de trabajo de Josi para citas en sitio",
     "label": "Espacio de trabajo de Josi"
+  },
+  "photoSecondary": {
+    "src": "",
+    "alt": "Detalle del espacio de trabajo de Josi",
+    "label": "Detalle del espacio"
   }
 }

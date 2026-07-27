@@ -2,7 +2,6 @@
   "eyebrow": "Agenda",
   "title": "Agenda tu cita",
   "text": "Comparte los datos de tu evento para consultar disponibilidad. Tu cita quedará confirmada después de recibir respuesta y realizar el anticipo correspondiente.",
-  "scheduleNote": "Las citas se realizan únicamente los fines de semana. Si tu evento todavía está lejos, puedes verificar la disponibilidad directamente por WhatsApp.",
   "disclaimer": "Enviar este formulario solicita disponibilidad; no confirma tu cita de forma automática.",
   "serviceOptions": [
     { "value": "social", "label": "Social / Eventos" },

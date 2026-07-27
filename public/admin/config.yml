@@ -161,6 +161,13 @@ collections:
               - { label: "Imagen", name: "src", widget: "image", required: false }
               - { label: "Texto alternativo (accesibilidad)", name: "alt", widget: "string" }
               - { label: "Etiqueta interna", name: "label", widget: "string" }
+          - label: "Segunda fotografía"
+            name: "photoSecondary"
+            widget: "object"
+            fields:
+              - { label: "Imagen", name: "src", widget: "image", required: false }
+              - { label: "Texto alternativo (accesibilidad)", name: "alt", widget: "string" }
+              - { label: "Etiqueta interna", name: "label", widget: "string" }
 
       - file: "src/content/booking.json"
         label: "Agenda"
@@ -169,7 +176,6 @@ collections:
           - { label: "Renglón pequeño arriba del título", name: "eyebrow", widget: "string" }
           - { label: "Título", name: "title", widget: "string" }
           - { label: "Texto", name: "text", widget: "text" }
-          - { label: "Nota de fin de semana", name: "scheduleNote", widget: "text" }
           - { label: "Aviso debajo del formulario", name: "disclaimer", widget: "text" }
           - label: "Opciones del selector \"Tipo de servicio\""
             name: "serviceOptions"

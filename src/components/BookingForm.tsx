@@ -77,10 +77,7 @@ export function BookingForm() {
           <Reveal className="md:col-span-4">
             <p className="eyebrow mb-6">{booking.eyebrow}</p>
             <h2 className="font-serif text-4xl leading-tight text-coffee sm:text-5xl">{booking.title}</h2>
-            <p className="mt-6 max-w-sm font-sans text-[0.9rem] font-medium leading-relaxed text-coffee">
-              {booking.scheduleNote}
-            </p>
-            <p className="mt-4 max-w-sm font-sans text-[0.9rem] leading-relaxed text-taupe">{booking.text}</p>
+            <p className="mt-6 max-w-sm font-sans text-[0.9rem] leading-relaxed text-taupe">{booking.text}</p>
 
             <p className="mt-8 max-w-sm border-l border-champagne pl-5 font-sans text-xs leading-relaxed text-taupe/80">
               {booking.disclaimer}
