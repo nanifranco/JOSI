@@ -1,0 +1,26 @@
+{
+  "eyebrow": "Cómo funciona",
+  "title": "Así comienza tu experiencia",
+  "steps": [
+    {
+      "number": "01",
+      "title": "Elige tu servicio",
+      "text": "Cuéntame qué evento tienes y el look que estás buscando."
+    },
+    {
+      "number": "02",
+      "title": "Consulta disponibilidad",
+      "text": "Selecciona la fecha, horario y zona del servicio."
+    },
+    {
+      "number": "03",
+      "title": "Confirma tu cita",
+      "text": "Recibe los detalles de disponibilidad, cotización y anticipo."
+    },
+    {
+      "number": "04",
+      "title": "Disfruta tu momento",
+      "text": "Juntas crearemos un look pensado especialmente para ti."
+    }
+  ]
+}

@@ -1,0 +1,36 @@
+{
+  "items": [
+    {
+      "question": "¿Con cuánto tiempo debo reservar?",
+      "answer": "Como mínimo, con 24 horas de anticipación — el formulario de Agenda no permite seleccionar una fecha más próxima que esa. EDITAR: se recomienda reservar con más tiempo, especialmente para fechas de temporada alta como fines de semana y meses de graduaciones."
+    },
+    {
+      "question": "¿Trabajas a domicilio?",
+      "answer": "Sí, ofrezco servicio a domicilio (el costo varía según el trayecto) y también puedes agendar en sitio. EDITAR: confirmar zona de cobertura y costo de traslado según distancia."
+    },
+    {
+      "question": "¿Cómo se confirma una cita?",
+      "answer": "EDITAR: tu cita se confirma una vez que se acuerda la disponibilidad y se realiza el anticipo correspondiente."
+    },
+    {
+      "question": "¿Es necesario realizar un anticipo?",
+      "answer": "Sí, se solicita un anticipo para apartar la fecha. Por el momento se recibe por transferencia bancaria — EDITAR: confirmar monto y datos bancarios que se comparten al confirmar disponibilidad."
+    },
+    {
+      "question": "¿Puedo mandarte referencias del maquillaje?",
+      "answer": "Sí, de hecho lo recomiendo. Puedes compartir fotos o un enlace de inspiración en el formulario de agenda o por WhatsApp."
+    },
+    {
+      "question": "¿Cuánto dura el servicio?",
+      "answer": "EDITAR: la duración varía según el tipo de maquillaje y si incluye peinado o preparación de piel adicional."
+    },
+    {
+      "question": "¿Qué debo hacer antes de mi cita?",
+      "answer": "EDITAR: se recomienda llegar con el rostro limpio, sin maquillaje previo, y comunicar con anticipación cualquier sensibilidad de piel."
+    },
+    {
+      "question": "¿Qué incluye el servicio de pinta caritas?",
+      "answer": "EDITAR: cuéntanos qué diseños, materiales y tiempo incluye el servicio de pinta caritas para fiestas infantiles."
+    }
+  ]
+}

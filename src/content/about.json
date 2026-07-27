@@ -1,0 +1,14 @@
+{
+  "eyebrow": "Sobre mí",
+  "title": "Belleza creada desde la confianza",
+  "paragraphs": [
+    { "line": "Hola, soy Josi. Me encanta ayudar a que cada persona se sienta segura y cómoda con su maquillaje. Para mí, no se trata de cambiar quién eres, sino de resaltar lo mejor de ti con un look que vaya contigo y con la ocasión." },
+    { "line": "Cada rostro es diferente, por eso me gusta trabajar de forma personalizada. Escucho tus ideas, conozco el estilo que buscas y juntos encontramos un maquillaje que se vea bonito, natural y que te haga sentir tú misma." },
+    { "line": "Mi objetivo es que disfrutes la experiencia de principio a fin y que, cuando te mires al espejo, te encante el resultado sin dejar de reconocerte." }
+  ],
+  "photoMain": {
+    "src": "",
+    "alt": "Retrato de Josi, maquillista profesional",
+    "label": "Fotografía de Josi"
+  }
+}

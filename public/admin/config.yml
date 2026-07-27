@@ -1,0 +1,249 @@
+# Panel de contenido de JOSI MAKEUP (Decap CMS).
+# Cada guardado hace commit directo a "main", lo que dispara el deploy
+# automático (.github/workflows/deploy.yml) — los cambios quedan publicados
+# en un par de minutos.
+
+backend:
+  name: github
+  repo: nanifranco/JOSI
+  branch: main
+  # URL del Worker de OAuth (ver oauth-worker/worker.js). Reemplazar por la
+  # URL real una vez desplegado — sin barra final, sin "/auth".
+  base_url: https://REEMPLAZAR-CON-TU-WORKER.workers.dev
+
+# Para probar el panel en local sin necesitar el login real de GitHub:
+#   npx decap-server   (en una terminal)
+#   npm run dev        (en otra)
+# y abrir http://localhost:5173/JOSI/admin/
+local_backend: true
+
+# El sitio vive en nanifranco.github.io/JOSI/ — si algún día cambia de
+# dominio, hay que actualizar esta línea también.
+media_folder: "public/images/uploads"
+public_folder: "/JOSI/images/uploads"
+
+collections:
+  - name: "pages"
+    label: "Secciones del sitio"
+    files:
+      - file: "src/content/brand.json"
+        label: "Marca"
+        name: "brand"
+        fields:
+          - { label: "Nombre", name: "name", widget: "string" }
+          - { label: "Descriptor (debajo del nombre)", name: "descriptor", widget: "string" }
+          - { label: "Frase corta (footer)", name: "tagline", widget: "string" }
+
+      - file: "src/content/contact.json"
+        label: "Contacto"
+        name: "contact"
+        fields:
+          - { label: "WhatsApp (solo dígitos, con código de país)", name: "whatsappNumber", widget: "string", hint: "Ej. México: 521XXXXXXXXXX" }
+          - { label: "Usuario de Instagram (sin @)", name: "instagramHandle", widget: "string" }
+          - { label: "Link de Instagram", name: "instagramUrl", widget: "string" }
+          - { label: "Nombre de página de Facebook", name: "facebookHandle", widget: "string" }
+          - { label: "Link de Facebook", name: "facebookUrl", widget: "string" }
+          - { label: "Zona de servicio", name: "serviceZone", widget: "string" }
+          - { label: "Link externo de reservas (opcional)", name: "externalBookingUrl", widget: "string", required: false }
+
+      - file: "src/content/hero.json"
+        label: "Inicio (Hero)"
+        name: "hero"
+        fields:
+          - { label: "Renglón pequeño arriba del título", name: "eyebrow", widget: "string" }
+          - { label: "Título", name: "title", widget: "string" }
+          - { label: "Texto", name: "text", widget: "text" }
+          - { label: "Botón principal", name: "primaryCta", widget: "string" }
+          - { label: "Botón secundario", name: "secondaryCta", widget: "string" }
+          - label: "Fotografía"
+            name: "image"
+            widget: "object"
+            fields:
+              - { label: "Imagen", name: "src", widget: "image", required: false }
+              - { label: "Texto alternativo (accesibilidad)", name: "alt", widget: "string" }
+              - { label: "Etiqueta interna", name: "label", widget: "string" }
+
+      - file: "src/content/about.json"
+        label: "Sobre mí"
+        name: "about"
+        fields:
+          - { label: "Renglón pequeño arriba del título", name: "eyebrow", widget: "string" }
+          - { label: "Título", name: "title", widget: "string" }
+          - label: "Párrafos"
+            name: "paragraphs"
+            widget: "list"
+            field: { label: "Párrafo", name: "line", widget: "text" }
+          - label: "Fotografía"
+            name: "photoMain"
+            widget: "object"
+            fields:
+              - { label: "Imagen", name: "src", widget: "image", required: false }
+              - { label: "Texto alternativo (accesibilidad)", name: "alt", widget: "string" }
+              - { label: "Etiqueta interna", name: "label", widget: "string" }
+
+      - file: "src/content/services-intro.json"
+        label: "Servicios (introducción)"
+        name: "servicesIntro"
+        fields:
+          - { label: "Renglón pequeño arriba del título", name: "eyebrow", widget: "string" }
+          - { label: "Título", name: "title", widget: "string" }
+          - { label: "Texto", name: "text", widget: "text" }
+          - { label: "Nota (a domicilio o en sitio)", name: "note", widget: "string" }
+          - { label: "Nota de precio", name: "priceNote", widget: "text" }
+
+      - file: "src/content/services.json"
+        label: "Servicios (lista y precios)"
+        name: "services"
+        fields:
+          - label: "Servicios"
+            name: "items"
+            widget: "list"
+            fields:
+              - { label: "ID interno (sin espacios)", name: "id", widget: "string" }
+              - { label: "Número (01, 02...)", name: "number", widget: "string" }
+              - { label: "Nombre del servicio", name: "name", widget: "string" }
+              - { label: "Descripción", name: "description", widget: "text" }
+              - label: "Precio (una línea por renglón)"
+                name: "price"
+                widget: "list"
+                field: { label: "Línea", name: "line", widget: "string" }
+              - label: "Fotografía"
+                name: "image"
+                widget: "object"
+                fields:
+                  - { label: "Imagen", name: "src", widget: "image", required: false }
+                  - { label: "Texto alternativo (accesibilidad)", name: "alt", widget: "string" }
+                  - { label: "Etiqueta interna", name: "label", widget: "string" }
+
+      - file: "src/content/featured-service.json"
+        label: "Servicio destacado"
+        name: "featuredService"
+        fields:
+          - { label: "Renglón pequeño arriba del título", name: "eyebrow", widget: "string" }
+          - { label: "Título", name: "title", widget: "string" }
+          - { label: "Texto", name: "text", widget: "text" }
+          - { label: "Texto del botón", name: "cta", widget: "string" }
+          - label: "Fotografía"
+            name: "image"
+            widget: "object"
+            fields:
+              - { label: "Imagen", name: "src", widget: "image", required: false }
+              - { label: "Texto alternativo (accesibilidad)", name: "alt", widget: "string" }
+              - { label: "Etiqueta interna", name: "label", widget: "string" }
+
+      - file: "src/content/booking-process.json"
+        label: "Cómo funciona"
+        name: "bookingProcess"
+        fields:
+          - { label: "Renglón pequeño arriba del título", name: "eyebrow", widget: "string" }
+          - { label: "Título", name: "title", widget: "string" }
+          - label: "Pasos"
+            name: "steps"
+            widget: "list"
+            fields:
+              - { label: "Número", name: "number", widget: "string" }
+              - { label: "Título", name: "title", widget: "string" }
+              - { label: "Texto", name: "text", widget: "text" }
+
+      - file: "src/content/on-site.json"
+        label: "En sitio"
+        name: "onSite"
+        fields:
+          - { label: "Renglón pequeño arriba del título", name: "eyebrow", widget: "string" }
+          - { label: "Título", name: "title", widget: "string" }
+          - { label: "Texto", name: "text", widget: "text" }
+          - { label: "Nota (dirección por WhatsApp)", name: "note", widget: "string" }
+          - label: "Fotografía"
+            name: "photo"
+            widget: "object"
+            fields:
+              - { label: "Imagen", name: "src", widget: "image", required: false }
+              - { label: "Texto alternativo (accesibilidad)", name: "alt", widget: "string" }
+              - { label: "Etiqueta interna", name: "label", widget: "string" }
+
+      - file: "src/content/booking.json"
+        label: "Agenda"
+        name: "booking"
+        fields:
+          - { label: "Renglón pequeño arriba del título", name: "eyebrow", widget: "string" }
+          - { label: "Título", name: "title", widget: "string" }
+          - { label: "Texto", name: "text", widget: "text" }
+          - { label: "Nota de fin de semana", name: "scheduleNote", widget: "text" }
+          - { label: "Aviso debajo del formulario", name: "disclaimer", widget: "text" }
+          - label: "Opciones del selector \"Tipo de servicio\""
+            name: "serviceOptions"
+            widget: "list"
+            fields:
+              - { label: "Valor interno", name: "value", widget: "string" }
+              - { label: "Texto visible", name: "label", widget: "string" }
+          - { label: "Mensaje inicial de WhatsApp", name: "whatsappGreeting", widget: "text" }
+
+      - file: "src/content/portfolio-intro.json"
+        label: "Portafolio (introducción)"
+        name: "portfolioIntro"
+        fields:
+          - { label: "Renglón pequeño arriba del título", name: "eyebrow", widget: "string" }
+          - { label: "Título", name: "title", widget: "string" }
+
+      - file: "src/content/portfolio.json"
+        label: "Portafolio (fotos)"
+        name: "portfolio"
+        fields:
+          - label: "Fotos"
+            name: "items"
+            widget: "list"
+            fields:
+              - { label: "ID interno (sin espacios)", name: "id", widget: "string" }
+              - label: "Categoría"
+                name: "category"
+                widget: "select"
+                options:
+                  - { label: "Social", value: "social" }
+                  - { label: "Infantil", value: "infantil" }
+                  - { label: "Caracterización", value: "caracterizacion" }
+              - label: "Orientación de la foto"
+                name: "orientation"
+                widget: "select"
+                options:
+                  - { label: "Vertical", value: "vertical" }
+                  - { label: "Horizontal", value: "horizontal" }
+              - label: "Fotografía"
+                name: "image"
+                widget: "object"
+                fields:
+                  - { label: "Imagen", name: "src", widget: "image", required: false }
+                  - { label: "Texto alternativo (accesibilidad)", name: "alt", widget: "string" }
+                  - { label: "Etiqueta (se ve como subtítulo debajo de la foto)", name: "label", widget: "string" }
+
+      - file: "src/content/faq-intro.json"
+        label: "Preguntas frecuentes (introducción)"
+        name: "faqIntro"
+        fields:
+          - { label: "Renglón pequeño arriba del título", name: "eyebrow", widget: "string" }
+          - { label: "Título", name: "title", widget: "string" }
+
+      - file: "src/content/faq.json"
+        label: "Preguntas frecuentes (lista)"
+        name: "faq"
+        fields:
+          - label: "Preguntas"
+            name: "items"
+            widget: "list"
+            fields:
+              - { label: "Pregunta", name: "question", widget: "string" }
+              - { label: "Respuesta", name: "answer", widget: "text" }
+
+      - file: "src/content/final-cta.json"
+        label: "CTA final"
+        name: "finalCta"
+        fields:
+          - { label: "Título", name: "title", widget: "string" }
+          - { label: "Texto", name: "text", widget: "text" }
+          - { label: "Texto del botón", name: "primaryCta", widget: "string" }
+          - label: "Fotografía"
+            name: "image"
+            widget: "object"
+            fields:
+              - { label: "Imagen", name: "src", widget: "image", required: false }
+              - { label: "Texto alternativo (accesibilidad)", name: "alt", widget: "string" }
+              - { label: "Etiqueta interna", name: "label", widget: "string" }
