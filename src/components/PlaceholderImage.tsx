@@ -25,7 +25,7 @@ type Props = {
  * se muestra una superficie tonal. Sin íconos, sin sombras, sin bordes
  * redondeados.
  */
-export function PlaceholderImage({ slot, tone = 'ivory', className = '', showLabel = false, insetClass = 'inset-5' }: Props) {
+export function PlaceholderImage({ slot, tone = 'ivory', className = '', showLabel = false, insetClass = 'inset-1' }: Props) {
   if (slot.src) {
     return (
       <img

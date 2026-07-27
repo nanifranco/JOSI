@@ -2,7 +2,7 @@
   "items": [
     {
       "question": "¿Con cuánto tiempo debo reservar?",
-      "answer": "Como mínimo, con 24 horas de anticipación — el formulario de Agenda no permite seleccionar una fecha más próxima que esa. Sin embargo, se recomienda reservar con más tiempo, especialmente en fechas de alta demanda como fines de semana y temporada de graduaciones."
+      "answer": "Como mínimo, 24 horas antes de tu cita. Sin embargo, se recomienda reservar con más tiempo, especialmente en temporada de graduaciones."
     },
     {
       "question": "¿Trabajas a domicilio?",
@@ -15,10 +15,6 @@
     {
       "question": "¿Es necesario realizar un anticipo?",
       "answer": "Sí, se solicita un anticipo para apartar la fecha. Por el momento se recibe por transferencia bancaria; el monto y los datos se comparten directamente al confirmar tu disponibilidad."
-    },
-    {
-      "question": "¿Cuánto dura el servicio?",
-      "answer": "La duración varía según el tipo de maquillaje solicitado y si incluye peinado o preparación de piel adicional; te confirmo un tiempo estimado al platicar los detalles de tu cita."
     },
     {
       "question": "¿Qué debo hacer antes de mi cita?",

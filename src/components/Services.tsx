@@ -28,12 +28,7 @@ export function Services() {
                   </div>
 
                   <div className="aspect-[4/3] w-full md:col-span-3">
-                    <PlaceholderImage
-                      slot={service.image}
-                      tone="blush"
-                      className="h-full w-full"
-                      insetClass="inset-2"
-                    />
+                    <PlaceholderImage slot={service.image} tone="blush" className="h-full w-full" />
                   </div>
 
                   <div className="md:col-span-4">
