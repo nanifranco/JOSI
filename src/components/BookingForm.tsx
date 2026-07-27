@@ -149,7 +149,8 @@ export function BookingForm() {
                 />
                 <p id="eventDate-hint" className="mt-2 font-sans text-xs text-taupe/70">
                   La disponibilidad para citas es los fines de semana. Si tu evento es entre semana, escríbenos por
-                  WhatsApp — contando con suficiente anticipación, es posible encontrar un espacio disponible.
+                  WhatsApp — contando con suficiente anticipación, a veces es posible encontrar un espacio, aunque
+                  no se puede garantizar.
                 </p>
                 {errors.eventDate && (
                   <p id="eventDate-error" className="mt-2 font-sans text-xs font-medium text-coffee">

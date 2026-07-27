@@ -161,13 +161,6 @@ collections:
               - { label: "Imagen", name: "src", widget: "image", required: false }
               - { label: "Texto alternativo (accesibilidad)", name: "alt", widget: "string" }
               - { label: "Etiqueta interna", name: "label", widget: "string" }
-          - label: "Segunda fotografía"
-            name: "photoSecondary"
-            widget: "object"
-            fields:
-              - { label: "Imagen", name: "src", widget: "image", required: false }
-              - { label: "Texto alternativo (accesibilidad)", name: "alt", widget: "string" }
-              - { label: "Etiqueta interna", name: "label", widget: "string" }
 
       - file: "src/content/booking.json"
         label: "Agenda"
