@@ -179,16 +179,6 @@
         "alt": "",
         "label": "Caracterización"
       }
-    },
-    {
-      "id": "p20",
-      "category": "social",
-      "orientation": "vertical",
-      "image": {
-        "src": "",
-        "alt": "",
-        "label": "Social"
-      }
     }
   ]
 }
