@@ -170,6 +170,16 @@
         color: var(--taupe);
         margin-top: 2px;
       }
+      .caption-row {
+        display: flex;
+        gap: 8px;
+        align-items: center;
+        margin-top: 8px;
+        max-width: 260px;
+      }
+      .caption-row input[type='text'] {
+        font-size: 0.8rem;
+      }
       .slot-actions {
         display: flex;
         flex-direction: column;
@@ -617,6 +627,25 @@
         info.appendChild(labelEl)
         info.appendChild(altEl)
 
+        // Solo las fotos del portafolio muestran su "label" como subtítulo visible en el
+        // sitio (ver Portfolio.tsx) — por eso solo ahí se puede editar desde el panel.
+        const isPortfolioSlot = slot.id.startsWith('portfolio-')
+        let captionInput = null
+        let captionSaveBtn = null
+        if (isPortfolioSlot) {
+          const captionRow = document.createElement('div')
+          captionRow.className = 'caption-row'
+          captionInput = document.createElement('input')
+          captionInput.type = 'text'
+          captionInput.placeholder = 'Subtítulo debajo de la foto'
+          captionSaveBtn = document.createElement('button')
+          captionSaveBtn.className = 'secondary'
+          captionSaveBtn.textContent = 'Guardar subtítulo'
+          captionRow.appendChild(captionInput)
+          captionRow.appendChild(captionSaveBtn)
+          info.appendChild(captionRow)
+        }
+
         const actions = document.createElement('div')
         actions.className = 'slot-actions'
         const fileInput = document.createElement('input')
@@ -643,6 +672,35 @@
           }
           uploadPhoto(slot, file, statusEl, previewImg, uploadBtn)
         })
+
+        if (isPortfolioSlot) {
+          captionSaveBtn.addEventListener('click', async () => {
+            const value = captionInput.value.trim()
+            if (!value) {
+              setStatus(statusEl, 'Escribe un subtítulo primero.', 'error')
+              return
+            }
+            const token = getToken()
+            if (!token) {
+              setStatus(statusEl, 'Primero guarda tu token de GitHub arriba.', 'error')
+              return
+            }
+            captionSaveBtn.disabled = true
+            setStatus(statusEl, 'Guardando subtítulo…', '')
+            try {
+              await enqueueWrite(() =>
+                updateJsonField(slot, token, (target) => {
+                  target.label = value
+                }),
+              )
+              setStatus(statusEl, 'Subtítulo guardado — se publicará en unos minutos.', 'ok')
+            } catch (error) {
+              setStatus(statusEl, error.message || 'Ocurrió un error al guardar el subtítulo.', 'error')
+            } finally {
+              captionSaveBtn.disabled = false
+            }
+          })
+        }
 
         const { panel: positionPanel, img: positionImg, setPosition, layout: positionLayout } = createPositionPanel(slot)
         let currentPosition = { x: 50, y: 50 }
@@ -676,6 +734,9 @@
             }
             if (target && target.objectPosition) {
               currentPosition = parsePosition(target.objectPosition)
+            }
+            if (captionInput && target && target.label) {
+              captionInput.value = target.label
             }
             altEl.textContent = target && target.alt ? target.alt : ''
           })
