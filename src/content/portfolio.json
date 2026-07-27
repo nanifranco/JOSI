@@ -91,113 +91,13 @@
       }
     },
     {
-      "id": "p10",
-      "category": "social",
-      "orientation": "horizontal",
-      "image": {
-        "src": "",
-        "alt": "",
-        "label": "Social"
-      }
-    },
-    {
-      "id": "p11",
-      "category": "social",
-      "orientation": "horizontal",
-      "image": {
-        "src": "",
-        "alt": "",
-        "label": "Social"
-      }
-    },
-    {
       "id": "p12",
       "category": "infantil",
       "orientation": "vertical",
       "image": {
-        "src": "",
+        "src": "/JOSI/images/uploads/p12-1785167966463.png",
         "alt": "",
         "label": "Infantil"
-      }
-    },
-    {
-      "id": "p13",
-      "category": "caracterizacion",
-      "orientation": "horizontal",
-      "image": {
-        "src": "",
-        "alt": "",
-        "label": "Caracterización"
-      }
-    },
-    {
-      "id": "p14",
-      "category": "social",
-      "orientation": "vertical",
-      "image": {
-        "src": "",
-        "alt": "",
-        "label": "Social"
-      }
-    },
-    {
-      "id": "p15",
-      "category": "infantil",
-      "orientation": "horizontal",
-      "image": {
-        "src": "",
-        "alt": "",
-        "label": "Infantil"
-      }
-    },
-    {
-      "id": "p16",
-      "category": "caracterizacion",
-      "orientation": "vertical",
-      "image": {
-        "src": "",
-        "alt": "",
-        "label": "Caracterización"
-      }
-    },
-    {
-      "id": "p17",
-      "category": "social",
-      "orientation": "horizontal",
-      "image": {
-        "src": "",
-        "alt": "",
-        "label": "Social"
-      }
-    },
-    {
-      "id": "p18",
-      "category": "infantil",
-      "orientation": "vertical",
-      "image": {
-        "src": "",
-        "alt": "",
-        "label": "Infantil"
-      }
-    },
-    {
-      "id": "p19",
-      "category": "caracterizacion",
-      "orientation": "horizontal",
-      "image": {
-        "src": "",
-        "alt": "",
-        "label": "Caracterización"
-      }
-    },
-    {
-      "id": "p20",
-      "category": "social",
-      "orientation": "vertical",
-      "image": {
-        "src": "",
-        "alt": "",
-        "label": "Social"
       }
     }
   ]
