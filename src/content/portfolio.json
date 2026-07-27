@@ -119,6 +119,17 @@
         "label": "Caracterización",
         "objectPosition": "50% 27%"
       }
+    },
+    {
+      "id": "p-1785186764561",
+      "category": "caracterizacion",
+      "orientation": "vertical",
+      "size": "grande",
+      "image": {
+        "src": "",
+        "alt": "",
+        "label": "Caracterización"
+      }
     }
   ]
 }
