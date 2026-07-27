@@ -1,5 +1,5 @@
 import { useState, type FormEvent } from 'react'
-import { booking } from '../config/site'
+import { booking, onSite } from '../config/site'
 import { buildWhatsappMessage, openWhatsapp, type BookingFormData } from '../lib/whatsapp'
 import { distanceKm, geocodeAddress, WORK_ZONE_CENTER, WORK_ZONE_RADIUS_KM } from '../lib/geocode'
 import { CtaButton } from './Cta'
@@ -322,6 +322,20 @@ export function BookingForm() {
 
               {form.serviceMode === 'domicilio' && (
                 <div className="sm:col-span-2">
+                  <p className="mb-3 font-sans text-xs text-taupe/70">
+                    A domicilio siempre tiene un costo adicional por traslado, sin importar la zona — te lo confirmo
+                    por WhatsApp según la distancia.
+                  </p>
+                  <div className="mb-4 aspect-[16/9] w-full max-w-sm border border-coffee/10">
+                    <iframe
+                      title="Zona general de trabajo (sin dirección exacta)"
+                      src={`https://maps.google.com/maps?q=${encodeURIComponent(onSite.mapQuery)}&z=12&output=embed`}
+                      className="h-full w-full grayscale-[15%]"
+                      loading="lazy"
+                      referrerPolicy="no-referrer-when-downgrade"
+                    />
+                  </div>
+
                   <label htmlFor="location" className={labelClasses}>
                     Dirección del servicio *
                   </label>
