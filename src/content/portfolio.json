@@ -99,6 +99,16 @@
         "alt": "",
         "label": "Infantil"
       }
+    },
+    {
+      "id": "p-1785179165019",
+      "category": "caracterizacion",
+      "orientation": "vertical",
+      "image": {
+        "src": "",
+        "alt": "",
+        "label": "Caracterización"
+      }
     }
   ]
 }
