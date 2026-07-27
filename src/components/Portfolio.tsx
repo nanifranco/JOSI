@@ -20,7 +20,7 @@ function aspectClassFor(item: PortfolioItem) {
   if (item.size === undefined) {
     return item.orientation === 'vertical' ? 'aspect-[3/4]' : 'aspect-[4/3]'
   }
-  return item.size === 'grande' ? 'aspect-[1/1]' : 'aspect-[4/3]'
+  return item.size === 'grande' ? 'aspect-[3/4]' : 'aspect-[4/3]'
 }
 
 // La cuadrícula usa columnas tipo mosaico (columns-N): el navegador llena cada
