@@ -1,16 +1,52 @@
-import { useEffect, useState } from 'react'
+import { useEffect, useMemo, useState } from 'react'
 import { ChevronLeft, ChevronRight, X } from 'lucide-react'
-import { portfolio, portfolioFilters, portfolioIntro, type PortfolioCategory } from '../config/site'
+import { portfolio, portfolioFilters, portfolioIntro, type PortfolioCategory, type PortfolioItem } from '../config/site'
 import { PlaceholderImage } from './PlaceholderImage'
 import { Reveal } from './Reveal'
 
 type Filter = 'todos' | PortfolioCategory
 
+// Caracterización e infantil quedan como las categorías más prominentes (se
+// reparten primero cuando hay empate); social es la que más se puede quedar
+// en pareja si el conteo obliga a repetir una categoría seguida.
+const CATEGORY_PRIORITY: PortfolioCategory[] = ['caracterizacion', 'infantil', 'social']
+
+/** Intercala las fotos por categoría para que se repita lo menos posible la misma seguida. */
+function interleaveByCategory(items: PortfolioItem[]): PortfolioItem[] {
+  const queues = new Map<PortfolioCategory, PortfolioItem[]>()
+  for (const item of items) {
+    const queue = queues.get(item.category)
+    if (queue) queue.push(item)
+    else queues.set(item.category, [item])
+  }
+
+  const result: PortfolioItem[] = []
+  let lastCategory: PortfolioCategory | null = null
+
+  while (result.length < items.length) {
+    const candidates = [...queues.entries()]
+      .filter(([, queue]) => queue.length > 0)
+      .sort((a, b) => {
+        if (b[1].length !== a[1].length) return b[1].length - a[1].length
+        return CATEGORY_PRIORITY.indexOf(a[0]) - CATEGORY_PRIORITY.indexOf(b[0])
+      })
+
+    const [category, queue] = candidates.find(([cat]) => cat !== lastCategory) ?? candidates[0]
+    result.push(queue.shift() as PortfolioItem)
+    lastCategory = category
+  }
+
+  return result
+}
+
 export function Portfolio() {
   const [filter, setFilter] = useState<Filter>('todos')
   const [activeIndex, setActiveIndex] = useState<number | null>(null)
 
-  const items = filter === 'todos' ? portfolio : portfolio.filter((item) => item.category === filter)
+  const items = useMemo(
+    () => (filter === 'todos' ? interleaveByCategory(portfolio) : portfolio.filter((item) => item.category === filter)),
+    [filter],
+  )
 
   useEffect(() => {
     setActiveIndex(null)

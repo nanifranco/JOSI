@@ -426,7 +426,7 @@
         }
       }
 
-      async function uploadPhoto(slot, file, statusEl, previewImg, uploadBtn) {
+      async function uploadPhoto(slot, file, statusEl, previewImg, uploadBtn, emptyThumb, fileInput) {
         const token = getToken()
         if (!token) {
           setStatus(statusEl, 'Primero guarda tu token de GitHub arriba.', 'error')
@@ -448,7 +448,13 @@
             })
           })
 
+          // Sin esto, un slot que empezaba vacío se quedaba mostrando "Sin foto" y el
+          // botón "Centrar" seguía rechazando la acción hasta refrescar la página,
+          // aunque la subida ya hubiera funcionado.
           previewImg.src = URL.createObjectURL(file)
+          previewImg.style.display = 'block'
+          emptyThumb.style.display = 'none'
+          fileInput.value = ''
           setStatus(statusEl, 'Listo — se publicará en unos minutos.', 'ok')
         } catch (error) {
           setStatus(statusEl, error.message || 'Ocurrió un error al subir la foto.', 'error')
@@ -469,7 +475,7 @@
        * slot.aspect) y se queda fijo; la foto se arrastra por debajo, igual que un
        * editor de foto de perfil — sin marcas ni puntos superpuestos.
        */
-      function createPositionPanel(slot) {
+      function createPositionPanel(slot, onSave) {
         const panel = document.createElement('div')
         panel.className = 'position-panel'
 
@@ -594,6 +600,10 @@
                 target.objectPosition = `${Math.round(pending.x)}% ${Math.round(pending.y)}%`
               }),
             )
+            // Sin esto, si volvías a abrir "Centrar" en la misma visita (sin refrescar),
+            // el recuadro regresaba a la última posición cargada al inicio, no a la que
+            // acababas de guardar.
+            onSave({ ...pending })
             setStatus(posStatus, 'Posición guardada — se publicará en unos minutos.', 'ok')
           } catch (error) {
             setStatus(posStatus, error.message || 'Ocurrió un error al guardar.', 'error')
@@ -672,7 +682,7 @@
             setStatus(statusEl, 'Elige una imagen primero.', 'error')
             return
           }
-          uploadPhoto(slot, file, statusEl, previewImg, uploadBtn)
+          uploadPhoto(slot, file, statusEl, previewImg, uploadBtn, emptyThumb, fileInput)
         })
 
         if (isPortfolioSlot) {
@@ -704,8 +714,13 @@
           })
         }
 
-        const { panel: positionPanel, img: positionImg, setPosition, layout: positionLayout } = createPositionPanel(slot)
         let currentPosition = { x: 50, y: 50 }
+        const { panel: positionPanel, img: positionImg, setPosition, layout: positionLayout } = createPositionPanel(
+          slot,
+          (newPosition) => {
+            currentPosition = newPosition
+          },
+        )
 
         centerBtn.addEventListener('click', () => {
           if (previewImg.style.display === 'none') {
