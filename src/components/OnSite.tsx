@@ -11,6 +11,7 @@ export function OnSite() {
           <h2 className="max-w-lg font-serif text-4xl leading-[1.15] text-coffee sm:text-5xl">{onSite.title}</h2>
 
           <p className="mt-9 max-w-xl font-sans text-[0.95rem] leading-relaxed text-taupe">{onSite.text}</p>
+          <p className="mt-4 max-w-xl font-sans text-[0.95rem] text-taupe">{onSite.zone}</p>
           <p className="mt-4 max-w-xl font-sans text-xs italic text-taupe/70">{onSite.note}</p>
         </Reveal>
 

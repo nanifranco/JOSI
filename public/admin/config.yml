@@ -152,6 +152,7 @@ collections:
           - { label: "Renglón pequeño arriba del título", name: "eyebrow", widget: "string" }
           - { label: "Título", name: "title", widget: "string" }
           - { label: "Texto", name: "text", widget: "text" }
+          - { label: "Zona / colonia (referencia general, sin calle ni número)", name: "zone", widget: "string" }
           - { label: "Nota (dirección por WhatsApp)", name: "note", widget: "string" }
           - label: "Fotografía"
             name: "photo"

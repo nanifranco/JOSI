@@ -19,7 +19,7 @@ export function FeaturedService() {
               {featuredService.text}
             </p>
 
-            <div className="mt-10">
+            <div className="mt-10 flex justify-center">
               <CtaLink href="#agenda" variant="outline-inverse">
                 {featuredService.cta}
               </CtaLink>
