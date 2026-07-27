@@ -9,7 +9,6 @@ import { OnSite } from './components/OnSite'
 import { BookingForm } from './components/BookingForm'
 import { Portfolio } from './components/Portfolio'
 import { FAQ } from './components/FAQ'
-import { FinalCta } from './components/FinalCta'
 import { Contact } from './components/Contact'
 import { Footer } from './components/Footer'
 import { WhatsAppFloat } from './components/WhatsAppFloat'
@@ -30,7 +29,6 @@ function App() {
         <BookingForm />
         <Portfolio />
         <FAQ />
-        <FinalCta />
         <Contact />
       </main>
       <Footer />

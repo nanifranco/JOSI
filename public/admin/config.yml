@@ -232,18 +232,3 @@ collections:
             fields:
               - { label: "Pregunta", name: "question", widget: "string" }
               - { label: "Respuesta", name: "answer", widget: "text" }
-
-      - file: "src/content/final-cta.json"
-        label: "CTA final"
-        name: "finalCta"
-        fields:
-          - { label: "Título", name: "title", widget: "string" }
-          - { label: "Texto", name: "text", widget: "text" }
-          - { label: "Texto del botón", name: "primaryCta", widget: "string" }
-          - label: "Fotografía"
-            name: "image"
-            widget: "object"
-            fields:
-              - { label: "Imagen", name: "src", widget: "image", required: false }
-              - { label: "Texto alternativo (accesibilidad)", name: "alt", widget: "string" }
-              - { label: "Etiqueta interna", name: "label", widget: "string" }

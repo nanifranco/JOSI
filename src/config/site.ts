@@ -27,7 +27,6 @@ import portfolioIntroData from '../content/portfolio-intro.json'
 import portfolioData from '../content/portfolio.json'
 import faqIntroData from '../content/faq-intro.json'
 import faqData from '../content/faq.json'
-import finalCtaData from '../content/final-cta.json'
 
 export type ImageSlot = {
   /** Ruta a la imagen real, p. ej. "/images/hero.jpg". Vacío = placeholder editorial. */
@@ -139,11 +138,6 @@ export const portfolioFilters: { value: 'todos' | PortfolioCategory; label: stri
 /* ----------------------------------------------------------------------- */
 export const faqIntro = faqIntroData
 export const faqs = faqData.items
-
-/* ----------------------------------------------------------------------- */
-/* CTA FINAL                                                                */
-/* ----------------------------------------------------------------------- */
-export const finalCta = finalCtaData
 
 /* ----------------------------------------------------------------------- */
 /* FOOTER — anclas de código, no editables desde el panel                  */
