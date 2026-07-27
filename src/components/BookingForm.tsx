@@ -277,21 +277,37 @@ export function BookingForm() {
               </div>
 
               <div>
-                <label htmlFor="serviceMode" className={labelClasses}>
-                  ¿Dónde prefieres el servicio? *
-                </label>
-                <select
-                  id="serviceMode"
-                  className={`${fieldClasses} appearance-none`}
-                  value={form.serviceMode}
-                  onChange={(e) => update('serviceMode', e.target.value as BookingFormData['serviceMode'])}
+                <p className={labelClasses}>¿Dónde prefieres el servicio? *</p>
+                <div
+                  role="radiogroup"
+                  aria-label="¿Dónde prefieres el servicio?"
                   aria-invalid={Boolean(errors.serviceMode)}
                   aria-describedby={errors.serviceMode ? 'serviceMode-error' : undefined}
+                  className="mt-1 grid grid-cols-2 gap-3"
                 >
-                  <option value="">Selecciona una opción</option>
-                  <option value="domicilio">A domicilio</option>
-                  <option value="estudio">En sitio</option>
-                </select>
+                  {([
+                    { value: 'domicilio', label: 'A domicilio' },
+                    { value: 'estudio', label: 'En sitio' },
+                  ] as const).map((option) => {
+                    const selected = form.serviceMode === option.value
+                    return (
+                      <button
+                        key={option.value}
+                        type="button"
+                        role="radio"
+                        aria-checked={selected}
+                        onClick={() => update('serviceMode', option.value)}
+                        className={`border py-3 font-sans text-xs uppercase tracking-[0.15em] transition-colors duration-300 ${
+                          selected
+                            ? 'border-coffee bg-coffee text-cream'
+                            : 'border-coffee/25 text-coffee hover:border-coffee'
+                        }`}
+                      >
+                        {option.label}
+                      </button>
+                    )
+                  })}
+                </div>
                 {errors.serviceMode && (
                   <p id="serviceMode-error" className="mt-2 font-sans text-xs font-medium text-coffee">
                     {errors.serviceMode}
