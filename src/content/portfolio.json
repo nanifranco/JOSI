@@ -111,16 +111,6 @@
       }
     },
     {
-      "id": "p14",
-      "category": "social",
-      "orientation": "vertical",
-      "image": {
-        "src": "",
-        "alt": "",
-        "label": "Social"
-      }
-    },
-    {
       "id": "p15",
       "category": "infantil",
       "orientation": "horizontal",
