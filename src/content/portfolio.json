@@ -110,6 +110,17 @@
         "alt": "",
         "label": "Caracterización"
       }
+    },
+    {
+      "id": "p-1785181018231",
+      "category": "social",
+      "orientation": "vertical",
+      "size": "chica",
+      "image": {
+        "src": "",
+        "alt": "",
+        "label": "Social"
+      }
     }
   ]
 }
