@@ -40,7 +40,8 @@
       "image": {
         "src": "/JOSI/images/uploads/portfolio-4-1785161405010.jpeg",
         "alt": "",
-        "label": "Caracterización"
+        "label": "Caracterización",
+        "objectPosition": "50% 43%"
       }
     },
     {
