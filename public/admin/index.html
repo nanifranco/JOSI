@@ -482,23 +482,35 @@
         return run
       }
 
-      // Otra subida al mismo archivo (p. ej. dos fotos de Servicios) puede adelantarse y
-      // dejar desactualizado el sha que leímos. Si GitHub responde 409, releemos el
-      // archivo con su sha más reciente y reintentamos, en vez de fallar de una vez.
+      // Aunque todas las escrituras a GitHub ya se hacen una por una (ver enqueueWrite),
+      // seguíamos viendo 409 entre tareas seguidas: pedirle a GitHub el sha "actual" justo
+      // después de haber escrito puede tardar un instante en reflejar ese cambio. En vez de
+      // confiar en esa lectura, guardamos el sha+contenido que YA sabemos correctos porque
+      // los acabamos de escribir nosotros mismos, y solo pedimos una lectura fresca la
+      // primera vez que tocamos un archivo (o si algo externo lo cambió y por eso da 409).
+      const lastKnownFile = new Map()
+
       async function updateJsonField(slot, token, mutate) {
-        const MAX_ATTEMPTS = 5
+        const MAX_ATTEMPTS = 6
         for (let attempt = 1; attempt <= MAX_ATTEMPTS; attempt++) {
-          const { sha, content } = await getFileSha(slot.file, token)
+          const cached = attempt === 1 ? lastKnownFile.get(slot.file) : null
+          const { sha, content } = cached
+            ? { sha: cached.sha, content: JSON.parse(JSON.stringify(cached.content)) }
+            : await getFileSha(slot.file, token)
+
           const target = slot.resolveTarget ? slot.resolveTarget(content) : walk(content, slot.path)
           if (!target) throw new Error('No se encontró el campo esperado en ' + slot.file)
           mutate(target)
 
           const newJsonBase64 = utf8ToBase64(JSON.stringify(content, null, 2) + '\n')
           try {
-            await putFile(slot.file, token, newJsonBase64, sha, `Actualizar foto: ${slot.label}`)
+            const result = await putFile(slot.file, token, newJsonBase64, sha, `Actualizar foto: ${slot.label}`)
+            const newSha = result && result.content && result.content.sha
+            if (newSha) lastKnownFile.set(slot.file, { sha: newSha, content })
             return
           } catch (error) {
             const isConflict = error.status === 409
+            if (isConflict) lastKnownFile.delete(slot.file)
             if (!isConflict || attempt === MAX_ATTEMPTS) throw error
             await wait(400 * attempt)
           }
