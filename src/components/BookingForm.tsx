@@ -72,6 +72,11 @@ export function BookingForm() {
   }
 
   const handleEventDateChange = (value: string) => {
+    if (value && value < minBookableDateIso()) {
+      setForm((prev) => ({ ...prev, eventDate: '' }))
+      setErrors((prev) => ({ ...prev, eventDate: 'Elige una fecha con al menos 24 horas de anticipación.' }))
+      return
+    }
     if (value && !isWeekendDate(value)) {
       setForm((prev) => ({ ...prev, eventDate: '' }))
       setErrors((prev) => ({ ...prev, eventDate: weekendRequiredMessage }))
