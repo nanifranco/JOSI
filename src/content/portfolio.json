@@ -110,6 +110,17 @@
         "alt": "",
         "label": "Caracterización"
       }
+    },
+    {
+      "id": "p-1785185129161",
+      "category": "infantil",
+      "orientation": "vertical",
+      "size": "chica",
+      "image": {
+        "src": "",
+        "alt": "",
+        "label": "Infantil"
+      }
     }
   ]
 }
