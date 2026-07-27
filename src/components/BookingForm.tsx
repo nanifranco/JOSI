@@ -69,7 +69,6 @@ export function BookingForm() {
   const [errors, setErrors] = useState<Errors>({})
   const [confirmation, setConfirmation] = useState(false)
   const [zoneCheck, setZoneCheck] = useState<ZoneCheck>('idle')
-  const [zoneCheckedValue, setZoneCheckedValue] = useState('')
   const [addressCoords, setAddressCoords] = useState<Coordinates | null>(null)
 
   const update = <K extends keyof BookingFormData>(key: K, value: BookingFormData[K]) => {
@@ -97,9 +96,9 @@ export function BookingForm() {
 
   const checkLocationZone = async () => {
     const address = form.location.trim()
-    if (!address || address === zoneCheckedValue) return
-    setZoneCheckedValue(address)
+    if (!address) return
     setZoneCheck('checking')
+    setErrors((prev) => ({ ...prev, location: undefined }))
 
     const coords = await geocodeAddress(`${address}, Ciudad de México`)
     if (!coords) {
@@ -138,8 +137,14 @@ export function BookingForm() {
     }
     if (!form.guestCount.trim()) nextErrors.guestCount = 'Indica el número de personas.'
     if (!form.serviceMode) nextErrors.serviceMode = 'Selecciona dónde prefieres el servicio.'
-    if (form.serviceMode === 'domicilio' && !form.location.trim()) {
-      nextErrors.location = 'Indica la dirección completa del servicio.'
+    if (form.serviceMode === 'domicilio') {
+      if (!form.location.trim()) {
+        nextErrors.location = 'Indica la dirección completa del servicio.'
+      } else if (zoneCheck === 'out-of-zone') {
+        nextErrors.location = 'Tu dirección está fuera de zona — escríbeme directamente por WhatsApp.'
+      } else if (zoneCheck !== 'in-zone') {
+        nextErrors.location = 'Verifica la zona con el botón antes de continuar.'
+      }
     }
 
     if (Object.keys(nextErrors).length > 0) {
@@ -338,20 +343,36 @@ export function BookingForm() {
                     por WhatsApp según la distancia.
                   </p>
 
+                  <div className="mb-4 aspect-[16/9] w-full max-w-sm border border-coffee/10">
+                    <Suspense fallback={<div className="h-full w-full bg-blush/40" />}>
+                      <WorkZoneMap addressCoords={addressCoords} inZone={zoneCheck === 'in-zone' ? true : zoneCheck === 'out-of-zone' ? false : null} />
+                    </Suspense>
+                  </div>
+
                   <label htmlFor="location" className={labelClasses}>
                     Dirección del servicio *
                   </label>
-                  <input
-                    id="location"
-                    type="text"
-                    placeholder="Calle y número, colonia, ciudad"
-                    className={fieldClasses}
-                    value={form.location}
-                    onChange={(e) => update('location', e.target.value)}
-                    onBlur={checkLocationZone}
-                    aria-invalid={Boolean(errors.location)}
-                    aria-describedby={errors.location ? 'location-error' : 'location-hint'}
-                  />
+                  <div className="flex flex-wrap items-end gap-3">
+                    <input
+                      id="location"
+                      type="text"
+                      placeholder="Calle y número, colonia, ciudad"
+                      className={`${fieldClasses} flex-1`}
+                      value={form.location}
+                      onChange={(e) => update('location', e.target.value)}
+                      aria-invalid={Boolean(errors.location)}
+                      aria-describedby={errors.location ? 'location-error' : 'location-hint'}
+                    />
+                    <CtaButton
+                      type="button"
+                      variant="outline"
+                      className="px-5 py-2.5"
+                      onClick={checkLocationZone}
+                      disabled={!form.location.trim() || zoneCheck === 'checking'}
+                    >
+                      Verificar zona
+                    </CtaButton>
+                  </div>
                   <p id="location-hint" className="mt-2 font-sans text-xs text-taupe/70">
                     Incluye calle, número, colonia y ciudad completos para evitar confusiones con calles del mismo
                     nombre en otras colonias.
@@ -372,12 +393,10 @@ export function BookingForm() {
                       Tu dirección cae dentro de mi zona de trabajo habitual.
                     </p>
                   )}
-                  {(zoneCheck === 'in-zone' || zoneCheck === 'out-of-zone') && (
-                    <div className="mt-3 aspect-[16/9] w-full max-w-sm border border-coffee/10">
-                      <Suspense fallback={<div className="h-full w-full bg-blush/40" />}>
-                        <WorkZoneMap addressCoords={addressCoords} inZone={zoneCheck === 'in-zone'} />
-                      </Suspense>
-                    </div>
+                  {zoneCheck === 'unknown' && (
+                    <p role="status" className="mt-2 font-sans text-xs font-medium text-coffee">
+                      No pude ubicar esa dirección — revisa que esté completa e inténtalo de nuevo.
+                    </p>
                   )}
                   {errors.location && (
                     <p id="location-error" className="mt-2 font-sans text-xs font-medium text-coffee">
