@@ -104,7 +104,8 @@
       "image": {
         "src": "/JOSI/images/uploads/p12-1785167966463.png",
         "alt": "",
-        "label": "Infantil"
+        "label": "Infantil",
+        "objectPosition": "50% 23%"
       },
       "size": "chica"
     },
