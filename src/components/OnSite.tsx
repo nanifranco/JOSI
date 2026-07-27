@@ -1,5 +1,4 @@
 import { onSite } from '../config/site'
-import { PlaceholderImage } from './PlaceholderImage'
 import { Reveal } from './Reveal'
 
 export function OnSite() {
@@ -16,8 +15,14 @@ export function OnSite() {
         </Reveal>
 
         <Reveal className="order-1 md:order-2 md:col-span-4">
-          <div className="aspect-square w-full">
-            <PlaceholderImage slot={onSite.photo} tone="champagne" className="h-full w-full" />
+          <div className="aspect-square w-full border border-coffee/10">
+            <iframe
+              title="Zona general de trabajo (sin dirección exacta)"
+              src={`https://maps.google.com/maps?q=${encodeURIComponent(onSite.mapQuery)}&z=14&output=embed`}
+              className="h-full w-full grayscale-[15%]"
+              loading="lazy"
+              referrerPolicy="no-referrer-when-downgrade"
+            />
           </div>
         </Reveal>
       </div>
