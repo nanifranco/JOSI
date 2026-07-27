@@ -633,7 +633,10 @@
         const info = document.createElement('div')
         const labelEl = document.createElement('p')
         labelEl.className = 'slot-label'
-        labelEl.textContent = slot.label
+        // En el portafolio, ese espacio muestra el subtítulo actual de la foto (lo que se
+        // ve en el sitio) en vez del nombre interno del slot — se actualiza al cargar y al
+        // guardar un subtítulo nuevo, para no tener que refrescar la página.
+        labelEl.textContent = slot.id.startsWith('portfolio-') ? 'Cargando…' : slot.label
         const altEl = document.createElement('p')
         altEl.className = 'slot-alt'
         info.appendChild(labelEl)
@@ -705,6 +708,7 @@
                   target.label = value
                 }),
               )
+              labelEl.textContent = value
               setStatus(statusEl, 'Subtítulo guardado — se publicará en unos minutos.', 'ok')
             } catch (error) {
               setStatus(statusEl, error.message || 'Ocurrió un error al guardar el subtítulo.', 'error')
@@ -754,11 +758,15 @@
             }
             if (captionInput && target && target.label) {
               captionInput.value = target.label
+              labelEl.textContent = target.label
+            } else if (isPortfolioSlot) {
+              labelEl.textContent = '(sin subtítulo)'
             }
             altEl.textContent = target && target.alt ? target.alt : ''
           })
           .catch(() => {
             altEl.textContent = 'No se pudo leer el estado actual.'
+            if (isPortfolioSlot) labelEl.textContent = slot.label
           })
 
         return row

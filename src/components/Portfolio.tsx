@@ -11,6 +11,14 @@ type Filter = 'todos' | PortfolioCategory
 // en pareja si el conteo obliga a repetir una categoría seguida.
 const CATEGORY_PRIORITY: PortfolioCategory[] = ['caracterizacion', 'infantil', 'social']
 
+// La cuadrícula usa columnas tipo mosaico (columns-N): el navegador llena cada
+// columna de arriba a abajo antes de pasar a la siguiente, así que dos fotos
+// vecinas en la cuadrícula NO son necesariamente vecinas en este arreglo —
+// también pueden quedar una junto a otra en columnas distintas a una altura
+// parecida. Por eso no basta con evitar que se repita la categoría anterior:
+// se evita repetir cualquier categoría usada en las últimas posiciones.
+const LOOKBACK_WINDOW = 3
+
 /** Intercala las fotos por categoría para que se repita lo menos posible la misma seguida. */
 function interleaveByCategory(items: PortfolioItem[]): PortfolioItem[] {
   const queues = new Map<PortfolioCategory, PortfolioItem[]>()
@@ -21,7 +29,7 @@ function interleaveByCategory(items: PortfolioItem[]): PortfolioItem[] {
   }
 
   const result: PortfolioItem[] = []
-  let lastCategory: PortfolioCategory | null = null
+  const recent: PortfolioCategory[] = []
 
   while (result.length < items.length) {
     const candidates = [...queues.entries()]
@@ -31,9 +39,19 @@ function interleaveByCategory(items: PortfolioItem[]): PortfolioItem[] {
         return CATEGORY_PRIORITY.indexOf(a[0]) - CATEGORY_PRIORITY.indexOf(b[0])
       })
 
-    const [category, queue] = candidates.find(([cat]) => cat !== lastCategory) ?? candidates[0]
+    let pick = candidates[0]
+    for (let window = LOOKBACK_WINDOW; window >= 1; window--) {
+      const recentSet = new Set(recent.slice(-window))
+      const found = candidates.find(([cat]) => !recentSet.has(cat))
+      if (found) {
+        pick = found
+        break
+      }
+    }
+
+    const [category, queue] = pick
     result.push(queue.shift() as PortfolioItem)
-    lastCategory = category
+    recent.push(category)
   }
 
   return result
