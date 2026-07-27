@@ -6,7 +6,7 @@ export type Coordinates = { lat: number; lon: number }
  * calcular distancias, no se muestra en ningún lugar del sitio.
  */
 export const WORK_ZONE_CENTER: Coordinates = { lat: 19.2965, lon: -99.1354 }
-export const WORK_ZONE_RADIUS_KM = 20
+export const WORK_ZONE_RADIUS_KM = 15
 
 const EARTH_RADIUS_KM = 6371
 
