@@ -3,10 +3,11 @@
  *  JOSI MAKEUP — CONFIGURACIÓN CENTRAL DEL SITIO
  * ============================================================================
  *  El contenido real (textos, precios, fotos) vive en los archivos JSON de
- *  src/content/ y se edita desde el panel /admin (Decap CMS) o directamente
- *  en esos archivos. Este archivo solo define los tipos y reexporta los
- *  datos con el mismo nombre que ya usan los componentes — no debería
- *  necesitar cambios al agregar/editar contenido.
+ *  src/content/. Las fotos pueden subirse desde el panel /admin (sube
+ *  directo a GitHub con un token personal); los textos se editan
+ *  directamente en esos archivos. Este archivo solo define los tipos y
+ *  reexporta los datos con el mismo nombre que ya usan los componentes —
+ *  no debería necesitar cambios al agregar/editar contenido.
  *
  *  navLinks y footerLinks se quedan como código (son anclas de navegación,
  *  no contenido de negocio) y no son editables desde el panel.

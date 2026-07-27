@@ -1,12 +1,445 @@
 <!doctype html>
-<html>
+<html lang="es">
   <head>
-    <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <title>JOSI — Panel de contenido</title>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="robots" content="noindex, nofollow" />
+    <title>JOSI MAKEUP — Subir fotos</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600&family=Jost:wght@400;500;600&display=swap"
+      rel="stylesheet"
+    />
+    <style>
+      :root {
+        --coffee: #3a2e2c;
+        --taupe: #8a7a72;
+        --cream: #faf8f5;
+        --champagne: #c9a876;
+        --border: rgba(58, 46, 44, 0.18);
+      }
+      * {
+        box-sizing: border-box;
+      }
+      body {
+        margin: 0;
+        background: var(--cream);
+        color: var(--coffee);
+        font-family: 'Jost', sans-serif;
+        line-height: 1.5;
+      }
+      .wrap {
+        max-width: 760px;
+        margin: 0 auto;
+        padding: 48px 24px 96px;
+      }
+      h1 {
+        font-family: 'Cormorant Garamond', serif;
+        font-weight: 500;
+        font-size: 2.25rem;
+        margin: 0 0 8px;
+      }
+      .intro {
+        color: var(--taupe);
+        font-size: 0.92rem;
+        margin: 0 0 32px;
+        max-width: 56ch;
+      }
+      details {
+        border: 1px solid var(--border);
+        padding: 16px 20px;
+        margin-bottom: 32px;
+        font-size: 0.88rem;
+        color: var(--taupe);
+      }
+      details summary {
+        cursor: pointer;
+        color: var(--coffee);
+        font-weight: 500;
+      }
+      details ol {
+        padding-left: 20px;
+      }
+      details a {
+        color: var(--coffee);
+      }
+      .token-box {
+        border: 1px solid var(--border);
+        padding: 20px;
+        margin-bottom: 40px;
+      }
+      .token-box label {
+        display: block;
+        font-size: 0.65rem;
+        text-transform: uppercase;
+        letter-spacing: 0.15em;
+        margin-bottom: 8px;
+        color: var(--taupe);
+      }
+      .token-row {
+        display: flex;
+        gap: 10px;
+      }
+      input[type='password'],
+      input[type='text'] {
+        flex: 1;
+        border: 0;
+        border-bottom: 1px solid var(--border);
+        background: transparent;
+        padding: 10px 2px;
+        font-family: 'Jost', sans-serif;
+        font-size: 0.9rem;
+        color: var(--coffee);
+      }
+      input:focus {
+        outline: none;
+        border-bottom-color: var(--coffee);
+      }
+      button {
+        font-family: 'Jost', sans-serif;
+        font-size: 0.72rem;
+        font-weight: 500;
+        text-transform: uppercase;
+        letter-spacing: 0.15em;
+        border: 1px solid var(--coffee);
+        background: var(--coffee);
+        color: var(--cream);
+        padding: 10px 20px;
+        cursor: pointer;
+      }
+      button:hover {
+        background: transparent;
+        color: var(--coffee);
+      }
+      button:disabled {
+        opacity: 0.4;
+        cursor: not-allowed;
+      }
+      button.secondary {
+        background: transparent;
+        color: var(--coffee);
+      }
+      .token-status {
+        margin-top: 10px;
+        font-size: 0.78rem;
+        color: var(--taupe);
+      }
+      .slot {
+        display: grid;
+        grid-template-columns: 90px 1fr auto;
+        gap: 16px;
+        align-items: center;
+        padding: 16px 0;
+        border-bottom: 1px solid var(--border);
+      }
+      .thumb {
+        width: 90px;
+        height: 90px;
+        object-fit: cover;
+        border: 1px solid var(--border);
+        background: #ece6e0;
+        display: block;
+      }
+      .thumb-empty {
+        width: 90px;
+        height: 90px;
+        border: 1px solid var(--border);
+        background: #ece6e0;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-size: 0.6rem;
+        color: var(--taupe);
+        text-align: center;
+        padding: 4px;
+      }
+      .slot-label {
+        font-size: 0.92rem;
+      }
+      .slot-alt {
+        font-size: 0.75rem;
+        color: var(--taupe);
+        margin-top: 2px;
+      }
+      .slot-actions {
+        display: flex;
+        flex-direction: column;
+        gap: 8px;
+        align-items: flex-end;
+      }
+      .slot-status {
+        font-size: 0.72rem;
+        margin-top: 4px;
+        max-width: 220px;
+        text-align: right;
+      }
+      .slot-status.error {
+        color: #a33;
+      }
+      .slot-status.ok {
+        color: #3a7a4a;
+      }
+      input[type='file'] {
+        font-size: 0.72rem;
+        max-width: 160px;
+      }
+      #slots {
+        display: none;
+      }
+      #slots.ready {
+        display: block;
+      }
+    </style>
   </head>
   <body>
-    <!-- config.yml se carga automáticamente desde esta misma carpeta. -->
-    <script src="https://unpkg.com/decap-cms@^3.0.0/dist/decap-cms.js"></script>
+    <div class="wrap">
+      <h1>Subir fotos</h1>
+      <p class="intro">
+        Sube o reemplaza las fotos del sitio directamente desde aquí. Los cambios se publican en unos minutos
+        automáticamente. Este panel solo sube fotos — los textos y precios se editan directamente en el código.
+      </p>
+
+      <details>
+        <summary>¿Cómo consigo un token de GitHub?</summary>
+        <ol>
+          <li>Entra a <a href="https://github.com/settings/tokens?type=beta" target="_blank" rel="noopener">github.com/settings/tokens</a> con tu cuenta.</li>
+          <li>Da clic en "Generate new token" (fine-grained).</li>
+          <li>En "Repository access" elige "Only select repositories" y selecciona <strong>nanifranco/JOSI</strong>.</li>
+          <li>En "Permissions" busca "Contents" y ponlo en "Read and write".</li>
+          <li>Genera el token y cópialo — solo se muestra una vez.</li>
+          <li>Pégalo abajo. Se queda guardado solo en este navegador, nunca se comparte con nadie más.</li>
+        </ol>
+      </details>
+
+      <div class="token-box">
+        <label for="token-input">Token de GitHub</label>
+        <div class="token-row">
+          <input id="token-input" type="password" placeholder="github_pat_..." autocomplete="off" />
+          <button id="save-token">Guardar</button>
+        </div>
+        <p class="token-status" id="token-status"></p>
+      </div>
+
+      <div id="slots"></div>
+    </div>
+
+    <script>
+      const REPO_OWNER = 'nanifranco'
+      const REPO_NAME = 'JOSI'
+      const BRANCH = 'main'
+      const RAW_BASE = `https://raw.githubusercontent.com/${REPO_OWNER}/${REPO_NAME}/${BRANCH}/`
+      const API_BASE = `https://api.github.com/repos/${REPO_OWNER}/${REPO_NAME}/contents/`
+      const SITE_ORIGIN = 'https://nanifranco.github.io'
+      const TOKEN_KEY = 'josi_admin_github_token'
+
+      const SLOTS = [
+        { id: 'hero', label: 'Hero (portada)', file: 'src/content/hero.json', path: ['image'] },
+        { id: 'about', label: 'Sobre mí', file: 'src/content/about.json', path: ['photoMain'] },
+        { id: 'service-social', label: 'Servicios — Maquillaje social', file: 'src/content/services.json', path: ['items', 0, 'image'] },
+        { id: 'service-infantil', label: 'Servicios — Fiestas infantiles', file: 'src/content/services.json', path: ['items', 1, 'image'] },
+        { id: 'service-caracterizacion', label: 'Servicios — Caracterización', file: 'src/content/services.json', path: ['items', 2, 'image'] },
+        { id: 'portfolio-1', label: 'Portafolio — Foto 1', file: 'src/content/portfolio.json', path: ['items', 0, 'image'] },
+        { id: 'portfolio-2', label: 'Portafolio — Foto 2', file: 'src/content/portfolio.json', path: ['items', 1, 'image'] },
+        { id: 'portfolio-3', label: 'Portafolio — Foto 3', file: 'src/content/portfolio.json', path: ['items', 2, 'image'] },
+        { id: 'portfolio-4', label: 'Portafolio — Foto 4', file: 'src/content/portfolio.json', path: ['items', 3, 'image'] },
+        { id: 'portfolio-5', label: 'Portafolio — Foto 5', file: 'src/content/portfolio.json', path: ['items', 4, 'image'] },
+        { id: 'portfolio-6', label: 'Portafolio — Foto 6', file: 'src/content/portfolio.json', path: ['items', 5, 'image'] },
+        { id: 'portfolio-7', label: 'Portafolio — Foto 7', file: 'src/content/portfolio.json', path: ['items', 6, 'image'] },
+        { id: 'portfolio-8', label: 'Portafolio — Foto 8', file: 'src/content/portfolio.json', path: ['items', 7, 'image'] },
+        { id: 'portfolio-9', label: 'Portafolio — Foto 9', file: 'src/content/portfolio.json', path: ['items', 8, 'image'] },
+        { id: 'portfolio-10', label: 'Portafolio — Foto 10', file: 'src/content/portfolio.json', path: ['items', 9, 'image'] },
+      ]
+
+      const walk = (obj, path) => path.reduce((node, key) => (node == null ? node : node[key]), obj)
+
+      const utf8ToBase64 = (str) => {
+        const bytes = new TextEncoder().encode(str)
+        let binary = ''
+        bytes.forEach((byte) => {
+          binary += String.fromCharCode(byte)
+        })
+        return btoa(binary)
+      }
+
+      const base64ToUtf8 = (base64) => {
+        const binary = atob(base64.replace(/\n/g, ''))
+        const bytes = Uint8Array.from(binary, (char) => char.charCodeAt(0))
+        return new TextDecoder('utf-8').decode(bytes)
+      }
+
+      const fileToBase64 = (file) =>
+        new Promise((resolve, reject) => {
+          const reader = new FileReader()
+          reader.onload = () => resolve(reader.result.split(',')[1])
+          reader.onerror = reject
+          reader.readAsDataURL(file)
+        })
+
+      function getToken() {
+        return localStorage.getItem(TOKEN_KEY) || ''
+      }
+
+      function setStatus(el, message, kind) {
+        el.textContent = message
+        el.className = 'slot-status' + (kind ? ' ' + kind : '')
+      }
+
+      async function fetchJson(file) {
+        const response = await fetch(RAW_BASE + file + '?t=' + Date.now())
+        if (!response.ok) throw new Error('No se pudo leer ' + file)
+        return response.json()
+      }
+
+      async function getFileSha(file, token) {
+        const response = await fetch(API_BASE + file + '?ref=' + BRANCH, {
+          headers: { Authorization: 'Bearer ' + token, Accept: 'application/vnd.github+json' },
+        })
+        if (!response.ok) throw new Error('No se pudo leer ' + file + ' desde GitHub (revisa el token).')
+        const data = await response.json()
+        return { sha: data.sha, content: JSON.parse(base64ToUtf8(data.content)) }
+      }
+
+      async function putFile(file, token, base64Content, sha, message) {
+        const body = { message, content: base64Content, branch: BRANCH }
+        if (sha) body.sha = sha
+        const response = await fetch(API_BASE + file, {
+          method: 'PUT',
+          headers: {
+            Authorization: 'Bearer ' + token,
+            Accept: 'application/vnd.github+json',
+            'Content-Type': 'application/json',
+          },
+          body: JSON.stringify(body),
+        })
+        if (!response.ok) {
+          const errText = await response.text().catch(() => '')
+          throw new Error('GitHub rechazó el cambio en ' + file + ' (' + response.status + '). ' + errText.slice(0, 200))
+        }
+        return response.json()
+      }
+
+      async function uploadPhoto(slot, file, statusEl, previewImg) {
+        const token = getToken()
+        if (!token) {
+          setStatus(statusEl, 'Primero guarda tu token de GitHub arriba.', 'error')
+          return
+        }
+
+        setStatus(statusEl, 'Subiendo…', '')
+
+        try {
+          const ext = (file.name.split('.').pop() || 'jpg').toLowerCase()
+          const imagePath = `public/images/uploads/${slot.id}-${Date.now()}.${ext}`
+          const imageBase64 = await fileToBase64(file)
+
+          await putFile(imagePath, token, imageBase64, null, `Subir foto: ${slot.label}`)
+
+          const { sha, content } = await getFileSha(slot.file, token)
+          const target = walk(content, slot.path)
+          if (!target) throw new Error('No se encontró el campo esperado en ' + slot.file)
+          target.src = '/JOSI/' + imagePath.replace(/^public\//, '')
+
+          const newJsonBase64 = utf8ToBase64(JSON.stringify(content, null, 2) + '\n')
+          await putFile(slot.file, token, newJsonBase64, sha, `Actualizar foto: ${slot.label}`)
+
+          previewImg.src = URL.createObjectURL(file)
+          setStatus(statusEl, 'Listo — se publicará en unos minutos.', 'ok')
+        } catch (error) {
+          setStatus(statusEl, error.message || 'Ocurrió un error al subir la foto.', 'error')
+        }
+      }
+
+      function renderSlot(slot) {
+        const row = document.createElement('div')
+        row.className = 'slot'
+
+        const previewWrap = document.createElement('div')
+        const previewImg = document.createElement('img')
+        previewImg.className = 'thumb'
+        previewImg.alt = slot.label
+        previewImg.style.display = 'none'
+        const emptyThumb = document.createElement('div')
+        emptyThumb.className = 'thumb-empty'
+        emptyThumb.textContent = 'Sin foto'
+        previewWrap.appendChild(emptyThumb)
+        previewWrap.appendChild(previewImg)
+
+        const info = document.createElement('div')
+        const labelEl = document.createElement('p')
+        labelEl.className = 'slot-label'
+        labelEl.textContent = slot.label
+        const altEl = document.createElement('p')
+        altEl.className = 'slot-alt'
+        info.appendChild(labelEl)
+        info.appendChild(altEl)
+
+        const actions = document.createElement('div')
+        actions.className = 'slot-actions'
+        const fileInput = document.createElement('input')
+        fileInput.type = 'file'
+        fileInput.accept = 'image/*'
+        const uploadBtn = document.createElement('button')
+        uploadBtn.className = 'secondary'
+        uploadBtn.textContent = 'Subir'
+        const statusEl = document.createElement('p')
+        statusEl.className = 'slot-status'
+        actions.appendChild(fileInput)
+        actions.appendChild(uploadBtn)
+        actions.appendChild(statusEl)
+
+        uploadBtn.addEventListener('click', () => {
+          const file = fileInput.files[0]
+          if (!file) {
+            setStatus(statusEl, 'Elige una imagen primero.', 'error')
+            return
+          }
+          uploadPhoto(slot, file, statusEl, previewImg)
+        })
+
+        row.appendChild(previewWrap)
+        row.appendChild(info)
+        row.appendChild(actions)
+
+        fetchJson(slot.file)
+          .then((data) => {
+            const target = walk(data, slot.path)
+            if (target && target.src) {
+              previewImg.src = SITE_ORIGIN + target.src
+              previewImg.style.display = 'block'
+              emptyThumb.style.display = 'none'
+            }
+            altEl.textContent = target && target.alt ? target.alt : ''
+          })
+          .catch(() => {
+            altEl.textContent = 'No se pudo leer el estado actual.'
+          })
+
+        return row
+      }
+
+      function renderSlots() {
+        const container = document.getElementById('slots')
+        container.innerHTML = ''
+        SLOTS.forEach((slot) => container.appendChild(renderSlot(slot)))
+        container.classList.add('ready')
+      }
+
+      function updateTokenStatus() {
+        const status = document.getElementById('token-status')
+        status.textContent = getToken() ? 'Token guardado en este navegador.' : 'Todavía no hay un token guardado.'
+      }
+
+      document.getElementById('save-token').addEventListener('click', () => {
+        const value = document.getElementById('token-input').value.trim()
+        if (!value) return
+        localStorage.setItem(TOKEN_KEY, value)
+        document.getElementById('token-input').value = ''
+        updateTokenStatus()
+      })
+
+      updateTokenStatus()
+      renderSlots()
+    </script>
   </body>
 </html>
