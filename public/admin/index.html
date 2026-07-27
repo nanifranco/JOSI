@@ -463,12 +463,22 @@
 
       // Dos escrituras casi al mismo tiempo (dos fotos, o una foto y un "Centrar") pueden
       // pisarse si ambas leen el mismo JSON antes de que la primera termine de guardarlo.
-      // Esta cola obliga a que todas las escrituras a GitHub se hagan una por una, nunca
-      // en paralelo, sin importar en qué botón se haya hecho clic.
-      let writeQueue = Promise.resolve()
+      // Esto pasaba incluso hacienda una tarea, refrescando, y haciendo otra — porque el
+      // panel puede quedar abierto en más de una pestaña/ventana a la vez, y una simple
+      // cola en memoria de JS no se comparte entre pestañas. Web Locks sí es compartido
+      // por el navegador entre todas las pestañas del mismo sitio, así que todas las
+      // escrituras a GitHub (sin importar en qué pestaña o botón se hayan iniciado) se
+      // hacen una por una de verdad.
+      const WRITE_LOCK_NAME = 'josi-admin-github-write'
+      let fallbackQueue = Promise.resolve()
+
       function enqueueWrite(task) {
-        const run = writeQueue.then(task, task)
-        writeQueue = run.catch(() => {})
+        if (navigator.locks && navigator.locks.request) {
+          return navigator.locks.request(WRITE_LOCK_NAME, task)
+        }
+        // Respaldo para navegadores sin Web Locks API: al menos serializa dentro de esta pestaña.
+        const run = fallbackQueue.then(task, task)
+        fallbackQueue = run.catch(() => {})
         return run
       }
 
