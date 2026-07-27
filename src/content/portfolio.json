@@ -112,17 +112,6 @@
       }
     },
     {
-      "id": "p-1785180082047",
-      "category": "caracterizacion",
-      "orientation": "vertical",
-      "size": "chica",
-      "image": {
-        "src": "",
-        "alt": "",
-        "label": "Caracterización"
-      }
-    },
-    {
       "id": "p-1785180177572",
       "category": "caracterizacion",
       "orientation": "vertical",
