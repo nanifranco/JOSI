@@ -123,13 +123,6 @@ collections:
           - { label: "Título", name: "title", widget: "string" }
           - { label: "Texto", name: "text", widget: "text" }
           - { label: "Texto del botón", name: "cta", widget: "string" }
-          - label: "Fotografía"
-            name: "image"
-            widget: "object"
-            fields:
-              - { label: "Imagen", name: "src", widget: "image", required: false }
-              - { label: "Texto alternativo (accesibilidad)", name: "alt", widget: "string" }
-              - { label: "Etiqueta interna", name: "label", widget: "string" }
 
       - file: "src/content/booking-process.json"
         label: "Cómo funciona"
