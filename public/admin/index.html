@@ -228,15 +228,9 @@
         cursor: grabbing;
       }
       .crop-stage img {
-        display: block;
-        width: 100%;
-        height: auto;
-        pointer-events: none;
-      }
-      .crop-window {
         position: absolute;
-        border: 2px solid var(--champagne);
-        box-shadow: 0 0 0 9999px rgba(58, 46, 44, 0.55);
+        top: 0;
+        left: 0;
         pointer-events: none;
       }
       .position-actions {
@@ -470,10 +464,10 @@
       }
 
       /**
-       * Panel para elegir qué parte de la foto entra en su espacio real. Muestra la foto
-       * completa con un recuadro superpuesto del mismo tamaño/forma que tendrá en el sitio
-       * (según slot.aspect) — igual que aplicaría object-fit: cover — y se arrastra ese
-       * recuadro para elegir qué parte queda visible.
+       * Panel para elegir qué parte de la foto entra en su espacio real. El recuadro
+       * (stage) tiene la forma exacta del cuadrito donde se verá en el sitio (según
+       * slot.aspect) y se queda fijo; la foto se arrastra por debajo, igual que un
+       * editor de foto de perfil — sin marcas ni puntos superpuestos.
        */
       function createPositionPanel(slot) {
         const panel = document.createElement('div')
@@ -481,17 +475,16 @@
 
         const stage = document.createElement('div')
         stage.className = 'crop-stage'
+        const aspect = slot.aspect || 1
+        stage.style.aspectRatio = String(aspect)
         const img = document.createElement('img')
-        const windowEl = document.createElement('div')
-        windowEl.className = 'crop-window'
         stage.appendChild(img)
-        stage.appendChild(windowEl)
 
         const actions = document.createElement('div')
         actions.className = 'position-actions'
         const hint = document.createElement('p')
         hint.className = 'position-hint'
-        hint.textContent = 'Arrastra el recuadro — es el tamaño real donde se verá la foto — para elegir qué parte queda dentro.'
+        hint.textContent = 'Arrastra la foto — el recuadro es el tamaño real donde se vera en el sitio.'
         const saveBtn = document.createElement('button')
         saveBtn.className = 'secondary'
         saveBtn.textContent = 'Guardar posición'
@@ -510,40 +503,39 @@
         panel.appendChild(actions)
 
         let pending = { x: 50, y: 50 }
-        const aspect = slot.aspect || 1
 
-        function cropWindowSize() {
+        function coverSize() {
           const stageRect = stage.getBoundingClientRect()
-          const W = stageRect.width
-          const H = stageRect.height
+          const stageW = stageRect.width
+          const stageH = stageRect.height
           const naturalW = img.naturalWidth
           const naturalH = img.naturalHeight
-          if (!W || !H || !naturalW || !naturalH) return null
+          if (!stageW || !stageH || !naturalW || !naturalH) return null
           const naturalAspect = naturalW / naturalH
-          let winW
-          let winH
+          let imgW
+          let imgH
           if (naturalAspect > aspect) {
-            winH = H
-            winW = H * aspect
+            imgH = stageH
+            imgW = stageH * naturalAspect
           } else {
-            winW = W
-            winH = W / aspect
+            imgW = stageW
+            imgH = stageW / naturalAspect
           }
-          return { W, H, winW, winH }
+          return { stageW, stageH, imgW, imgH }
         }
 
         function layout() {
-          const size = cropWindowSize()
+          const size = coverSize()
           if (!size) return
-          const { W, H, winW, winH } = size
-          const maxLeft = W - winW
-          const maxTop = H - winH
-          const left = maxLeft * (pending.x / 100)
-          const top = maxTop * (pending.y / 100)
-          windowEl.style.width = winW + 'px'
-          windowEl.style.height = winH + 'px'
-          windowEl.style.left = left + 'px'
-          windowEl.style.top = top + 'px'
+          const { stageW, stageH, imgW, imgH } = size
+          const rangeX = imgW - stageW
+          const rangeY = imgH - stageH
+          const left = -rangeX * (pending.x / 100)
+          const top = -rangeY * (pending.y / 100)
+          img.style.width = imgW + 'px'
+          img.style.height = imgH + 'px'
+          img.style.left = left + 'px'
+          img.style.top = top + 'px'
         }
 
         function setPosition(x, y) {
@@ -557,7 +549,7 @@
         let dragStart = null
 
         stage.addEventListener('pointerdown', (event) => {
-          const size = cropWindowSize()
+          const size = coverSize()
           if (!size) return
           dragging = true
           stage.classList.add('dragging')
@@ -567,14 +559,14 @@
 
         stage.addEventListener('pointermove', (event) => {
           if (!dragging) return
-          const size = cropWindowSize()
+          const size = coverSize()
           if (!size) return
-          const maxLeft = size.W - size.winW
-          const maxTop = size.H - size.winH
+          const rangeX = size.imgW - size.stageW
+          const rangeY = size.imgH - size.stageH
           const dx = event.clientX - dragStart.x
           const dy = event.clientY - dragStart.y
-          const dxPercent = maxLeft > 0 ? (dx / maxLeft) * 100 : 0
-          const dyPercent = maxTop > 0 ? (dy / maxTop) * 100 : 0
+          const dxPercent = rangeX > 0 ? -(dx / rangeX) * 100 : 0
+          const dyPercent = rangeY > 0 ? -(dy / rangeY) * 100 : 0
           setPosition(dragStart.pending.x + dxPercent, dragStart.pending.y + dyPercent)
         })
 

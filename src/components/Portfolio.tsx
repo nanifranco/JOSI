@@ -60,7 +60,7 @@ export function Portfolio() {
           </div>
         </Reveal>
 
-        <div className="mt-14 columns-1 gap-4 sm:columns-2 lg:columns-3 xl:columns-4">
+        <div className="mt-14 columns-1 gap-4 sm:columns-3 lg:columns-4 xl:columns-5">
           {items.map((item, index) => (
             <button
               key={item.id}
