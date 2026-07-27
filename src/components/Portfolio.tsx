@@ -60,7 +60,7 @@ export function Portfolio() {
           </div>
         </Reveal>
 
-        <div className="mt-14 columns-1 gap-5 sm:columns-2 lg:columns-3">
+        <div className="mt-14 columns-1 gap-5 sm:columns-2 lg:columns-3 xl:columns-4">
           {items.map((item, index) => (
             <button
               key={item.id}
@@ -106,8 +106,8 @@ export function Portfolio() {
             <ChevronLeft size={30} strokeWidth={1.1} />
           </button>
 
-          <div className="max-h-[80vh] w-full max-w-2xl">
-            <div className="aspect-[3/4] max-h-[80vh] w-full">
+          <div className="max-h-[70vh] w-full max-w-xl">
+            <div className="aspect-[3/4] max-h-[70vh] w-full">
               <PlaceholderImage slot={activeItem.image} tone="coffee" className="h-full w-full" />
             </div>
             <p className="mt-4 text-center font-sans text-xs uppercase tracking-[0.2em] text-cream/60">
