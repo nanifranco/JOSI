@@ -353,8 +353,8 @@
       // recuadro de "Centrar" muestre el tamaño real donde se vera la foto en el sitio.
       function aspectForOrientation(orientation, size) {
         const big = size === 'grande'
-        if (orientation === 'horizontal') return big ? 1 : 4 / 3
-        return big ? 3 / 5 : 3 / 4
+        if (orientation === 'horizontal') return big ? 6 / 5 : 4 / 3
+        return big ? 2 / 3 : 3 / 4
       }
 
       /** "slot" cuyo target es la foto (image) de un item del portafolio, buscado por id. */

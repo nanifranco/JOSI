@@ -14,8 +14,8 @@ const CATEGORY_PRIORITY: PortfolioCategory[] = ['caracterizacion', 'infantil', '
 /** "Grande" ocupa más alto en su columna de la cuadrícula; "chica" (por defecto) es más compacta. */
 function aspectClassFor(item: PortfolioItem) {
   const big = item.size === 'grande'
-  if (item.orientation === 'vertical') return big ? 'aspect-[3/5]' : 'aspect-[3/4]'
-  return big ? 'aspect-[1/1]' : 'aspect-[4/3]'
+  if (item.orientation === 'vertical') return big ? 'aspect-[2/3]' : 'aspect-[3/4]'
+  return big ? 'aspect-[6/5]' : 'aspect-[4/3]'
 }
 
 // La cuadrícula usa columnas tipo mosaico (columns-N): el navegador llena cada
