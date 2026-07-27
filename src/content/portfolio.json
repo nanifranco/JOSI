@@ -4,61 +4,101 @@
       "id": "p1",
       "category": "infantil",
       "orientation": "vertical",
-      "image": { "src": "", "alt": "Pinta caritas en fiesta infantil", "label": "Infantil" }
+      "image": {
+        "src": "",
+        "alt": "Pinta caritas en fiesta infantil",
+        "label": "Infantil"
+      }
     },
     {
       "id": "p2",
       "category": "social",
       "orientation": "horizontal",
-      "image": { "src": "", "alt": "Maquillaje social con acabado luminoso", "label": "Social" }
+      "image": {
+        "src": "",
+        "alt": "Maquillaje social con acabado luminoso",
+        "label": "Social"
+      }
     },
     {
       "id": "p3",
       "category": "social",
       "orientation": "vertical",
-      "image": { "src": "", "alt": "Maquillaje social de alto contraste", "label": "Social" }
+      "image": {
+        "src": "",
+        "alt": "Maquillaje social de alto contraste",
+        "label": "Social"
+      }
     },
     {
       "id": "p4",
       "category": "caracterizacion",
       "orientation": "horizontal",
-      "image": { "src": "", "alt": "Maquillaje de caracterización para una celebración especial", "label": "Caracterización" }
+      "image": {
+        "src": "",
+        "alt": "Maquillaje de caracterización para una celebración especial",
+        "label": "Caracterización"
+      }
     },
     {
       "id": "p5",
       "category": "infantil",
       "orientation": "horizontal",
-      "image": { "src": "", "alt": "Diseño de pinta caritas temático", "label": "Infantil" }
+      "image": {
+        "src": "",
+        "alt": "Diseño de pinta caritas temático",
+        "label": "Infantil"
+      }
     },
     {
       "id": "p6",
       "category": "social",
       "orientation": "vertical",
-      "image": { "src": "", "alt": "Maquillaje social diurno", "label": "Social" }
+      "image": {
+        "src": "",
+        "alt": "Maquillaje social diurno",
+        "label": "Social"
+      }
     },
     {
       "id": "p7",
       "category": "caracterizacion",
       "orientation": "vertical",
-      "image": { "src": "", "alt": "Maquillaje de caracterización estilo fantasía", "label": "Caracterización" }
+      "image": {
+        "src": "",
+        "alt": "Maquillaje de caracterización estilo fantasía",
+        "label": "Caracterización"
+      }
     },
     {
       "id": "p8",
       "category": "caracterizacion",
       "orientation": "horizontal",
-      "image": { "src": "", "alt": "Maquillaje de caracterización", "label": "Caracterización" }
+      "image": {
+        "src": "/JOSI/images/uploads/portfolio-8-1785158151733.png",
+        "alt": "Maquillaje de caracterización",
+        "label": "Caracterización"
+      }
     },
     {
       "id": "p9",
       "category": "infantil",
       "orientation": "vertical",
-      "image": { "src": "", "alt": "Detalle de pinta caritas en fiesta infantil", "label": "Infantil" }
+      "image": {
+        "src": "",
+        "alt": "Detalle de pinta caritas en fiesta infantil",
+        "label": "Infantil"
+      }
     },
     {
       "id": "p10",
       "category": "social",
       "orientation": "horizontal",
-      "image": { "src": "", "alt": "Maquillaje social para graduación", "label": "Social" }
+      "image": {
+        "src": "",
+        "alt": "Maquillaje social para graduación",
+        "label": "Social"
+      }
     }
   ]
 }
