@@ -11,11 +11,11 @@ type Filter = 'todos' | PortfolioCategory
 // en pareja si el conteo obliga a repetir una categoría seguida.
 const CATEGORY_PRIORITY: PortfolioCategory[] = ['caracterizacion', 'infantil', 'social']
 
-/** "Grande" ocupa más alto en su columna de la cuadrícula; "chica" (por defecto) es más compacta. */
+// El mismo tamaño (chica/grande) se ve igual sin importar si la foto original es vertical
+// u horizontal — antes una vertical "chica" salía bastante más alta que una horizontal
+// "chica" solo por su orientación, lo que hacía parecer que "chica" a veces era grande.
 function aspectClassFor(item: PortfolioItem) {
-  const big = item.size === 'grande'
-  if (item.orientation === 'vertical') return big ? 'aspect-[2/3]' : 'aspect-[3/4]'
-  return big ? 'aspect-[6/5]' : 'aspect-[4/3]'
+  return item.size === 'grande' ? 'aspect-[1/1]' : 'aspect-[4/3]'
 }
 
 // La cuadrícula usa columnas tipo mosaico (columns-N): el navegador llena cada
