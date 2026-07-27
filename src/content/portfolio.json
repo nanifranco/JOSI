@@ -7,7 +7,8 @@
       "image": {
         "src": "/JOSI/images/uploads/portfolio-3-1785161820626.jpeg",
         "alt": "",
-        "label": "Hola"
+        "label": "Caracterización",
+        "objectPosition": "50% 39%"
       }
     },
     {
@@ -17,7 +18,8 @@
       "image": {
         "src": "/JOSI/images/uploads/portfolio-2-1785160691470.jpeg",
         "alt": "",
-        "label": "Social"
+        "label": "Social",
+        "objectPosition": "44% 50%"
       }
     },
     {
@@ -27,7 +29,8 @@
       "image": {
         "src": "/JOSI/images/uploads/portfolio-1-1785160557703.png",
         "alt": "",
-        "label": "Infantil"
+        "label": "Infantil",
+        "objectPosition": "50% 0%"
       }
     },
     {
@@ -37,7 +40,8 @@
       "image": {
         "src": "/JOSI/images/uploads/portfolio-4-1785161405010.jpeg",
         "alt": "",
-        "label": "Caracterización"
+        "label": "Caracterización",
+        "objectPosition": "50% 43%"
       }
     },
     {
@@ -47,7 +51,8 @@
       "image": {
         "src": "/JOSI/images/uploads/p5-1785167247394.png",
         "alt": "",
-        "label": "Infantil"
+        "label": "Infantil",
+        "objectPosition": "50% 31%"
       }
     },
     {
@@ -67,7 +72,8 @@
       "image": {
         "src": "/JOSI/images/uploads/portfolio-7-1785161233818.jpg",
         "alt": "",
-        "label": "Caracterización"
+        "label": "Caracterización",
+        "objectPosition": "50% 93%"
       }
     },
     {
@@ -87,7 +93,8 @@
       "image": {
         "src": "/JOSI/images/uploads/portfolio-9-1785161038251.png",
         "alt": "",
-        "label": "Infantil n"
+        "label": "Infantil n",
+        "objectPosition": "50% 9%"
       }
     },
     {
@@ -97,7 +104,8 @@
       "image": {
         "src": "/JOSI/images/uploads/p12-1785167966463.png",
         "alt": "",
-        "label": "Infantil"
+        "label": "Infantil",
+        "objectPosition": "50% 23%"
       },
       "size": "chica"
     },
@@ -108,7 +116,19 @@
       "image": {
         "src": "/JOSI/images/uploads/p-1785179165019-1785179185472.jpeg",
         "alt": "",
-        "label": "Caracterización"
+        "label": "Caracterización",
+        "objectPosition": "50% 27%"
+      }
+    },
+    {
+      "id": "p-1785185129161",
+      "category": "infantil",
+      "orientation": "vertical",
+      "size": "chica",
+      "image": {
+        "src": "/JOSI/images/uploads/p-1785185129161-1785185138292.png",
+        "alt": "",
+        "label": "Infantil"
       }
     }
   ]
