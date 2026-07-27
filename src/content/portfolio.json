@@ -109,6 +109,16 @@
         "alt": "",
         "label": "Caracterización"
       }
+    },
+    {
+      "id": "p-1785179258592",
+      "category": "caracterizacion",
+      "orientation": "vertical",
+      "image": {
+        "src": "",
+        "alt": "",
+        "label": "Caracterización"
+      }
     }
   ]
 }
