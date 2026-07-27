@@ -76,7 +76,15 @@ export function BookingForm() {
     } else if (form.eventDate < minBookableDateIso()) {
       nextErrors.eventDate = 'Elige una fecha con al menos 24 horas de anticipación.'
     }
-    if (!form.eventTime) nextErrors.eventTime = 'Selecciona la hora del evento.'
+    if (!form.eventTime) {
+      nextErrors.eventTime = 'Selecciona la hora del evento.'
+    } else if (form.eventDate && !nextErrors.eventDate) {
+      const eventDateTime = new Date(`${form.eventDate}T${form.eventTime}`)
+      const minDateTime = new Date(Date.now() + 24 * 60 * 60 * 1000)
+      if (eventDateTime < minDateTime) {
+        nextErrors.eventTime = 'Elige una hora con al menos 24 horas de anticipación desde este momento.'
+      }
+    }
     if (!form.guestCount.trim()) nextErrors.guestCount = 'Indica el número de personas.'
     if (!form.serviceMode) nextErrors.serviceMode = 'Selecciona dónde prefieres el servicio.'
     if (form.serviceMode === 'domicilio' && !form.location.trim()) {
@@ -194,8 +202,11 @@ export function BookingForm() {
                   value={form.eventTime}
                   onChange={(e) => update('eventTime', e.target.value)}
                   aria-invalid={Boolean(errors.eventTime)}
-                  aria-describedby={errors.eventTime ? 'eventTime-error' : undefined}
+                  aria-describedby={errors.eventTime ? 'eventTime-error' : 'eventTime-hint'}
                 />
+                <p id="eventTime-hint" className="mt-2 font-sans text-xs text-taupe/70">
+                  Si tu evento es mañana, la hora debe tener al menos 24 horas de anticipación desde este momento.
+                </p>
                 {errors.eventTime && (
                   <p id="eventTime-error" className="mt-2 font-sans text-xs font-medium text-coffee">
                     {errors.eventTime}
