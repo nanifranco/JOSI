@@ -46,24 +46,6 @@
         margin: 0 0 32px;
         max-width: 56ch;
       }
-      details {
-        border: 1px solid var(--border);
-        padding: 16px 20px;
-        margin-bottom: 32px;
-        font-size: 0.88rem;
-        color: var(--taupe);
-      }
-      details summary {
-        cursor: pointer;
-        color: var(--coffee);
-        font-weight: 500;
-      }
-      details ol {
-        padding-left: 20px;
-      }
-      details a {
-        color: var(--coffee);
-      }
       .token-box {
         border: 1px solid var(--border);
         padding: 20px;
@@ -200,24 +182,13 @@
         automáticamente. Este panel solo sube fotos — los textos y precios se editan directamente en el código.
       </p>
 
-      <details>
-        <summary>¿Cómo consigo un token de GitHub?</summary>
-        <ol>
-          <li>Entra a <a href="https://github.com/settings/tokens?type=beta" target="_blank" rel="noopener">github.com/settings/tokens</a> con tu cuenta.</li>
-          <li>Da clic en "Generate new token" (fine-grained).</li>
-          <li>En "Repository access" elige "Only select repositories" y selecciona <strong>nanifranco/JOSI</strong>.</li>
-          <li>En "Permissions" busca "Contents" y ponlo en "Read and write".</li>
-          <li>Genera el token y cópialo — solo se muestra una vez.</li>
-          <li>Pégalo abajo. Se queda guardado solo en este navegador, nunca se comparte con nadie más.</li>
-        </ol>
-      </details>
-
       <div class="token-box">
         <label for="token-input">Token de GitHub</label>
-        <div class="token-row">
+        <div class="token-row" id="token-row">
           <input id="token-input" type="password" placeholder="github_pat_..." autocomplete="off" />
           <button id="save-token">Guardar</button>
         </div>
+        <button id="change-token" class="secondary" style="display: none; margin-top: 4px">Cambiar token</button>
         <p class="token-status" id="token-status"></p>
       </div>
 
@@ -427,7 +398,12 @@
 
       function updateTokenStatus() {
         const status = document.getElementById('token-status')
-        status.textContent = getToken() ? 'Token guardado en este navegador.' : 'Todavía no hay un token guardado.'
+        const tokenRow = document.getElementById('token-row')
+        const changeBtn = document.getElementById('change-token')
+        const hasToken = Boolean(getToken())
+        status.textContent = hasToken ? 'Token guardado en este navegador.' : 'Todavía no hay un token guardado.'
+        tokenRow.style.display = hasToken ? 'none' : 'flex'
+        changeBtn.style.display = hasToken ? 'inline-block' : 'none'
       }
 
       document.getElementById('save-token').addEventListener('click', () => {
@@ -436,6 +412,11 @@
         localStorage.setItem(TOKEN_KEY, value)
         document.getElementById('token-input').value = ''
         updateTokenStatus()
+      })
+
+      document.getElementById('change-token').addEventListener('click', () => {
+        document.getElementById('token-row').style.display = 'flex'
+        document.getElementById('change-token').style.display = 'none'
       })
 
       updateTokenStatus()
