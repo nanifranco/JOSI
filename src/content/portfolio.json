@@ -119,17 +119,6 @@
         "label": "Caracterización",
         "objectPosition": "50% 27%"
       }
-    },
-    {
-      "id": "p-1785185129161",
-      "category": "infantil",
-      "orientation": "vertical",
-      "size": "chica",
-      "image": {
-        "src": "/JOSI/images/uploads/p-1785185129161-1785185138292.png",
-        "alt": "",
-        "label": "Infantil"
-      }
     }
   ]
 }
