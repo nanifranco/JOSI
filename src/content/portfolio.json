@@ -28,7 +28,8 @@
       "image": {
         "src": "/JOSI/images/uploads/portfolio-1-1785160557703.png",
         "alt": "",
-        "label": "Infantil"
+        "label": "Infantil",
+        "objectPosition": "50% 0%"
       }
     },
     {
