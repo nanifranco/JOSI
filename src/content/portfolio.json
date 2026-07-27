@@ -199,6 +199,16 @@
         "alt": "",
         "label": "Social"
       }
+    },
+    {
+      "id": "p-1785166536326",
+      "category": "caracterizacion",
+      "orientation": "vertical",
+      "image": {
+        "src": "",
+        "alt": "",
+        "label": "Caracterización"
+      }
     }
   ]
 }
