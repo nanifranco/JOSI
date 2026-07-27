@@ -1,10 +1,15 @@
-import { useState, type FormEvent } from 'react'
-import { booking, onSite } from '../config/site'
+import { lazy, Suspense, useState, type FormEvent } from 'react'
+import { booking } from '../config/site'
 import { buildWhatsappMessage, openWhatsapp, type BookingFormData } from '../lib/whatsapp'
-import { distanceKm, geocodeAddress, WORK_ZONE_CENTER, WORK_ZONE_RADIUS_KM } from '../lib/geocode'
+import { distanceKm, geocodeAddress, WORK_ZONE_CENTER, WORK_ZONE_RADIUS_KM, type Coordinates } from '../lib/geocode'
 import { CtaButton } from './Cta'
 import { DatePicker } from './DatePicker'
 import { Reveal } from './Reveal'
+
+// Leaflet pesa bastante (~150 KB) — se carga solo cuando de verdad hace falta
+// mostrar el mapa (alguien eligió "a domicilio" y su dirección ya se verificó),
+// no en cada visita al sitio.
+const WorkZoneMap = lazy(() => import('./WorkZoneMap').then((mod) => ({ default: mod.WorkZoneMap })))
 
 const emptyForm: BookingFormData = {
   fullName: '',
@@ -65,11 +70,15 @@ export function BookingForm() {
   const [confirmation, setConfirmation] = useState(false)
   const [zoneCheck, setZoneCheck] = useState<ZoneCheck>('idle')
   const [zoneCheckedValue, setZoneCheckedValue] = useState('')
+  const [addressCoords, setAddressCoords] = useState<Coordinates | null>(null)
 
   const update = <K extends keyof BookingFormData>(key: K, value: BookingFormData[K]) => {
     setForm((prev) => ({ ...prev, [key]: value }))
     setErrors((prev) => ({ ...prev, [key]: undefined }))
-    if (key === 'location') setZoneCheck('idle')
+    if (key === 'location') {
+      setZoneCheck('idle')
+      setAddressCoords(null)
+    }
   }
 
   const handleEventDateChange = (value: string) => {
@@ -95,9 +104,11 @@ export function BookingForm() {
     const coords = await geocodeAddress(`${address}, Ciudad de México`)
     if (!coords) {
       setZoneCheck('unknown')
+      setAddressCoords(null)
       return
     }
 
+    setAddressCoords(coords)
     const distance = distanceKm(WORK_ZONE_CENTER, coords)
     setZoneCheck(distance <= WORK_ZONE_RADIUS_KM ? 'in-zone' : 'out-of-zone')
   }
@@ -326,15 +337,6 @@ export function BookingForm() {
                     A domicilio siempre tiene un costo adicional por traslado, sin importar la zona — te lo confirmo
                     por WhatsApp según la distancia.
                   </p>
-                  <div className="mb-4 aspect-[16/9] w-full max-w-sm border border-coffee/10">
-                    <iframe
-                      title="Zona general de trabajo (sin dirección exacta)"
-                      src={`https://maps.google.com/maps?q=${encodeURIComponent(onSite.mapQuery)}&z=12&output=embed`}
-                      className="h-full w-full grayscale-[15%]"
-                      loading="lazy"
-                      referrerPolicy="no-referrer-when-downgrade"
-                    />
-                  </div>
 
                   <label htmlFor="location" className={labelClasses}>
                     Dirección del servicio *
@@ -364,6 +366,18 @@ export function BookingForm() {
                       Parece que tu dirección está fuera de mi zona de trabajo habitual. Escríbeme directamente por
                       WhatsApp para ver si es posible cubrir tu evento.
                     </p>
+                  )}
+                  {zoneCheck === 'in-zone' && (
+                    <p role="status" className="mt-2 font-sans text-xs font-medium text-coffee">
+                      Tu dirección cae dentro de mi zona de trabajo habitual.
+                    </p>
+                  )}
+                  {(zoneCheck === 'in-zone' || zoneCheck === 'out-of-zone') && (
+                    <div className="mt-3 aspect-[16/9] w-full max-w-sm border border-coffee/10">
+                      <Suspense fallback={<div className="h-full w-full bg-blush/40" />}>
+                        <WorkZoneMap addressCoords={addressCoords} inZone={zoneCheck === 'in-zone'} />
+                      </Suspense>
+                    </div>
                   )}
                   {errors.location && (
                     <p id="location-error" className="mt-2 font-sans text-xs font-medium text-coffee">
