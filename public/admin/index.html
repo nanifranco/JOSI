@@ -352,6 +352,9 @@
       // Debe coincidir exactamente con aspectClassFor() en Portfolio.tsx para que el
       // recuadro de "Centrar" muestre el tamaño real donde se vera la foto en el sitio.
       function aspectForOrientation(orientation, size) {
+        if (size === undefined) {
+          return orientation === 'vertical' ? 3 / 4 : 4 / 3
+        }
         return size === 'grande' ? 1 : 4 / 3
       }
 

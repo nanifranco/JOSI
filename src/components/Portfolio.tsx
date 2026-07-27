@@ -11,10 +11,15 @@ type Filter = 'todos' | PortfolioCategory
 // en pareja si el conteo obliga a repetir una categoría seguida.
 const CATEGORY_PRIORITY: PortfolioCategory[] = ['caracterizacion', 'infantil', 'social']
 
-// El mismo tamaño (chica/grande) se ve igual sin importar si la foto original es vertical
-// u horizontal — antes una vertical "chica" salía bastante más alta que una horizontal
-// "chica" solo por su orientación, lo que hacía parecer que "chica" a veces era grande.
+// Las fotos que ya existían antes de tener selector de tamaño (sin campo
+// `size`) conservan su tamaño original según orientación, para no cambiar
+// cómo se ven las fotos ya establecidas. Las fotos nuevas, que sí eligen
+// tamaño al agregarse, usan "chica"/"grande" sin importar la orientación
+// (tomando como referencia el tamaño de las Fotos 4 y 5).
 function aspectClassFor(item: PortfolioItem) {
+  if (item.size === undefined) {
+    return item.orientation === 'vertical' ? 'aspect-[3/4]' : 'aspect-[4/3]'
+  }
   return item.size === 'grande' ? 'aspect-[1/1]' : 'aspect-[4/3]'
 }
 
@@ -165,10 +170,18 @@ export function Portfolio() {
             <ChevronLeft size={30} strokeWidth={1.1} />
           </button>
 
-          <div className="max-h-[70vh] w-full max-w-xl">
-            <div className="aspect-[3/4] max-h-[70vh] w-full">
-              <PlaceholderImage slot={activeItem.image} tone="coffee" className="h-full w-full" />
-            </div>
+          <div className="flex max-h-[70vh] w-full max-w-3xl flex-col items-center">
+            {activeItem.image.src ? (
+              <img
+                src={activeItem.image.src}
+                alt={activeItem.image.label}
+                className="max-h-[70vh] w-auto max-w-full object-contain"
+              />
+            ) : (
+              <div className="aspect-[3/4] max-h-[70vh] w-full max-w-xl">
+                <PlaceholderImage slot={activeItem.image} tone="coffee" className="h-full w-full" />
+              </div>
+            )}
             <p className="mt-4 text-center font-sans text-xs uppercase tracking-[0.2em] text-cream/60">
               {activeItem.image.label}
             </p>
