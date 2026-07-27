@@ -54,6 +54,8 @@ export function BookingForm() {
     } else if (form.eventDate < minBookableDateIso()) {
       nextErrors.eventDate = 'Elige una fecha con al menos 24 horas de anticipación.'
     }
+    if (!form.eventTime) nextErrors.eventTime = 'Selecciona la hora del evento.'
+    if (!form.guestCount.trim()) nextErrors.guestCount = 'Indica el número de personas.'
     if (!form.serviceMode) nextErrors.serviceMode = 'Selecciona dónde prefieres el servicio.'
     if (form.serviceMode === 'domicilio' && !form.location.trim()) {
       nextErrors.location = 'Indica la dirección completa del servicio.'
@@ -161,7 +163,7 @@ export function BookingForm() {
 
               <div>
                 <label htmlFor="eventTime" className={labelClasses}>
-                  Hora
+                  Hora *
                 </label>
                 <input
                   id="eventTime"
@@ -169,12 +171,19 @@ export function BookingForm() {
                   className={fieldClasses}
                   value={form.eventTime}
                   onChange={(e) => update('eventTime', e.target.value)}
+                  aria-invalid={Boolean(errors.eventTime)}
+                  aria-describedby={errors.eventTime ? 'eventTime-error' : undefined}
                 />
+                {errors.eventTime && (
+                  <p id="eventTime-error" className="mt-2 font-sans text-xs font-medium text-coffee">
+                    {errors.eventTime}
+                  </p>
+                )}
               </div>
 
               <div>
                 <label htmlFor="guestCount" className={labelClasses}>
-                  Número de personas
+                  Número de personas *
                 </label>
                 <input
                   id="guestCount"
@@ -184,7 +193,14 @@ export function BookingForm() {
                   className={fieldClasses}
                   value={form.guestCount}
                   onChange={(e) => update('guestCount', e.target.value)}
+                  aria-invalid={Boolean(errors.guestCount)}
+                  aria-describedby={errors.guestCount ? 'guestCount-error' : undefined}
                 />
+                {errors.guestCount && (
+                  <p id="guestCount-error" className="mt-2 font-sans text-xs font-medium text-coffee">
+                    {errors.guestCount}
+                  </p>
+                )}
               </div>
 
               <div>

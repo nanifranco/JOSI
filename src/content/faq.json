@@ -2,19 +2,19 @@
   "items": [
     {
       "question": "¿Con cuánto tiempo debo reservar?",
-      "answer": "Como mínimo, con 24 horas de anticipación — el formulario de Agenda no permite seleccionar una fecha más próxima que esa. EDITAR: se recomienda reservar con más tiempo, especialmente para fechas de temporada alta como fines de semana y meses de graduaciones."
+      "answer": "Como mínimo, con 24 horas de anticipación — el formulario de Agenda no permite seleccionar una fecha más próxima que esa. Sin embargo, se recomienda reservar con más tiempo, especialmente en fechas de alta demanda como fines de semana y temporada de graduaciones."
     },
     {
       "question": "¿Trabajas a domicilio?",
-      "answer": "Sí, ofrezco servicio a domicilio (el costo varía según el trayecto) y también puedes agendar en sitio. EDITAR: confirmar zona de cobertura y costo de traslado según distancia."
+      "answer": "Sí, ofrezco servicio a domicilio (el costo varía según el trayecto) y también puedes agendar en mi espacio de trabajo. Escríbeme por WhatsApp para confirmar cobertura y costo de traslado según tu zona."
     },
     {
       "question": "¿Cómo se confirma una cita?",
-      "answer": "EDITAR: tu cita se confirma una vez que se acuerda la disponibilidad y se realiza el anticipo correspondiente."
+      "answer": "Tu cita se confirma una vez que se acuerda la disponibilidad por WhatsApp y se realiza el anticipo correspondiente."
     },
     {
       "question": "¿Es necesario realizar un anticipo?",
-      "answer": "Sí, se solicita un anticipo para apartar la fecha. Por el momento se recibe por transferencia bancaria — EDITAR: confirmar monto y datos bancarios que se comparten al confirmar disponibilidad."
+      "answer": "Sí, se solicita un anticipo para apartar la fecha. Por el momento se recibe por transferencia bancaria; el monto y los datos se comparten directamente al confirmar tu disponibilidad."
     },
     {
       "question": "¿Puedo mandarte referencias del maquillaje?",
@@ -22,15 +22,15 @@
     },
     {
       "question": "¿Cuánto dura el servicio?",
-      "answer": "EDITAR: la duración varía según el tipo de maquillaje y si incluye peinado o preparación de piel adicional."
+      "answer": "La duración varía según el tipo de maquillaje solicitado y si incluye peinado o preparación de piel adicional; te confirmo un tiempo estimado al platicar los detalles de tu cita."
     },
     {
       "question": "¿Qué debo hacer antes de mi cita?",
-      "answer": "EDITAR: se recomienda llegar con el rostro limpio, sin maquillaje previo, y comunicar con anticipación cualquier sensibilidad de piel."
+      "answer": "Se recomienda llegar con el rostro limpio, sin maquillaje previo, y avisar con anticipación si tienes alguna sensibilidad o alergia de piel."
     },
     {
       "question": "¿Qué incluye el servicio de pinta caritas?",
-      "answer": "EDITAR: cuéntanos qué diseños, materiales y tiempo incluye el servicio de pinta caritas para fiestas infantiles."
+      "answer": "Incluye diseños coloridos hechos con materiales seguros para la piel, pensados para fiestas infantiles; la cantidad de diseños y el tiempo se ajustan según la duración del evento."
     }
   ]
 }
