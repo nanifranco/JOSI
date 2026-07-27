@@ -378,6 +378,17 @@
 
       const wait = (ms) => new Promise((resolve) => setTimeout(resolve, ms))
 
+      // Dos escrituras casi al mismo tiempo (dos fotos, o una foto y un "Centrar") pueden
+      // pisarse si ambas leen el mismo JSON antes de que la primera termine de guardarlo.
+      // Esta cola obliga a que todas las escrituras a GitHub se hagan una por una, nunca
+      // en paralelo, sin importar en qué botón se haya hecho clic.
+      let writeQueue = Promise.resolve()
+      function enqueueWrite(task) {
+        const run = writeQueue.then(task, task)
+        writeQueue = run.catch(() => {})
+        return run
+      }
+
       // Otra subida al mismo archivo (p. ej. dos fotos de Servicios) puede adelantarse y
       // dejar desactualizado el sha que leímos. Si GitHub responde 409, releemos el
       // archivo con su sha más reciente y reintentamos, en vez de fallar de una vez.
@@ -401,29 +412,34 @@
         }
       }
 
-      async function uploadPhoto(slot, file, statusEl, previewImg) {
+      async function uploadPhoto(slot, file, statusEl, previewImg, uploadBtn) {
         const token = getToken()
         if (!token) {
           setStatus(statusEl, 'Primero guarda tu token de GitHub arriba.', 'error')
           return
         }
 
+        uploadBtn.disabled = true
         setStatus(statusEl, 'Subiendo…', '')
 
         try {
-          const ext = (file.name.split('.').pop() || 'jpg').toLowerCase()
-          const imagePath = `public/images/uploads/${slot.id}-${Date.now()}.${ext}`
-          const imageBase64 = await fileToBase64(file)
+          await enqueueWrite(async () => {
+            const ext = (file.name.split('.').pop() || 'jpg').toLowerCase()
+            const imagePath = `public/images/uploads/${slot.id}-${Date.now()}.${ext}`
+            const imageBase64 = await fileToBase64(file)
 
-          await putFile(imagePath, token, imageBase64, null, `Subir foto: ${slot.label}`)
-          await updateJsonField(slot, token, (target) => {
-            target.src = '/JOSI/' + imagePath.replace(/^public\//, '')
+            await putFile(imagePath, token, imageBase64, null, `Subir foto: ${slot.label}`)
+            await updateJsonField(slot, token, (target) => {
+              target.src = '/JOSI/' + imagePath.replace(/^public\//, '')
+            })
           })
 
           previewImg.src = URL.createObjectURL(file)
           setStatus(statusEl, 'Listo — se publicará en unos minutos.', 'ok')
         } catch (error) {
           setStatus(statusEl, error.message || 'Ocurrió un error al subir la foto.', 'error')
+        } finally {
+          uploadBtn.disabled = false
         }
       }
 
@@ -558,14 +574,19 @@
             setStatus(posStatus, 'Primero guarda tu token de GitHub arriba.', 'error')
             return
           }
+          saveBtn.disabled = true
           setStatus(posStatus, 'Guardando…', '')
           try {
-            await updateJsonField(slot, token, (target) => {
-              target.objectPosition = `${Math.round(pending.x)}% ${Math.round(pending.y)}%`
-            })
+            await enqueueWrite(() =>
+              updateJsonField(slot, token, (target) => {
+                target.objectPosition = `${Math.round(pending.x)}% ${Math.round(pending.y)}%`
+              }),
+            )
             setStatus(posStatus, 'Posición guardada — se publicará en unos minutos.', 'ok')
           } catch (error) {
             setStatus(posStatus, error.message || 'Ocurrió un error al guardar.', 'error')
+          } finally {
+            saveBtn.disabled = false
           }
         })
 
@@ -620,7 +641,7 @@
             setStatus(statusEl, 'Elige una imagen primero.', 'error')
             return
           }
-          uploadPhoto(slot, file, statusEl, previewImg)
+          uploadPhoto(slot, file, statusEl, previewImg, uploadBtn)
         })
 
         const { panel: positionPanel, img: positionImg, setPosition, layout: positionLayout } = createPositionPanel(slot)

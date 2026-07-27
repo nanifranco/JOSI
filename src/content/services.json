@@ -26,10 +26,7 @@
       "description": "Diseños divertidos y coloridos para celebrar en grande, a domicilio en la fiesta.",
       "price": [
         {
-          "line": "$600 MXN/hora básico"
-        },
-        {
-          "line": "$1,000 MXN/hora elaborado"
+          "line": "$1,000 MXN/hora"
         }
       ],
       "image": {

@@ -111,7 +111,7 @@ export function Portfolio() {
               <PlaceholderImage slot={activeItem.image} tone="coffee" className="h-full w-full" />
             </div>
             <p className="mt-4 text-center font-sans text-xs uppercase tracking-[0.2em] text-cream/60">
-              {activeItem.image.alt}
+              {portfolioFilters.find((f) => f.value === activeItem.category)?.label ?? activeItem.image.label}
             </p>
           </div>
 
