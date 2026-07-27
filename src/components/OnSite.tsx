@@ -6,7 +6,7 @@ export function OnSite() {
   return (
     <section id="en-sitio" className="bg-ivory py-12 md:py-16 lg:py-20">
       <div className="mx-auto grid max-w-[1400px] gap-16 px-6 md:grid-cols-12 md:gap-6 md:px-12">
-        <Reveal className="order-2 md:order-1 md:col-span-8 md:flex md:flex-col md:justify-start md:pr-16 lg:pr-24">
+        <Reveal className="order-2 md:order-1 md:col-span-9 md:flex md:flex-col md:justify-start md:pr-16 lg:pr-24">
           <p className="eyebrow mb-6">{onSite.eyebrow}</p>
           <h2 className="max-w-lg font-serif text-4xl leading-[1.15] text-coffee sm:text-5xl">{onSite.title}</h2>
 
@@ -15,8 +15,8 @@ export function OnSite() {
           <p className="mt-4 max-w-xl font-sans text-xs italic text-taupe/70">{onSite.note}</p>
         </Reveal>
 
-        <Reveal className="order-1 md:order-2 md:col-span-4">
-          <div className="aspect-[3/4] w-full">
+        <Reveal className="order-1 md:order-2 md:col-span-3">
+          <div className="aspect-square w-full">
             <PlaceholderImage slot={onSite.photo} tone="champagne" className="h-full w-full" />
           </div>
         </Reveal>
