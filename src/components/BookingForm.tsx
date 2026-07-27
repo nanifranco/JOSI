@@ -3,6 +3,7 @@ import { booking } from '../config/site'
 import { buildWhatsappMessage, openWhatsapp, type BookingFormData } from '../lib/whatsapp'
 import { distanceKm, geocodeAddress, WORK_ZONE_CENTER, WORK_ZONE_RADIUS_KM } from '../lib/geocode'
 import { CtaButton } from './Cta'
+import { DatePicker } from './DatePicker'
 import { Reveal } from './Reveal'
 
 const emptyForm: BookingFormData = {
@@ -208,15 +209,14 @@ export function BookingForm() {
                 <label htmlFor="eventDate" className={labelClasses}>
                   Fecha del evento *
                 </label>
-                <input
+                <DatePicker
                   id="eventDate"
-                  type="date"
-                  min={minBookableDateIso()}
+                  minDate={minBookableDateIso()}
                   className={fieldClasses}
                   value={form.eventDate}
-                  onChange={(e) => handleEventDateChange(e.target.value)}
-                  aria-invalid={Boolean(errors.eventDate)}
-                  aria-describedby={errors.eventDate ? 'eventDate-error' : 'eventDate-hint'}
+                  onChange={handleEventDateChange}
+                  ariaInvalid={Boolean(errors.eventDate)}
+                  ariaDescribedBy={errors.eventDate ? 'eventDate-error' : 'eventDate-hint'}
                 />
                 <p id="eventDate-hint" className="mt-2 font-sans text-xs text-taupe/70">
                   La disponibilidad para citas es los fines de semana. Si tu evento es entre semana, escríbenos por
