@@ -1,6 +1,7 @@
 import { useState, type FormEvent } from 'react'
 import { booking } from '../config/site'
 import { buildWhatsappMessage, openWhatsapp, type BookingFormData } from '../lib/whatsapp'
+import { distanceKm, geocodeAddress, WORK_ZONE_CENTER, WORK_ZONE_RADIUS_KM } from '../lib/geocode'
 import { CtaButton } from './Cta'
 import { Reveal } from './Reveal'
 
@@ -32,14 +33,35 @@ const minBookableDateIso = () => {
   return localNow.toISOString().slice(0, 10)
 }
 
+type ZoneCheck = 'idle' | 'checking' | 'in-zone' | 'out-of-zone' | 'unknown'
+
 export function BookingForm() {
   const [form, setForm] = useState<BookingFormData>(emptyForm)
   const [errors, setErrors] = useState<Errors>({})
   const [confirmation, setConfirmation] = useState(false)
+  const [zoneCheck, setZoneCheck] = useState<ZoneCheck>('idle')
+  const [zoneCheckedValue, setZoneCheckedValue] = useState('')
 
   const update = <K extends keyof BookingFormData>(key: K, value: BookingFormData[K]) => {
     setForm((prev) => ({ ...prev, [key]: value }))
     setErrors((prev) => ({ ...prev, [key]: undefined }))
+    if (key === 'location') setZoneCheck('idle')
+  }
+
+  const checkLocationZone = async () => {
+    const address = form.location.trim()
+    if (!address || address === zoneCheckedValue) return
+    setZoneCheckedValue(address)
+    setZoneCheck('checking')
+
+    const coords = await geocodeAddress(`${address}, Ciudad de México`)
+    if (!coords) {
+      setZoneCheck('unknown')
+      return
+    }
+
+    const distance = distanceKm(WORK_ZONE_CENTER, coords)
+    setZoneCheck(distance <= WORK_ZONE_RADIUS_KM ? 'in-zone' : 'out-of-zone')
   }
 
   const handleSubmit = (event: FormEvent<HTMLFormElement>) => {
@@ -238,6 +260,7 @@ export function BookingForm() {
                     className={fieldClasses}
                     value={form.location}
                     onChange={(e) => update('location', e.target.value)}
+                    onBlur={checkLocationZone}
                     aria-invalid={Boolean(errors.location)}
                     aria-describedby={errors.location ? 'location-error' : 'location-hint'}
                   />
@@ -245,6 +268,17 @@ export function BookingForm() {
                     Incluye calle, número, colonia y ciudad completos para evitar confusiones con calles del mismo
                     nombre en otras colonias.
                   </p>
+                  {zoneCheck === 'checking' && (
+                    <p role="status" className="mt-2 font-sans text-xs text-taupe/70">
+                      Verificando zona de cobertura…
+                    </p>
+                  )}
+                  {zoneCheck === 'out-of-zone' && (
+                    <p role="status" className="mt-2 font-sans text-xs font-medium text-coffee">
+                      Parece que tu dirección está fuera de mi zona de trabajo habitual. Escríbeme directamente por
+                      WhatsApp para ver si es posible cubrir tu evento.
+                    </p>
+                  )}
                   {errors.location && (
                     <p id="location-error" className="mt-2 font-sans text-xs font-medium text-coffee">
                       {errors.location}
