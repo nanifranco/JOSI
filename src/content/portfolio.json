@@ -149,16 +149,6 @@
         "alt": "",
         "label": "Social"
       }
-    },
-    {
-      "id": "p18",
-      "category": "infantil",
-      "orientation": "vertical",
-      "image": {
-        "src": "",
-        "alt": "",
-        "label": "Infantil"
-      }
     }
   ]
 }
