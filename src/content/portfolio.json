@@ -121,17 +121,6 @@
         "alt": "",
         "label": "Caracterización"
       }
-    },
-    {
-      "id": "p-1785180785585",
-      "category": "caracterizacion",
-      "orientation": "vertical",
-      "size": "chica",
-      "image": {
-        "src": "",
-        "alt": "",
-        "label": "Caracterización"
-      }
     }
   ]
 }
