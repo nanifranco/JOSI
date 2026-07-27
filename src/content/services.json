@@ -49,7 +49,8 @@
       "image": {
         "src": "/JOSI/images/uploads/service-caracterizacion-1785158973547.jpeg",
         "alt": "Maquillaje de caracterización realizado por Josi",
-        "label": "Maquillaje de caracterización"
+        "label": "Maquillaje de caracterización",
+        "objectPosition": "50% 8%"
       }
     }
   ]
