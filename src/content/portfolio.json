@@ -22,12 +22,12 @@
     },
     {
       "id": "p3",
-      "category": "social",
+      "category": "caracterizacion",
       "orientation": "vertical",
       "image": {
         "src": "/JOSI/images/uploads/portfolio-3-1785160837255.png",
-        "alt": "Maquillaje social de alto contraste",
-        "label": "Social"
+        "alt": "Maquillaje de caracterización de alto contraste",
+        "label": "Caracterización"
       }
     },
     {
