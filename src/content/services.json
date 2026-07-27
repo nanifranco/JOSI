@@ -28,7 +28,7 @@
       "id": "caracterizacion",
       "number": "03",
       "name": "Maquillaje de caracterización",
-      "description": "EDITAR: describe el tipo de caracterización que ofreces (teatral, fantasía, efectos especiales, disfraces, etc.).",
+      "description": "Para cortometrajes, teatro, disfraces y cualquier personaje que tengas en mente, con efectos especiales o transformaciones completas.",
       "price": [{ "line": "Depende del diseño" }],
       "image": {
         "src": "",
