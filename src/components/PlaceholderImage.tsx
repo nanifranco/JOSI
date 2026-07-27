@@ -27,13 +27,18 @@ type Props = {
  */
 export function PlaceholderImage({ slot, tone = 'ivory', className = '', showLabel = false, insetClass = 'inset-1' }: Props) {
   if (slot.src) {
+    if (!showLabel) {
+      return <img src={slot.src} alt={slot.alt} loading="lazy" className={`h-full w-full object-cover ${className}`} />
+    }
+
     return (
-      <img
-        src={slot.src}
-        alt={slot.alt}
-        loading="lazy"
-        className={`h-full w-full object-cover ${className}`}
-      />
+      <div className={`relative flex items-end overflow-hidden ${className}`}>
+        <img src={slot.src} alt={slot.alt} loading="lazy" className="absolute inset-0 h-full w-full object-cover" />
+        <div className="pointer-events-none absolute inset-x-0 bottom-0 h-24 bg-gradient-to-t from-coffee/70 to-transparent" />
+        <span className="relative m-5 font-sans text-[0.62rem] font-medium uppercase tracking-[0.28em] text-cream">
+          {slot.label}
+        </span>
+      </div>
     )
   }
 
