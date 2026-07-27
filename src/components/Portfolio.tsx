@@ -11,6 +11,13 @@ type Filter = 'todos' | PortfolioCategory
 // en pareja si el conteo obliga a repetir una categoría seguida.
 const CATEGORY_PRIORITY: PortfolioCategory[] = ['caracterizacion', 'infantil', 'social']
 
+/** "Grande" ocupa más alto en su columna de la cuadrícula; "chica" (por defecto) es más compacta. */
+function aspectClassFor(item: PortfolioItem) {
+  const big = item.size === 'grande'
+  if (item.orientation === 'vertical') return big ? 'aspect-[3/5]' : 'aspect-[3/4]'
+  return big ? 'aspect-[1/1]' : 'aspect-[4/3]'
+}
+
 // La cuadrícula usa columnas tipo mosaico (columns-N): el navegador llena cada
 // columna de arriba a abajo antes de pasar a la siguiente, así que dos fotos
 // vecinas en la cuadrícula NO son necesariamente vecinas en este arreglo —
@@ -120,9 +127,7 @@ export function Portfolio() {
               key={item.id}
               type="button"
               onClick={() => setActiveIndex(index)}
-              className={`mb-5 block w-full break-inside-avoid focus-visible:outline-offset-4 ${
-                item.orientation === 'vertical' ? 'aspect-[3/4]' : 'aspect-[4/3]'
-              }`}
+              className={`mb-5 block w-full break-inside-avoid focus-visible:outline-offset-4 ${aspectClassFor(item)}`}
             >
               <PlaceholderImage
                 slot={item.image}

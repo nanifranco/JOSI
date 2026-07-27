@@ -344,9 +344,17 @@
         { value: 'infantil', label: 'Infantil' },
         { value: 'caracterizacion', label: 'Caracterización' },
       ]
+      const PORTFOLIO_SIZES = [
+        { value: 'chica', label: 'Chica' },
+        { value: 'grande', label: 'Grande' },
+      ]
 
-      function aspectForOrientation(orientation) {
-        return orientation === 'horizontal' ? 4 / 3 : 3 / 4
+      // Debe coincidir exactamente con aspectClassFor() en Portfolio.tsx para que el
+      // recuadro de "Centrar" muestre el tamaño real donde se vera la foto en el sitio.
+      function aspectForOrientation(orientation, size) {
+        const big = size === 'grande'
+        if (orientation === 'horizontal') return big ? 1 : 4 / 3
+        return big ? 3 / 5 : 3 / 4
       }
 
       /** "slot" cuyo target es la foto (image) de un item del portafolio, buscado por id. */
@@ -861,6 +869,19 @@
         captionRow.appendChild(captionSaveBtn)
         info.appendChild(captionRow)
 
+        const sizePicker = document.createElement('div')
+        sizePicker.className = 'category-picker'
+        let selectedSize = item.size === 'grande' ? 'grande' : 'chica'
+        const sizeButtons = PORTFOLIO_SIZES.map((s) => {
+          const btn = document.createElement('button')
+          btn.type = 'button'
+          btn.className = 'secondary' + (s.value === selectedSize ? ' selected' : '')
+          btn.textContent = s.label
+          sizePicker.appendChild(btn)
+          return btn
+        })
+        info.appendChild(sizePicker)
+
         const actions = document.createElement('div')
         actions.className = 'slot-actions'
         const fileInput = document.createElement('input')
@@ -887,7 +908,7 @@
         const imageSlot = portfolioImageSlot(item.id, labelEl.textContent)
 
         let currentPosition = parsePosition(item.image.objectPosition)
-        imageSlot.aspect = aspectForOrientation(orientation)
+        imageSlot.aspect = aspectForOrientation(orientation, selectedSize)
         const { panel: positionPanel, img: positionImg, setPosition, layout: positionLayout, setAspect } =
           createPositionPanel(imageSlot, (newPosition) => {
             currentPosition = newPosition
@@ -902,7 +923,7 @@
           const detectedOrientation = await detectOrientation(file)
           uploadPhoto(imageSlot, file, statusEl, previewImg, uploadBtn, emptyThumb, fileInput).then(async () => {
             orientation = detectedOrientation
-            setAspect(aspectForOrientation(orientation))
+            setAspect(aspectForOrientation(orientation, selectedSize))
             const token = getToken()
             if (!token) return
             try {
@@ -942,6 +963,35 @@
           } finally {
             captionSaveBtn.disabled = false
           }
+        })
+
+        sizeButtons.forEach((btn, i) => {
+          btn.addEventListener('click', async () => {
+            const newSize = PORTFOLIO_SIZES[i].value
+            if (newSize === selectedSize) return
+            const token = getToken()
+            if (!token) {
+              setStatus(statusEl, 'Primero guarda tu token de GitHub arriba.', 'error')
+              return
+            }
+            sizeButtons.forEach((b) => b.disabled = true)
+            setStatus(statusEl, 'Guardando tamaño…', '')
+            try {
+              await enqueueWrite(() =>
+                updateJsonField(portfolioItemSlot(item.id, 'tamaño de la foto'), token, (found) => {
+                  found.size = newSize
+                }),
+              )
+              selectedSize = newSize
+              sizeButtons.forEach((b, j) => b.classList.toggle('selected', j === i))
+              setAspect(aspectForOrientation(orientation, selectedSize))
+              setStatus(statusEl, 'Tamaño guardado — se publicará en unos minutos.', 'ok')
+            } catch (error) {
+              setStatus(statusEl, error.message || 'Ocurrió un error al guardar el tamaño.', 'error')
+            } finally {
+              sizeButtons.forEach((b) => b.disabled = false)
+            }
+          })
         })
 
         centerBtn.addEventListener('click', () => {
@@ -1035,6 +1085,27 @@
           return btn
         })
 
+        const sizeHint = document.createElement('p')
+        sizeHint.className = 'add-photo-hint'
+        sizeHint.textContent = 'Elige el tamaño en la cuadrícula:'
+
+        const sizePicker = document.createElement('div')
+        sizePicker.className = 'category-picker'
+        let selectedSize = PORTFOLIO_SIZES[0].value
+        const sizeButtons = PORTFOLIO_SIZES.map((s) => {
+          const btn = document.createElement('button')
+          btn.type = 'button'
+          btn.className = 'secondary' + (s.value === selectedSize ? ' selected' : '')
+          btn.textContent = s.label
+          btn.addEventListener('click', () => {
+            selectedSize = s.value
+            sizeButtons.forEach((b) => b.classList.remove('selected'))
+            btn.classList.add('selected')
+          })
+          sizePicker.appendChild(btn)
+          return btn
+        })
+
         const addBtn = document.createElement('button')
         addBtn.textContent = '+ Agregar foto'
         const statusEl = document.createElement('p')
@@ -1054,6 +1125,7 @@
             id: 'p-' + Date.now(),
             category: selectedCategory,
             orientation: 'vertical',
+            size: selectedSize,
             image: { src: '', alt: '', label: categoryLabel },
           }
           try {
@@ -1075,6 +1147,8 @@
 
         box.appendChild(hint)
         box.appendChild(picker)
+        box.appendChild(sizeHint)
+        box.appendChild(sizePicker)
         box.appendChild(addBtn)
         box.appendChild(statusEl)
         container.appendChild(box)

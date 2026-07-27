@@ -123,6 +123,8 @@ export type PortfolioItem = {
   id: string
   category: PortfolioCategory
   orientation: 'vertical' | 'horizontal'
+  /** Qué tan grande se ve la foto en la cuadrícula del portafolio. Por defecto "chica". */
+  size?: 'grande' | 'chica'
   image: ImageSlot
 }
 
