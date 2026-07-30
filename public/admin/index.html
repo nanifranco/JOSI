@@ -317,7 +317,7 @@
 
     <script>
       const REPO_OWNER = 'nanifranco'
-      const REPO_NAME = 'JOSI'
+      const REPO_NAME = 'josi-makeup-mx'
       const BRANCH = 'main'
       const RAW_BASE = `https://raw.githubusercontent.com/${REPO_OWNER}/${REPO_NAME}/${BRANCH}/`
       const API_BASE = `https://api.github.com/repos/${REPO_OWNER}/${REPO_NAME}/contents/`
@@ -544,7 +544,7 @@
 
             await putFile(imagePath, token, imageBase64, null, `Subir foto: ${slot.label}`)
             await updateJsonField(slot, token, (target) => {
-              target.src = '/JOSI/' + imagePath.replace(/^public\//, '')
+              target.src = '/josi-makeup-mx/' + imagePath.replace(/^public\//, '')
             })
           })
 
